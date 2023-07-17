@@ -50,6 +50,7 @@
                         <!-- /.card-body -->
                     </div>
                     <?php include_once('create.php') ?>
+                    <?php include_once('update.php') ?>
                 </div>
             </div>
         </div>

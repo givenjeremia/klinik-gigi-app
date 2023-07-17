@@ -32,7 +32,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" id="close_add" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                <button type="button" id="close_add" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                 <button type="button" id="submit_add" class="btn btn-primary">Simpan</button>
             </div>
         </div>
