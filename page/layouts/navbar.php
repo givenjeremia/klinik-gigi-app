@@ -27,6 +27,14 @@
           </ul>
         </li>
 
+        <li class="nav-item dropdown">
+          <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+            class="nav-link dropdown-toggle">Jadwal</a>
+          <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+            <li><a href="#" class="dropdown-item">Dokter</a></li>
+          </ul>
+        </li>
+
 
         <li class="nav-item dropdown">
           <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"

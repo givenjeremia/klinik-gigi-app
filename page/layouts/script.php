@@ -35,3 +35,13 @@
 <script src="../../assets/plugins/moment/moment.min.js"></script>
 <script src="../../assets/plugins/fullcalendar/main.js"></script>
 <script src="../../assets/plugins/sweetalert2/sweetalert2.min.js"></script>
+<script src="../../assets/plugins/select2/js/select2.full.min.js"></script>
+
+<script>
+$('.select2').select2()
+
+$('.select2bs4').select2({
+    theme: 'bootstrap4'
+})
+
+</script>

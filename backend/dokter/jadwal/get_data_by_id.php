@@ -1,12 +1,12 @@
 <?php 
-require_once('../config.php');
+require_once('../../config.php');
 $id = $_POST['id'];
-$stmt = $mysqli->prepare('SELECT * FROM `data_obat` WHERE `id`=?');
+$stmt = $mysqli->prepare('SELECT * FROM `jadwal_dokter` WHERE `id` =?');
 $stmt->bind_param('i',$id);
 $stmt->execute();
 $datas = [];
 $result = $stmt->get_result();
-if (1 > 0) {
+if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc() ) {
         array_push($datas,[
             'status'=> 'success',

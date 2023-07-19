@@ -1,8 +1,8 @@
-<div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModalEdit" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Dokter</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Pasien</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -35,7 +35,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Jenis Kelamin</label>
-                        <select name="jenis_kelamin" id="jenisKelaminEdit" class="form-control" required>
+                        <select name="jenis_kelamin" id="jenisKelaminEdit" class="select2bs4" required>
                             <option value="">Pilih Jenis Kelamin</option>
                             <option value="laki-laki">Laki - Laki</option>
                             <option value="Perempuan">Perempuan</option>
@@ -47,7 +47,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" id="passwordEdit" class="form-control" name="username">
+                        <input type="password" id="passwordEdit" class="form-control" name="password">
                     </div>
                 </form>
             </div>

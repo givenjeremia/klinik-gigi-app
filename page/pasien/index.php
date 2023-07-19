@@ -56,12 +56,13 @@
                         </div>
                         <!-- /.card-body -->
                     </div>
-                    <?php include_once('create.php') ?>
-                    <?php include_once('update.php') ?>
+               
                 </div>
             </div>
         </div>
     </div>
+    <?php include_once('create.php') ?>
+    <?php include_once('update.php') ?>
     <?php include '../layouts/script.php' ?>
     <script src="../../js/pasien.js"></script>
 </body>

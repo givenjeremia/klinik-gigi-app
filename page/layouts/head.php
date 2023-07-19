@@ -22,6 +22,10 @@
 <link rel="stylesheet" href="../../assets/plugins/summernote/summernote-bs4.min.css">
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+
+<link rel="stylesheet" href="../../assets/plugins/select2/css/select2.min.css">
+<link rel="stylesheet" href="../../assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
 <style>
 
 </style>

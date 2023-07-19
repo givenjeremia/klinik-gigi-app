@@ -1,6 +1,6 @@
 function getData() {
     $("#hasil").html();
-    var url = "../../backend/dokter/data.php";
+    var url = "../../backend/obat/data.php";
     $.ajax(url, {
       dataType: "json", // type of response data
       timeout: 500, // timeout milliseconds
@@ -14,14 +14,12 @@ function getData() {
             $("#hasil").append("<tr class='data' id='tr_" + key + "'>");
             $("#tr_" + key).append("<th scope='row'>" + (key + 1) + "</th>");
             $("#tr_" + key).append("<th>" + element.data["nama"] + "</th>");
-            $("#tr_" + key).append("<th>" + element.data["alamat"] + "</th>");
-            $("#tr_" + key).append("<th>" + element.data["no_telp"] + "</th>");
-            $("#tr_" + key).append("<th>" + element.data["jenis_kelamin"] + "</th>");
+            $("#tr_" + key).append("<th>" + element.data["kategori"] + "</th>");
+            $("#tr_" + key).append("<th>" + element.data["tgl_exp"] + "</th>");
+            $("#tr_" + key).append("<th>" + element.data["stok"] + "</th>");
+            $("#tr_" + key).append("<th>" + element.data["jenis"] + "</th>");
             var action =
-              `<th>
-                <a href="#" class="btn btn-info" data-toggle="modal" data-target="#exampleModalJadwal" onClick="jadwalData(` +
-              element.data["id"] +
-              `)"><i class="fa fa-calendar"></i></a> 
+              `<th>  
                   <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit" onClick="updateData(` +
               element.data["id"] +
               `)"><i class="fa fa-pen"></i></a> 
@@ -50,10 +48,9 @@ function getData() {
   
   $("#submit_add").on("click", function (e) {
     e.preventDefault();
-    console.log("masuk")
-    var form = document.querySelector("#FormTambahDokter");
+    var form = document.querySelector("#FormTambahObat");
     var form_data = new FormData(form);
-    var url = "../../backend/dokter/insert.php";
+    var url = "../../backend/obat/insert.php";
     $.ajax({
       type: "POST",
       url: url,
@@ -65,21 +62,22 @@ function getData() {
         if (data.status == "success") {
           Swal.fire({
             title: "Success",
-            text: "Dokter Berhasil Ditambahkan",
+            text: "Obat Berhasil Ditambahkan",
             icon: "success",
             showConfirmButton: true,
-          }).then((result) => {
-            $("#close_add").click();
-            // Reset Value
-            for (var key of form_data.keys()) {
+          })
+          $("#close_add").click();
+          for (var key of form_data.keys()) {
+            console.log(key)
               form_data.delete(key);
-            }
+          }
+           $("#example1").DataTable().destroy();
             getData();
-          });
+            console.log('Complate')
         } else {
           Swal.fire({
             title: "Error",
-            text: "Dokter Gagal Di Tambahkan",
+            text: "Obat Gagal Di Tambahkan",
             icon: "error",
             showConfirmButton: true,
           });
@@ -90,7 +88,7 @@ function getData() {
   
   // Update
   function updateData(id) {
-    var url = "../../backend/dokter/get_data_by_id.php";
+    var url = "../../backend/obat/get_data_by_id.php";
     $.ajax(url, {
       type: "post",
       data: {
@@ -101,25 +99,23 @@ function getData() {
       success: function (data, status, xhr) {
         if (data[0].status == "success") {
           $("#namaEdit").val(data[0].data.nama);
-          $("#alamatEdit").html(data[0].data.alamat);
-          $("#telpEdit").val(data[0].data.no_telp);
-          $("#jenisKelaminEdit").val(data[0].data.jenis_kelamin);
-          $("#usernameEdit").val(data[0].data.username);
-          $("#passwordEdit").val(data[0].data.password);
+          $("#kategoriEdit").val(data[0].data.kategori);
+          $("#tglExpEditEdit").val(data[0].data.tgl_exp);
+          $("#stokEdit").val(data[0].data.stok);
+          $("#jenisEdit").val(data[0].data.jenis);
           $("#submit_edit").attr("key", data[0].data.id);
         }
       },
     });
   }
-
   
   $("#submit_edit").on("click", function (e) {
     var id = $(this).attr("key");
     e.preventDefault();
-    var form = document.querySelector("#FormEditDokter");
+    var form = document.querySelector("#FormEditObat");
     var form_data = new FormData(form);
     form_data.append('id', id);
-    var url = "../../backend/dokter/update.php";
+    var url = "../../backend/obat/update.php";
     $.ajax({
       type: "POST",
       url: url,
@@ -131,7 +127,7 @@ function getData() {
         if (data.status == "success") {
           Swal.fire({
             title: "Success",
-            text: "Dokter Berhasil Diubah",
+            text: "Obat terhasil Diubah",
             icon: "success",
             showConfirmButton: true,
           }).then(result => {
@@ -147,7 +143,7 @@ function getData() {
         } else {
           Swal.fire({
             title: "Error",
-            text: "Dokter Gagal Di Ubah",
+            text: "Obat Gagal Di Ubah",
             icon: "error",
             showConfirmButton: true,
           });
@@ -156,4 +152,4 @@ function getData() {
       },
     });
   });
-  
+

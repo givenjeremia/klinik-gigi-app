@@ -64,7 +64,7 @@ function getData() {
         if (data.status == "success") {
           Swal.fire({
             title: "Success",
-            text: "Karyawan Berhasil Ditambahkan",
+            text: "Pasien Berhasil Ditambahkan",
             icon: "success",
             showConfirmButton: true,
           }).then((result) => {
@@ -78,7 +78,7 @@ function getData() {
         } else {
           Swal.fire({
             title: "Error",
-            text: "Karyawan Gagal Di Tambahkan",
+            text: "Pasien Gagal Di Tambahkan",
             icon: "error",
             showConfirmButton: true,
           });
@@ -117,10 +117,10 @@ function getData() {
   $("#submit_edit").on("click", function (e) {
     var id = $(this).attr("key");
     e.preventDefault();
-    var form = document.querySelector("#FormEditKaryawan");
+    var form = document.querySelector("#FormEditPasien");
     var form_data = new FormData(form);
     form_data.append('id', id);
-    var url = "../../backend/karyawan/update.php";
+    var url = "../../backend/pasien/update.php";
     $.ajax({
       type: "POST",
       url: url,
@@ -132,7 +132,7 @@ function getData() {
         if (data.status == "success") {
           Swal.fire({
             title: "Success",
-            text: "Karyawan Berhasil Diubah",
+            text: "Pasien Berhasil Diubah",
             icon: "success",
             showConfirmButton: true,
           }).then(result => {
@@ -148,7 +148,7 @@ function getData() {
         } else {
           Swal.fire({
             title: "Error",
-            text: "Karyawan Gagal Di Ubah",
+            text: "Pasien Gagal Di Ubah",
             icon: "error",
             showConfirmButton: true,
           });
@@ -157,4 +157,4 @@ function getData() {
       },
     });
   });
-  
+

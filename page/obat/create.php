@@ -2,32 +2,32 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Perawat</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Obat</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="FormTambahPerawat">
+                <form id="FormTambahObat">
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Nama</label>
                         <input type="text" class="form-control" name="nama" required>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Alamat</label>
-                        <textarea name="alamat" class="form-control" required></textarea>
+                        <label for="exampleInputPassword1" class="form-label">Kategori</label>
+                        <input type="text" class="form-control" name="kategori" required>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">No. Telepon</label>
-                        <input type="number" class="form-control" name="no_telp" required>
+                        <label for="exampleInputPassword1" class="form-label">Tanggal Expired</label>
+                        <input type="date" class="form-control" name="tgl_exp" required>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Username</label>
-                        <input type="text" class="form-control" name="username">
+                        <label for="exampleInputPassword1" class="form-label">Stok</label>
+                        <input type="number" class="form-control" name="stok" required>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" name="password">
+                        <label for="exampleInputPassword1" class="form-label">Jenis</label>
+                        <input type="text" class="form-control" name="jenis" required>
                     </div>
                 </form>
             </div>

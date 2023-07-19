@@ -1,14 +1,16 @@
 <?php 
 require_once('../config.php');
-$result = $mysqli->query('SELECT * FROM `data_karyawan`');
+$result = $mysqli->query('SELECT * FROM `data_obat`');
 $datas = [];
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         $data =[
             'id'=> $row['id'],
             'nama'=> $row['nama'],
-            'alamat'=> $row['alamat'],
-            'no_telp'=> $row['no_telp'],
+            'kategori'=> $row['kategori'],
+            'tgl_exp'=> $row['tgl_exp'],
+            'stok'=> $row['stok'],
+            'jenis'=> $row['jenis'],
         ];
         array_push($datas,[
             'status'=> 'oke',

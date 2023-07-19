@@ -1,4 +1,4 @@
-<div class="modal fade" id="exampleModalTambah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModalTambah"  aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -35,19 +35,20 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Jenis Kelamin</label>
-                        <select name="jenis_kelamin" class="form-control" required>
+                        <select name="jenis_kelamin" class="select2bs4" style="width: 100%;" required>
                             <option value="">Pilih Jenis Kelamin</option>
                             <option value="laki-laki">Laki - Laki</option>
                             <option value="Perempuan">Perempuan</option>
                         </select>
                     </div>
+             
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Username</label>
                         <input type="text" class="form-control" name="username">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" name="username">
+                        <input type="password" class="form-control" name="password">
                     </div>
                 </form>
             </div>
