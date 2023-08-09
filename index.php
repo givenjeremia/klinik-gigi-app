@@ -1,13 +1,7 @@
 <?php 
+session_start();
 if($_SESSION['auth']){
-    // Admin To Admin Page
-    
-    // Karyawan To Karyawan Page
-
-    // Dokter To Dokter Page
-
-    // Pasien To Pasien Page
-
+    header("Location: page/home/index.php");
 }
 else{
     header("Location: page/auth/login.php");

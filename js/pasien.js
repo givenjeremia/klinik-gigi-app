@@ -106,8 +106,6 @@ function getData() {
           $("#telpEdit").val(data[0].data.no_telp);
           $("#tanggalDaftarEdit").val(data[0].data.tanggal_daftar);
           $("#jenisKelaminEdit").val(data[0].data.jenis_kelamin);
-          $("#usernameEdit").val(data[0].data.username);
-          $("#passwordEdit").val(data[0].data.password);
           $("#submit_edit").attr("key", data[0].data.id);
         }
       },

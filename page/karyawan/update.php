@@ -21,14 +21,6 @@
                         <label for="exampleInputPassword1" class="form-label">Telp</label>
                         <input type="number" id="telpEdit" class="form-control" name="no_telp">
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Username</label>
-                        <input type="text" id="usernameEdit" class="form-control" name="username">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" id="passwordEdit" class="form-control" name="password">
-                    </div>
                 </form>
             </div>
             <div class="modal-footer">

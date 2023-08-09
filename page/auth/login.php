@@ -1,3 +1,18 @@
+<?php 
+session_start();
+if(isset($_SESSION['auth'])){
+    if($_SESSION['auth']['role'] == 'pasien'){
+        header("Location: ../home/pasien.php");
+    }
+    else{
+        header("Location: ../home/index.php");
+    }
+}
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

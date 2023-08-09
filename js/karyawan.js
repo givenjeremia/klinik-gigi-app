@@ -98,8 +98,6 @@ function updateData(id) {
         $("#namaEdit").val(data[0].data.nama);
         $("#alamatEdit").val(data[0].data.alamat);
         $("#telpEdit").val(data[0].data.no_telp);
-        $("#usernameEdit").val(data[0].data.username);
-        $("#passwordEdit").val(data[0].data.password);
         $("#submit_edit").attr("key", data[0].data.id);
       }
     },

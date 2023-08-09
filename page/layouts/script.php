@@ -38,10 +38,43 @@
 <script src="../../assets/plugins/select2/js/select2.full.min.js"></script>
 
 <script>
-$('.select2').select2()
+    $('.select2').select2()
 
-$('.select2bs4').select2({
-    theme: 'bootstrap4'
-})
+    $('.select2bs4').select2({
+        theme: 'bootstrap4'
+    })
+</script>
 
+<script>
+    $('#btn-logout').on('click', function (e) {
+        e.preventDefault();
+        var url = "../../backend/auth/logout.php";
+        $.ajax({
+            type: "POST",
+            url: url,
+            dataType: "json",
+            contentType: false,
+            processData: false,
+            success: function (data, status, xhr) {
+                if (data.status == "success") {
+                    Swal.fire({
+                        title: "Success",
+                        text: "Berhasil Logout",
+                        icon: "success",
+                        showConfirmButton: true,
+                    }).then(result => {
+                        window.location.reload();
+                    })
+
+                } else {
+                    Swal.fire({
+                        title: "Error",
+                        text: "Gagal Logout",
+                        icon: "error",
+                        showConfirmButton: true,
+                    });
+                }
+            },
+        });
+    })
 </script>

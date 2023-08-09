@@ -13,9 +13,7 @@ if ($result->num_rows > 0) {
             'no_telp'=> $row['no_telp'],
             'tanggal_daftar' => $row['tanggal_daftar'],
             'jenis_kelamin' => $row['jenis_kelamin'],
-            'username' => $row['username'],
-            'password' => $row['password'],
-            'users_id' => $row['users_id'],
+            'user_id' => $row['user_id'],
         ];
         array_push($datas,[
             'status'=> 'oke',

@@ -1,6 +1,6 @@
 <?php 
 require_once('../config.php');
-
+session_start();
 $username = $_POST['username'];
 $password = $_POST['password'];
 $stmt = $mysqli->prepare("SELECT * FROM `users` WHERE `username`=? AND `password` =?");
@@ -12,7 +12,7 @@ $row = $result->fetch_assoc();
 
 if($row > 0){
     // Create Session
-    // $_SESSION['auth'] = $row;
+    $_SESSION['auth'] = $row;
     echo json_encode(['status'=>'success', 'data'=>$row]);
 }
 else{

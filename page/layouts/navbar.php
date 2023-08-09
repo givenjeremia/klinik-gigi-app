@@ -1,3 +1,4 @@
+
 <nav class="main-header navbar navbar-expand-md navbar-dark">
   <div class="container">
     <a href="/" class="navbar-brand">
@@ -13,6 +14,8 @@
     <div class="collapse navbar-collapse order-3" id="navbarCollapse">
       <!-- Left navbar links -->
       <ul class="navbar-nav">
+        <?php if($_SESSION['auth']['role'] !== 'pasien') : ?>
+
         <li class="nav-item dropdown">
           <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             class="nav-link dropdown-toggle">Master</a>
@@ -43,7 +46,18 @@
             <!-- <li><a href="{{url('admin/transaksi-perias')}}" class="dropdown-item">Pemesanan</a></li> -->
           </ul>
         </li>
-       
+        <?php endif; ?>
+        <li class="nav-item dropdown">
+          <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+            class="nav-link dropdown-toggle">Reservasi</a>
+          <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+            <li><a href="#" class="dropdown-item">History</a></li>
+            <li><a href="#" class="dropdown-item">Jadwal Dokter</a></li>
+          </ul>
+          
+    
+
+        </li>
        
         
       </ul>
@@ -53,17 +67,15 @@
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-user-circle"></i>
+          <span class="d-none d-md-inline"><?= $_SESSION['auth']['username'] ?></span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-header">My Profile</span>
           <div class="dropdown-divider"></div>
           <div class="dropdown-divider"></div>
-          <a href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-item">
+          <a href="#" id="btn-logout" class="dropdown-item">
             Logout
           </a>
-          <form id="logout-form" action="" method="POST" style="display: none;">
-            @csrf
-          </form>
         </div>
       </li>
     </ul>

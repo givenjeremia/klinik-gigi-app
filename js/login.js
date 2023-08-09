@@ -17,9 +17,8 @@ $("#btn-login").on("click", function (e) {
           text: "Login Berhasil",
           icon: "success",
           showConfirmButton: true,
-        }).then((result) => {
-        //   window.location.href = "/";
-        });
+        })
+        window.location.reload();
       } else {
         Swal.fire({
           title: "Error",
