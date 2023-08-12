@@ -51,8 +51,8 @@
           <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             class="nav-link dropdown-toggle">Reservasi</a>
           <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-            <li><a href="#" class="dropdown-item">History</a></li>
-            <li><a href="#" class="dropdown-item">Jadwal Dokter</a></li>
+            <li><a href="../reservasi/history.php" class="dropdown-item">History</a></li>
+            <li><a href="../alat/index.php" class="dropdown-item">Jadwal Dokter</a></li>
           </ul>
           
     
