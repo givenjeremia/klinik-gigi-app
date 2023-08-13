@@ -51,8 +51,11 @@
           <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             class="nav-link dropdown-toggle">Reservasi</a>
           <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+            <?php if($_SESSION['auth']['role'] == 'admin' || $_SESSION['auth']['role'] == 'karyawan') : ?>
+            <li><a href="../reservasi/pengajuan.php" class="dropdown-item">Pengajuan</a></li>
+            <?php endif; ?>
             <li><a href="../reservasi/history.php" class="dropdown-item">History</a></li>
-            <li><a href="../alat/index.php" class="dropdown-item">Jadwal Dokter</a></li>
+            <li><a href="../reservasi/jadwal_dokter.php" class="dropdown-item">Jadwal Dokter</a></li>
           </ul>
           
     

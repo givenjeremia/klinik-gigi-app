@@ -1,11 +1,14 @@
 <?php
 require_once( '../config.php' );
 session_start();
-$datas = [];
 try {
-    $sql = "SELECT jd.id as id_jadwal ,dd.id as id_dokter, dd.nama as nama_dokter, jd.id as id_jadwal , jd.jam as jam, jd.hari as hari, jd.kuota_pasien as kuota FROM `data_dokter` dd INNER JOIN `jadwal_dokter` jd ON dd.id = jd.data_dokter_id";
+    $sql = "SELECT rk.id AS IdReservasi, dd.nama AS NamaDokter, dp.nama AS NamaPasien, rk.jam_reservasi AS Jam, rk.tanggal_reservasi AS Tanggal, rk.status as Status
+    FROM `reservasi_kllinik` rk INNER JOIN `data_pasien` dp ON rk.data_pasien_id_pasien = dp.id
+    INNER JOIN `jadwal_dokter` jd ON jd.id = rk.jadwal_dokter_id
+    INNER JOIN `data_dokter` dd ON jd.data_dokter_id = dd.id
+    WHERE rk.status = 'pending'";
     $result = $mysqli->query( $sql );
-    
+    $datas = [];
     if ( $result->num_rows > 0 ) {
         $tamps = [];
         while( $row = $result->fetch_assoc() ) {
@@ -20,6 +23,7 @@ try {
             'status'=> 'gagal',
         ] );
     }
+    echo json_encode( $datas );
 
 } catch ( \Throwable $th ) {
     //throw $th;
@@ -28,4 +32,3 @@ try {
         'error'=>$th->getMessage()
     ]);
 }
-echo json_encode( $datas );

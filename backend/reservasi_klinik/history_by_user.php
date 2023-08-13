@@ -1,5 +1,5 @@
 <?php
-require_once( '../../config.php' );
+require_once( '../config.php' );
 session_start();
 try {
     // Get Pasien ID By User ID

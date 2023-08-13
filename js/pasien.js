@@ -45,7 +45,7 @@ function getData() {
         }
       },
     });
-  }
+}
   getData();
   
   $("#submit_add").on("click", function (e) {
