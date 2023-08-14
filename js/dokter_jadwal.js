@@ -107,6 +107,16 @@ function updateJadwalData(id) {
   });
 }
 // Reserfasi
+var hariToIndo = {
+  'Sunday': 'Minggu',
+  'Monday': 'Senin',
+  'Tuesday': 'Selasa',
+  'Wednesday': 'Rabu',
+  'Thursday': 'Kamis',
+  'Friday': 'Jumat',
+  'Saturday': 'Sabtu'
+};
+
 function jadwalDataAllReservasi() {
   var url = "../../backend/reservasi_klinik/jadwal_dokter.php";
   $.ajax(url, {
@@ -123,7 +133,7 @@ function jadwalDataAllReservasi() {
             $("#tr_jadwal" + key).append("<th scope='row'>" + (key + 1) + "</th>");
             $("#tr_jadwal" + key).append("<th>" + element["nama_dokter"] + "</th>");
             $("#tr_jadwal" + key).append("<th>" + element["jam"] + "</th>");
-            $("#tr_jadwal" + key).append("<th>" + element["hari"] + "</th>");
+            $("#tr_jadwal" + key).append("<th>" + hariToIndo[element["hari"]] + "</th>");
             $("#tr_jadwal" + key).append("<th>" + element["kuota"] + "</th>");
             var action =
               `<th>
@@ -145,6 +155,7 @@ function jadwalDataAllReservasi() {
   });
 }
 
+
 function createReservasi(id) {
   var url = "../../backend/reservasi_klinik/data_by_id.php";
   $.ajax(url, {
@@ -156,8 +167,8 @@ function createReservasi(id) {
     timeout: 500,
     success: function (data, status, xhr) {
       if (data[0].status == "success") {
-        $("#hari_tambah").val(data[0].data.hari);
-
+        $('#jadwal_tambah').val(id);
+        $("#hari_tambah").val(hariToIndo[data[0].data.hari]);
       }
     },
   });
@@ -166,7 +177,7 @@ function createReservasi(id) {
 $('#submit_add_reservasi').on('click',function(){
   var form = document.querySelector("#FormCreateReservasi");
   var form_data = new FormData(form);
-  var url = "../../backend/reservasi/insert.php";
+  var url = "../../backend/reservasi_klinik/insert.php";
   $.ajax({
     type: "POST",
     url: url,
@@ -178,7 +189,7 @@ $('#submit_add_reservasi').on('click',function(){
       if (data.status == "success") {
         Swal.fire({
           title: "Success",
-          text: "Reservasi Berhasil Ditambahkan",
+          text: data.msg,
           icon: "success",
           showConfirmButton: true,
         }).then((result) => {
@@ -192,7 +203,7 @@ $('#submit_add_reservasi').on('click',function(){
       } else {
         Swal.fire({
           title: "Error",
-          text: "Reservasi Gagal Di Tambahkan",
+          text: data.msg,
           icon: "error",
           showConfirmButton: true,
         });
@@ -200,3 +211,23 @@ $('#submit_add_reservasi').on('click',function(){
     },
   });
 })
+
+function getDataPasien() {
+  $.ajax({
+      type: "GET",
+      url: "../../backend/pasien/data.php",
+      dataType: "json",
+      success: function(data) {
+          $('#pasienReservasi').empty();
+          if (data[0].status == 'oke') {
+              $('#pasienReservasi').append('<option value="">Pilih Nama Pasien</option>');
+              $.each(data, function(i, item) {
+                  console.log(item)
+                  $('#pasienReservasi').append('<option value="' + item.data["id"] + '">' + item.data["nama"]+'</option>');
+              });
+          } else {
+              $('#pasienReservasi').append('<option value="">Tidak Ada Pasien</option>');
+          }
+      }
+  });
+}

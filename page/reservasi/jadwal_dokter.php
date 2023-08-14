@@ -55,6 +55,7 @@
     <script src='../../js/dokter_jadwal.js'></script>
     <script>
         jadwalDataAllReservasi()
+        getDataPasien()
     </script>
 
 </body>

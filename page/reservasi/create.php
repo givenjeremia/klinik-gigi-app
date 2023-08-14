@@ -11,6 +11,16 @@
                 <form id="FormCreateReservasi">
                     <input type="hidden" name="jadwal" id="jadwal_tambah">
                     <!-- IF ROLE ADMIN / KARYAWAN WITH NAMA PASIEN -->
+                    <?php if($_SESSION['auth']['role'] == 'admin' || $_SESSION['auth']['role'] == 'karyawan'):?>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Nama Pasien</label>
+                        <select name="pasien" id="pasienReservasi" class="select2bs4" style="width: 100%;" required>
+                            <option value="">Pilih Nama Pasien</option>
+                            <option value="laki-laki">Laki - Laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
+                    </div>
+                    <?php endif;?>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Tanggal</label>
                         <input type="date" class="form-control" name="tanggal" id="tanggal_tambah" required>

@@ -63,7 +63,7 @@
     </div>
     <?php include '../layouts/script.php' ?>
     <script src="../../js/pengajuan.js"></script>
-    <?php if($_SESSION['auth']['role'] == 'admin' ): ?>
+    <?php if($_SESSION['auth']['role'] == 'admin' || $_SESSION['auth']['role'] == 'karyawan'  ): ?>
     <script>
         getDataPengajuan()
     </script>

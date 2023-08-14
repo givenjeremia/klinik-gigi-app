@@ -67,9 +67,10 @@
         getDataHistoryByUser()
     </script>
     <?php endif; ?>
-    <?php if($_SESSION['auth']['role'] == 'admin' ): ?>
+    <?php if($_SESSION['auth']['role'] == 'admin' || $_SESSION['auth']['role'] == 'karyawan' ): ?>
     <script>
         getAllData()
+        getDataPasien()
     </script>
     <?php endif; ?>
     
