@@ -23,11 +23,15 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Stok</label>
-                        <input type="number" class="form-control" id="stokEdit" name="no_telp" required>
+                        <input type="number" class="form-control" id="stokEdit" name="stok" required>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Jenis</label>
                         <input type="text" class="form-control" id="jenisEdit" name="jenis">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Harga</label>
+                        <input type="text" id="hargaEdit" class="form-control format-rupiah" name="harga" required>
                     </div>
                 </form>
             </div>

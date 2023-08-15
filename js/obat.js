@@ -15,9 +15,10 @@ function getData() {
             $("#tr_" + key).append("<th scope='row'>" + (key + 1) + "</th>");
             $("#tr_" + key).append("<th>" + element.data["nama"] + "</th>");
             $("#tr_" + key).append("<th>" + element.data["kategori"] + "</th>");
-            $("#tr_" + key).append("<th>" + element.data["tgl_exp"] + "</th>");
+            $("#tr_" + key).append("<th>" +  convertDate(element.data["tgl_exp"]) + "</th>");
             $("#tr_" + key).append("<th>" + element.data["stok"] + "</th>");
             $("#tr_" + key).append("<th>" + element.data["jenis"] + "</th>");
+            $("#tr_" + key).append("<th>Rp. " + formatRupiah(element.data["harga"]) + "</th>");
             var action =
               `<th>  
                   <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit" onClick="updateData(` +
@@ -100,9 +101,10 @@ function getData() {
         if (data[0].status == "success") {
           $("#namaEdit").val(data[0].data.nama);
           $("#kategoriEdit").val(data[0].data.kategori);
-          $("#tglExpEditEdit").val(data[0].data.tgl_exp);
+          $("#tglExpEdit").val(data[0].data.tgl_exp);
           $("#stokEdit").val(data[0].data.stok);
           $("#jenisEdit").val(data[0].data.jenis);
+          $("#hargaEdit").val(formatRupiah(data[0].data.harga));
           $("#submit_edit").attr("key", data[0].data.id);
         }
       },

@@ -21,6 +21,10 @@
                         <label for="exampleInputPassword1" class="form-label">Kategori</label>
                         <input type="text" id="kategoriEdit" class="form-control" name="kategori">
                     </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Harga</label>
+                        <input type="text" id="hargaEdit" class="form-control format-rupiah" name="harga">
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">

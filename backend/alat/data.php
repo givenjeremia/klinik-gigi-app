@@ -9,6 +9,7 @@ if ($result->num_rows > 0) {
             'nama'=> $row['nama'],
             'jenis'=> $row['jenis'],
             'kategori'=> $row['kategori'],
+            'harga'=> $row['harga'],
         ];
         array_push($datas,[
             'status'=> 'oke',

@@ -13,11 +13,11 @@
             <div class="container-fluid pr-5 pl-5 pt-3">
                 <div class="content">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalTambah">
-                        Add Obat
+                        Add Layanan
                     </button>
                     <div class="card mt-2">
                         <div class="card-header">
-                            <h3 class="card-title">Data Master Obat</h3>
+                            <h3 class="card-title">Data Master Layanan</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">

@@ -1,3 +1,4 @@
+<?php include '../layouts/session_login.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,6 +30,7 @@
                                             <th>Nama</th>
                                             <th>Jenis</th>
                                             <th>Kategori</th>
+                                            <th>Harga</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -39,8 +41,9 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
-                                            <th>Alamat</th>
-                                            <th>No Telp</th>
+                                            <th>Jenis</th>
+                                            <th>Kategori</th>
+                                            <th>Harga</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </tfoot>
@@ -56,6 +59,12 @@
         </div>
     </div>
     <?php include '../layouts/script.php' ?>
+    <?php include '../layouts/format_rupiah.php' ?>
+    <script>
+        $(document).on('input', '.format-rupiah', function() {
+            $(this).val(formatRupiah(this.value));
+        })
+    </script>
     <script src="../../js/alat.js"></script>
 </body>
 

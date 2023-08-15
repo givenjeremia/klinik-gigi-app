@@ -11,6 +11,7 @@ if ($result->num_rows > 0) {
             'tgl_exp'=> $row['tgl_exp'],
             'stok'=> $row['stok'],
             'jenis'=> $row['jenis'],
+            'harga' => $row['harga'],
         ];
         array_push($datas,[
             'status'=> 'oke',

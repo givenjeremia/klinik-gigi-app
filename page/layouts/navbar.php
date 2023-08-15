@@ -27,6 +27,7 @@
             <li><a href="../perawat/index.php" class="dropdown-item">Perawat</a></li>
             <li><a href="../karyawan/index.php" class="dropdown-item">Karyawan</a></li>
             <li><a href="../obat/index.php" class="dropdown-item">Obat</a></li>
+            <li><a href="../layanan/index.php" class="dropdown-item">Layanan</a></li>
           </ul>
         </li>
 
@@ -38,7 +39,7 @@
           </ul>
         </li>
 
-
+        <?php if($_SESSION['auth']['role'] == 'admin' || $_SESSION['auth']['role'] == 'karyawan') : ?>
         <li class="nav-item dropdown">
           <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             class="nav-link dropdown-toggle">Keuangan</a>
@@ -46,6 +47,19 @@
             <!-- <li><a href="{{url('admin/transaksi-perias')}}" class="dropdown-item">Pemesanan</a></li> -->
           </ul>
         </li>
+        <?php endif; ?>
+
+        <?php if($_SESSION['auth']['role'] == 'dokter') : ?>
+        <li class="nav-item dropdown">
+          <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+            class="nav-link dropdown-toggle">Rekam Medias</a>
+          <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+            <li><a href="#" class="dropdown-item">Data</a></li>
+            <li><a href="#" class="dropdown-item">Buat</a></li>
+          </ul>
+        </li>
+        <?php endif; ?>
+
         <?php endif; ?>
         <li class="nav-item dropdown">
           <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"

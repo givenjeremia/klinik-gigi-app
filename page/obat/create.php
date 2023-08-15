@@ -29,6 +29,10 @@
                         <label for="exampleInputPassword1" class="form-label">Jenis</label>
                         <input type="text" class="form-control" name="jenis" required>
                     </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Harga</label>
+                        <input type="text" class="form-control format-rupiah" name="harga" required>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
