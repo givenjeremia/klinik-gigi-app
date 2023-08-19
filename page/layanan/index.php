@@ -27,12 +27,9 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
-                                            <th>Kategori</th>
-                                            <th>Tanggal Expired</th>
-                                            <th>Stok</th>
                                             <th>Jenis</th>
                                             <th>Harga</th>
-
+                                            <th>Hari</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -43,11 +40,9 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
-                                            <th>Kategori</th>
-                                            <th>Tanggal Expired</th>
-                                            <th>Stok</th>
                                             <th>Jenis</th>
                                             <th>Harga</th>
+                                            <th>Hari</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </tfoot>
@@ -70,7 +65,7 @@
             $(this).val(formatRupiah(this.value));
         })
     </script>
-    <script src="../../js/obat.js"></script>
+    <script src="../../js/layanan.js"></script>
 </body>
 
 </html>

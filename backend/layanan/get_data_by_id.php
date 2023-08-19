@@ -1,7 +1,7 @@
 <?php 
 require_once('../config.php');
 $id = $_POST['id'];
-$stmt = $mysqli->prepare('SELECT * FROM `data_karyawan` WHERE `id`=?');
+$stmt = $mysqli->prepare('SELECT * FROM `layanan` WHERE `id`=?');
 $stmt->bind_param('i',$id);
 $stmt->execute();
 $datas = [];
