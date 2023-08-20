@@ -1,4 +1,17 @@
 <?php include '../layouts/session_login.php' ?>
+<?php 
+ $user = $_SESSION['auth'];
+ if($user['role'] == 'admin' || $user['role'] == 'karyawan'){
+     header("location:../home/index.php");
+    }
+    else if($user['role'] == 'dokter') {
+        header("location:../home/dokter.php");
+    }
+    else{
+     print_r("dasdas");
+     header("location:../home/pasien.php");
+ }
+?>
 <!DOCTYPE html>
 <html lang="en">
 

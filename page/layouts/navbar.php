@@ -14,7 +14,7 @@
     <div class="collapse navbar-collapse order-3" id="navbarCollapse">
       <!-- Left navbar links -->
       <ul class="navbar-nav">
-        <?php if($_SESSION['auth']['role'] !== 'pasien') : ?>
+        <?php if($_SESSION['auth']['role'] !== 'pasien' && $_SESSION['auth']['role'] !== 'dokter') : ?>
 
         <li class="nav-item dropdown">
           <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
@@ -47,34 +47,33 @@
             <!-- <li><a href="{{url('admin/transaksi-perias')}}" class="dropdown-item">Pemesanan</a></li> -->
           </ul>
         </li>
+        <?php endif; ?> 
         <?php endif; ?>
 
         <?php if($_SESSION['auth']['role'] == 'dokter') : ?>
         <li class="nav-item dropdown">
           <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-            class="nav-link dropdown-toggle">Rekam Medias</a>
+            class="nav-link dropdown-toggle">Rekam Medis</a>
           <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-            <li><a href="#" class="dropdown-item">Data</a></li>
-            <li><a href="#" class="dropdown-item">Buat</a></li>
+            <li><a href="../rekam_medis/index.php" class="dropdown-item">Data</a></li>
+            <li><a href="../rekam_medis/create.php" class="dropdown-item">Buat</a></li>
           </ul>
         </li>
         <?php endif; ?>
 
-        <?php endif; ?>
+        <?php if($_SESSION['auth']['role'] !== 'dokter'): ?>
         <li class="nav-item dropdown">
           <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             class="nav-link dropdown-toggle">Reservasi</a>
           <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-            <?php if($_SESSION['auth']['role'] == 'admin' || $_SESSION['auth']['role'] == 'karyawan') : ?>
+            <?php if($_SESSION['auth']['role'] == 'admin' || $_SESSION['auth']['role'] == 'karyawan' || $_SESSION['auth']['role'] !== 'dokter') : ?>
             <li><a href="../reservasi/pengajuan.php" class="dropdown-item">Pengajuan</a></li>
             <?php endif; ?>
             <li><a href="../reservasi/history.php" class="dropdown-item">History</a></li>
             <li><a href="../reservasi/jadwal_dokter.php" class="dropdown-item">Jadwal Dokter</a></li>
           </ul>
-          
-    
-
         </li>
+        <?php endif;?>
        
         
       </ul>
