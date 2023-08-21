@@ -45,16 +45,17 @@
                                             <label for='exampleInputPassword1' class='form-label'>Tindakan</label>
                                             <textarea name="diagnosa" class="form-control"></textarea>
                                         </div>
+                                        <div class='mb-3'>
+                                            <button id="btn-simpan-reservasi" class="btn btn-primary d-block w-100">Simpan Rekam Medis</button>
+                                        </div>
                                     </div>
                                     <div class='col'>
                                         <!-- Obat -->
                                         <div class='mb-3'>
-
                                             <div class="row">
                                                 <div class=" col-6">
                                                     <label for='exampleInputPassword1' class='form-label'>Obat</label>
                                                     <select id="cboObat" class='select2bs4 w-100' required>
-                                                        <option value=''>Pilih Obat</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-3">
@@ -74,11 +75,10 @@
                                                 <table id="tableObat" class="table table-bordered table-striped">
                                                     <thead>
                                                         <tr>
-                                                            <th>No</th>
                                                             <th>Nama</th>
                                                             <th>Qty</th>
                                                             <th>Harga</th>
-                                                            <th>Aksi</th>
+                                                            <!-- <th>Aksi</th> -->
                                                         </tr>
                                                     </thead>
                                                     <tbody id="tableObatBody">
@@ -93,9 +93,6 @@
                                                 <div class="col">
                                                     <label for='exampleInputPassword1' class='form-label'>Alat</label>
                                                     <select id="cboAlat" class='select2bs4 w-100' required>
-                                                        <option value=''>Pilih Alat</option>
-                                                        <option value='L'>Laki - Laki</option>
-                                                        <option value='P'>Perempuan</option>
                                                     </select>
                                                 </div>
                                                 <div class="col">
@@ -117,15 +114,14 @@
                                         <div class='mb-3'>
                                             <label for='exampleInputPassword1' class='form-label'>Tabel Alat</label>
                                             <div class="table-responsive">
-                                                <table id="tableObat" class="table table-bordered table-striped">
+                                                <table id="tableAlat" class="table table-bordered table-striped">
                                                     <thead>
                                                         <tr>
-                                                            <th>No</th>
                                                             <th>Nama</th>
                                                             <th>Pemakaian</th>
                                                             <th>Harga</th>
                                                             <th>Keterangan</th>
-                                                            <th>Aksi</th>
+                                                            <!-- <th>Aksi</th> -->
                                                         </tr>
                                                     </thead>
                                                     <tbody id="tableAlatBody">
@@ -145,10 +141,9 @@
             </div>
         </div>
     </div>
-    <?php include_once('create.php') ?>
-    <?php include_once('update.php') ?>
     <?php include '../layouts/script.php' ?>
-    <script src='../../js/perawat.js'></script>
+    <?php include '../layouts/format_rupiah.php' ?>
+    <script src='../../js/rekam_medis.js'></script>
 </body>
 
 </html>
