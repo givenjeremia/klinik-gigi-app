@@ -14,7 +14,7 @@
                 <div class="content">
                     <div class="card mt-2">
                         <div class="card-header">
-                            <h3 class="card-title">Riwayat Rekam Medis</h3>
+                            <h3 class="card-title">Data Reservasi</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">

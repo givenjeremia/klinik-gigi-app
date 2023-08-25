@@ -26,12 +26,15 @@
                                             <input type="date" name="tanggal_pemeriksaan" class="form-control">
                                         </div>
                                         <div class='mb-3'>
-                                            <label for='exampleInputPassword1' class='form-label'>Reservasi</label>
-                                            <select name='jenis_kelamin' class=' select2bs4 w-100' required>
-                                                <option value=''>Pilih Reservasi</option>
-                                                <option value='L'>Laki - Laki</option>
-                                                <option value='P'>Perempuan</option>
+                                            <label for='exampleInputPassword1' class='form-label'>Layanan</label>
+                                            <select id="cboLayanan" name='layanan' class=' select2bs4 w-100' required>
                                             </select>
+                                        </div>
+                                        <div class='mb-3'>
+                                            <label for='exampleInputPassword1' class='form-label'>Reservasi</label>
+                                            <select id="cboReservasi" name='reservasi' class=' select2bs4 w-100' required>
+                                            </select>
+                                            <input type="hidden" name="jadwal_dokter_id" id="jadwal_dokter_id" >
                                         </div>
                                         <div class='mb-3'>
                                             <label for='exampleInputPassword1' class='form-label'>Keluhan</label>
@@ -43,7 +46,11 @@
                                         </div>
                                         <div class='mb-3'>
                                             <label for='exampleInputPassword1' class='form-label'>Tindakan</label>
-                                            <textarea name="diagnosa" class="form-control"></textarea>
+                                            <textarea name="tindakan" class="form-control"></textarea>
+                                        </div>
+                                        <div class='mb-3'>
+                                            <h3>Total Biaya : Rp. <span id="total-biaya-text">0</span></h3>
+                                            <input type="hidden" name="total_biaya" id="total_biaya_input">
                                         </div>
                                         <div class='mb-3'>
                                             <button id="btn-simpan-reservasi" class="btn btn-primary d-block w-100">Simpan Rekam Medis</button>
@@ -52,15 +59,25 @@
                                     <div class='col'>
                                         <!-- Obat -->
                                         <div class='mb-3'>
-                                            <div class="row">
-                                                <div class=" col-6">
+                                            <div class="row mb-1">
+                                                <div class="col">
                                                     <label for='exampleInputPassword1' class='form-label'>Obat</label>
                                                     <select id="cboObat" class='select2bs4 w-100' required>
                                                     </select>
                                                 </div>
+                                                <div class="col">
+                                                    <label for='exampleInputPassword1' class='form-label'>Keterangan</label>
+                                                    <input type="text" id="keterangan_obat" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class=" col-6">
+                                                    <label for='exampleInputPassword1' class='form-label'>Aturan Pakai</label>
+                                                    <input type="text" id="aturan_pakai" class="form-control">
+                                                </div>
                                                 <div class="col-3">
-                                                    <label for='exampleInputPassword1' class='form-label'>Qty</label>
-                                                    <input type="number" id="qty" class="form-control">
+                                                    <label for='exampleInputPassword1' class='form-label'>Jumlah</label>
+                                                    <input type="number" id="jumlah" class="form-control">
                                                 </div>
                                                 <div class="col-3">
                                                     <label for='exampleInputPassword1' class='form-label'>&nbsp;</label>
@@ -76,8 +93,10 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Nama</th>
-                                                            <th>Qty</th>
+                                                            <th>Jumlah</th>
                                                             <th>Harga</th>
+                                                            <th>Keterangan</th>
+                                                            <th>Aturan Pakai</th>
                                                             <!-- <th>Aksi</th> -->
                                                         </tr>
                                                     </thead>
@@ -130,8 +149,6 @@
                                                 </table>
                                             </div>
                                         </div>
-
-
                                     </div>
                                 </div>
                             </form>
