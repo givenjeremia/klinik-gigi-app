@@ -29,9 +29,9 @@
                                             <th>Tanggal</th>
                                             <th>Jam</th>
                                             <th>Status</th>
-                                            <!-- <?php if($_SESSION['auth']['role'] != 'pasien' ): ?>
+                                            <?php if($_SESSION['auth']['role'] == 'dokter' ): ?>
                                             <th>Aksi</th>
-                                            <?php endif; ?> -->
+                                            <?php endif; ?>
                                         </tr>
                                     </thead>
                                     <tbody id="hasil-reservasi">
@@ -47,9 +47,9 @@
                                             <th>Tanggal</th>
                                             <th>Jam</th>
                                             <th>Status</th>
-                                            <!-- <?php if($_SESSION['auth']['role'] != 'pasien' ): ?>
+                                            <?php if($_SESSION['auth']['role'] == 'dokter' ): ?>
                                             <th>Aksi</th>
-                                            <?php endif; ?> -->
+                                            <?php endif; ?>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -70,7 +70,7 @@
     <?php if($_SESSION['auth']['role'] == 'admin' || $_SESSION['auth']['role'] == 'karyawan' || $_SESSION['auth']['role'] == 'dokter'  ): ?>
     <script>
         getAllData()
-        getDataPasien()
+        // getDataPasien()
     </script>
     <?php endif; ?>
     

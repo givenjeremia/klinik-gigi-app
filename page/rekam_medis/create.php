@@ -30,12 +30,17 @@
                                             <select id="cboLayanan" name='layanan' class=' select2bs4 w-100' required>
                                             </select>
                                         </div>
+                                        <?php if(isset($_GET['reservasi']) && isset($_GET['dokter'])) : ?>
+                                            <input type="hidden" name="reservasi" value="<?= $_GET['reservasi'] ?>">
+                                            <input type="hidden" name="jadwal_dokter_id" value="<?= $_GET['dokter'] ?>">
+                                        <?php else: ?>
                                         <div class='mb-3'>
                                             <label for='exampleInputPassword1' class='form-label'>Reservasi</label>
                                             <select id="cboReservasi" name='reservasi' class=' select2bs4 w-100' required>
                                             </select>
                                             <input type="hidden" name="jadwal_dokter_id" id="jadwal_dokter_id" >
                                         </div>
+                                        <?php endif; ?>
                                         <div class='mb-3'>
                                             <label for='exampleInputPassword1' class='form-label'>Keluhan</label>
                                             <textarea name="keluhan" class="form-control"></textarea>

@@ -1,7 +1,7 @@
 
 <nav class="main-header navbar navbar-expand-md navbar-dark">
   <div class="container">
-    <a href="/" class="navbar-brand">
+    <a href="../../index.php" class="navbar-brand">
   
       <span class="brand-text font-weight-light">Klinik Gigi</span>
     </a>

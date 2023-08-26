@@ -167,7 +167,7 @@ $('#btn-simpan-reservasi').on('click', function(e){
       type: "POST",
       url: url,
       data: form_data,
-      dataType: "json",
+      dataType: "json", 
       contentType: false,
       processData: false,
       success: function (data) {
@@ -178,7 +178,7 @@ $('#btn-simpan-reservasi').on('click', function(e){
             icon: "success",
             showConfirmButton: true,
           }).then((result) => {
-            window.location.href = '/index.php';
+            window.location.href = '../../page/rekam_medis/index.php';
           });
         } else {
           Swal.fire({

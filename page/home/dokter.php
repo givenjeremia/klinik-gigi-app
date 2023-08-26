@@ -23,34 +23,36 @@
                                 <p>And Login Sebagai, <?= $_SESSION['auth']['role'] ?></p>
                             </div>
                         </div>
-                        <div class="row">
-                            <section class="col-lg-7 connectedSortable">
-                                <img src="../../assets/brand/5063407.png" alt="" class="w-100">
+                        <!-- Daftar Pasien Hari Ini -->
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>Daftar Pasien Reservasi Hari Ini</h3>
+                                <div class="table-responsive">
+                                    <table id="jadwal-pasien" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>No Antrian</th>
+                                                <th>Nama Pasien</th>
+                                                <th>Jam Reservasi</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="hasil-jadwal-pasien">
 
-                            </section>
-
-                            <section class="col-lg-5 connectedSortable">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">
-                                            Reservasi Hari Ini
-                                        </h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <form id="form-reservasi">
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1" class="form-label">Dokter Hari Ini</label>
-                                                <select name="jadwal_dokter" id="dokter_hari_ini" class="select2bs4 w-100" required>
-                                                </select>
-                                            </div>
-
-                                        </form>
-                                    </div>
-                                    <div class="card-footer">
-                                        <button type="button" class="btn btn-primary" id="btn-reservasi">Reservasi</button>
-                                    </div>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>No Antrian</th>
+                                                <th>Nama Pasien</th>
+                                                <th>Jam Reservasi</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
                                 </div>
-                            </section>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -59,58 +61,46 @@
     </div>
     <?php include '../layouts/script.php' ?>
     <script>
-        function getDataDokterHariIni() {
-            $.ajax({
-                type: "GET",
-                url: "../../backend/dashboard/pasien/data_dokter.php",
+        function getReservasi() {
+            $("#hasil-jadwal").html();
+            var url = "../../backend/rekam_medis/data_reservasi_hari_ini.php";
+            $.ajax(url, {
                 dataType: "json",
-                success: function(data) {
-                    $('#dokter_hari_ini').empty();
-                    if (data[0].status == 'oke') {
-                        $('#dokter_hari_ini').append('<option value="">Pilih Nama Dokter</option>');
-                        $.each(data[0].data, function(i, item) {
-                            console.log(item)
-                            $('#dokter_hari_ini').append('<option value="' + item.id_jadwal + '">' + item.nama_dokter + ' - ' + item.jam + '</option>');
-                        });
-                    } else {
-                        $('#dokter_hari_ini').append('<option value="">Tidak Ada Dokter Hari Ini</option>');
-                    }
-                }
-            });
-        }
-        getDataDokterHariIni()
+                timeout: 500,
+                success: function(data, status, xhr) {
+                    if (data[0].status === "oke") {
+                        $(".data-pasien").remove();
+                        data.forEach((element, key) => {
+                            $("#hasil-jadwal-pasien").append(
+                                "<tr class='data-pasien' id='tr_pasien" + key + "'>"
+                            );
+                            $("#tr_pasien" + key).append("<th scope='row'>" + (key + 1) + "</th>");
+                            $("#tr_pasien" + key).append("<th>" + element.data["NoAntrian"] + "</th>");
+                            $("#tr_pasien" + key).append("<th>" + element.data["NamaPasien"] + "</th>");
+                            $("#tr_pasien" + key).append("<th>" + element.data["Jam"] + "</th>");
+                            var action =
+                                `<th>  
+                <a href="../rekam_medis/create.php?reservasi=${element['IdReservasi']}&dokter=${element['IdJadwalDokter']}" class="btn btn-primary"><i class="fa fa-plus"></i></a> 
+            </th>`;
+                            $("#tr_pasien" + key).append(action);
+                            $("#hasil-jadwal-pasien").append("</tr>");
 
-        $('#btn-reservasi').on('click', function() {
-            var form = document.querySelector('#form-reservasi');
-            var form_data = new FormData(form);
-            $.ajax({
-                type: "POST",
-                url: "../../backend/dashboard/pasien/insert_reservasi.php",
-                data: form_data,
-                dataType: "json",
-                contentType: false,
-                processData: false,
-                success: function(data) {
-                    if (data.status == "success") {
-                        Swal.fire({
-                            title: "Success",
-                            text: "Reservasi Berhasil Ditambahkan",
-                            icon: "success",
-                            showConfirmButton: true,
-                        }).then((result) => {
-                            window.location.reload()
                         });
-                    } else {
-                        Swal.fire({
-                            title: "Error",
-                            text: "Reservasi Gagal Di Tambahkan",
-                            icon: "error",
-                            showConfirmButton: true,
-                        });
+
                     }
+                    $("#jadwal-pasien")
+                        .DataTable({
+                            pageLength: 3,
+                            bDestroy: true,
+                            responsive: true,
+                        })
+                        .buttons()
+                        .container()
+                        .appendTo("#example1_wrapper .col-md-6:eq(0)");
                 },
             });
-        });
+        }
+        getReservasi();
     </script>
 </body>
 
