@@ -14,12 +14,14 @@ function getData() {
             $("#tr_" + key).append("<th>" + element.data["jenis"] + "</th>");
             $("#tr_" + key).append("<th>Rp. " + formatRupiah(element.data["harga"]) + "</th>");
             $("#tr_" + key).append("<th>" + element.data["hari_dokter"] + "</th>");
-            var action =
-              `<th>  
-                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit" onClick="updateData(` +element.data["id"] +`)"><i class="fa fa-pen"></i></a> 
-                    <a href="#" class="btn btn-danger" onClick="deleteData(` +element.data["id"] +`)"><i class="fa fa-trash"></i></a>
-                </th>`;
-            $("#tr_" + key).append(action);
+            if (data[0].role != 'pasien'){
+              var action =
+                `<th>  
+                      <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit" onClick="updateData(` +element.data["id"] +`)"><i class="fa fa-pen"></i></a> 
+                      <a href="#" class="btn btn-danger" onClick="deleteData(` +element.data["id"] +`)"><i class="fa fa-trash"></i></a>
+                  </th>`;
+              $("#tr_" + key).append(action);
+            }
             $("#hasil").append("</tr>");
           });
         }

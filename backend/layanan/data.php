@@ -1,5 +1,6 @@
 <?php 
 require_once('../config.php');
+session_start();
 $hari_list = [
     'Sunday'=> 'Minggu',
     'Monday' => 'Senin',
@@ -22,7 +23,8 @@ if ($result->num_rows > 0) {
         ];
         array_push($datas,[
             'status'=> 'oke',
-            'data'=>$data
+            'data'=>$data,
+            'role' => $_SESSION['auth']['role']
         ]);
     }
   } else {

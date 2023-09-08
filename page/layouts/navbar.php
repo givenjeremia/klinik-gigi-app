@@ -31,13 +31,13 @@
           </ul>
         </li>
 
-        <li class="nav-item dropdown">
+        <!-- <li class="nav-item dropdown">
           <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             class="nav-link dropdown-toggle">Jadwal</a>
           <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
             <li><a href="#" class="dropdown-item">Dokter</a></li>
           </ul>
-        </li>
+        </li> -->
 
         <?php if($_SESSION['auth']['role'] == 'admin' || $_SESSION['auth']['role'] == 'karyawan') : ?>
         <li class="nav-item dropdown">
@@ -48,6 +48,13 @@
           </ul>
         </li>
         <?php endif; ?> 
+        
+        <?php endif; ?>
+
+        <?php if($_SESSION['auth']['role'] == 'pasien') : ?>
+        <li class="nav-item">
+          <a href="../layanan/index.php" class="nav-link">Layanan</a>
+        </li>
         <?php endif; ?>
 
         <?php if($_SESSION['auth']['role'] == 'dokter') : ?>
@@ -67,7 +74,10 @@
           <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             class="nav-link dropdown-toggle">Reservasi</a>
           <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-            <?php if($_SESSION['auth']['role'] == 'admin' || $_SESSION['auth']['role'] == 'karyawan' || $_SESSION['auth']['role'] !== 'dokter') : ?>
+            <?php if($_SESSION['auth']['role'] == 'pasien'): ?>
+            <li><a href="../reservasi/pengingat.php" class="dropdown-item">Pengingat</a></li>
+            <?php endif;?>
+            <?php if(($_SESSION['auth']['role'] == 'admin' || $_SESSION['auth']['role'] == 'karyawan') && ($_SESSION['auth']['role'] !== 'dokter' || $_SESSION['auth']['role'] !== 'pasien') ) : ?>
             <li><a href="../reservasi/pengajuan.php" class="dropdown-item">Pengajuan</a></li>
             <?php endif; ?>
             <li><a href="../reservasi/history.php" class="dropdown-item">History</a></li>

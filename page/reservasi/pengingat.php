@@ -1,5 +1,4 @@
 <?php include '../layouts/session_login.php' ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,14 +12,19 @@
         <div class="content-wrapper">
             <div class="container-fluid pr-5 pl-5 pt-3">
                 <div class="content">
-                    <?php if($_SESSION['auth']['role'] !== 'pasien') : ?>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalTambah">
-                        Add Layanan
-                    </button>
-                    <?php endif; ?>
+                    <div class="form-group">
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Pengingat</label>
+                            <select name="hari" id="pilih_hari" class=" form-control w-25" required>
+                                <option value="hari_ini">Hari Ini</option>
+                                <option value="besok">Besok</option>
+                                <option value="terlewati">Terlewati</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="card mt-2">
                         <div class="card-header">
-                            <h3 class="card-title">Layanan</h3>
+                            <h3 class="card-title">Pengingat <span id="jenis_pengingat">Hari Ini</span></h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -29,13 +33,10 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama</th>
-                                            <th>Jenis</th>
-                                            <th>Harga</th>
-                                            <th>Hari</th>
-                                            <?php if($_SESSION['auth']['role'] !== 'pasien') : ?>
-                                            <th>Aksi</th>
-                                            <?php endif; ?>
+                                            <th>No Antrian</th>
+                                            <th>Nama Dokter</th>
+                                            <th>Tanggal</th>
+                                            <th>Jam</th>
                                         </tr>
                                     </thead>
                                     <tbody id="hasil">
@@ -44,35 +45,23 @@
                                     <tfoot>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama</th>
-                                            <th>Jenis</th>
-                                            <th>Harga</th>
-                                            <th>Hari</th>
-                                            <?php if($_SESSION['auth']['role'] !== 'pasien') : ?>
-                                            <th>Aksi</th>
-                                            <?php endif; ?>
+                                            <th>No Antrian</th>
+                                            <th>Nama Dokter</th>
+                                            <th>Tanggal</th>
+                                            <th>Jam</th>
                                         </tr>
                                     </tfoot>
                                 </table>
                             </div>
                         </div>
-                        <!-- /.card-body -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <?php include_once('create.php') ?>
-    <?php include_once('update.php') ?>
     <?php include '../layouts/script.php' ?>
-    <?php include '../layouts/format_rupiah.php' ?>
     <?php include '../layouts/format_tanggal.php' ?>
-    <script>
-        $(document).on('input', '.format-rupiah', function() {
-            $(this).val(formatRupiah(this.value));
-        })
-    </script>
-    <script src="../../js/layanan.js"></script>
+    <script src="../../js/pengingat.js"></script>
 </body>
 
 </html>

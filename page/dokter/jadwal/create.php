@@ -22,8 +22,8 @@
                             <option value="Tuesday">Selasa</option>
                             <option value="Wednesday">Rabu</option>
                             <option value="Thursday">Kamis</option>
-                            <option value="Tuesday">Jum'at</option>
-                            <option value="Friday">Sabtu</option>
+                            <option value="Friday">Jum'at</option>
+                            <option value="Saturday">Sabtu</option>
                             <option value="Sunday">Minggu</option>
                         </select>
                     </div>
