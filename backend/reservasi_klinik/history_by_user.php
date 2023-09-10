@@ -10,7 +10,7 @@ try {
     $result_pasien = $stmt_pasien->get_result();
     $data_pasien = $result_pasien->fetch_assoc();
     $id_pasien = $data_pasien[ 'id' ];
-    $sql = "SELECT dd.nama AS NamaDokter, dp.nama AS NamaPasien, rk.jam_reservasi AS Jam, rk.tanggal_reservasi AS Tanggal, rk.status as Status
+    $sql = "SELECT rk.id as IdReservasi, dd.nama AS NamaDokter, dp.nama AS NamaPasien, rk.jam_reservasi AS Jam, rk.tanggal_reservasi AS Tanggal, rk.status as Status
     FROM `reservasi_kllinik` rk INNER JOIN `data_pasien` dp ON rk.data_pasien_id_pasien = dp.id
     INNER JOIN `jadwal_dokter` jd ON jd.id = rk.jadwal_dokter_id
     INNER JOIN `data_dokter` dd ON jd.data_dokter_id = dd.id

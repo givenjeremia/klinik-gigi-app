@@ -15,16 +15,11 @@ function getDataHistoryByUser() {
           $("#tr_" + key).append("<th>" + element["Tanggal"] + "</th>");
           $("#tr_" + key).append("<th>" + element["Jam"] + "</th>");
           $("#tr_" + key).append("<th>" + element["Status"] + "</th>");
-          //         var action =
-          //             `<th>
-          //       <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit" onClick="updateData(` +
-          //             element.data["id"] +
-          //             `)"><i class="fa fa-pen"></i></a>
-          //       <a href="#" class="btn btn-danger" onClick="deleteData(` +
-          //             element.data["id"] +
-          //             `)"><i class="fa fa-trash"></i></a>
-          //   </th>`;
-          //         $("#tr_" + key).append(action);
+          var action =
+          `<th>
+          <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalRekamMedis" onClick="rekamMedis(` +element["IdReservasi"] +`)"><i class="fa fa-file"></i></a>
+          </th>`;
+          $("#tr_" + key).append(action);
           $("#hasil-reservasi").append("</tr>");
         });
 
@@ -80,4 +75,8 @@ function getAllData() {
       }
     },
   });
+}
+
+function rekamMedis(id_reservasi){
+
 }

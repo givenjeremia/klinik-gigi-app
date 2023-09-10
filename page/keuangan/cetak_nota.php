@@ -1,5 +1,47 @@
 <?php
-$id_nota = $_GET['id_nota']
+require_once('../../backend/config.php');
+$id_nota = $_GET['id_nota'];
+$sql_nota = "SELECT n.*,rm.keluhan as Keluhan, rm.diagnosa as Diagnosa, dk.nama AS NamaKaryawan, dp.nama as NamaPasien
+FROM nota n INNER JOIN rekam_medis rm ON n.rekam_medis_id = rm.id
+INNER JOIN data_karyawan dk ON dk.id = n.data_karyawan_id
+INNER JOIN reservasi_kllinik rk ON rk.id = rm.reservasi_kllinik_id
+INNER JOIN data_pasien dp ON dp.id = rk.data_pasien_id_pasien
+WHERE n.id=?";
+$stmt_nota = $mysqli->prepare($sql_nota);
+$stmt_nota->bind_param('i',$id_nota);
+$stmt_nota->execute();
+$result_nota = $stmt_nota->get_result();
+$data_nota = $result_nota->fetch_assoc();
+$id_rekam_medis = $data_nota['rekam_medis_id'];
+
+$sql_obat = "SELECT rs.*, d_o.nama as NamaObat
+FROM resep_obat rs 
+INNER JOIN data_obat d_o ON rs.data_obat_id = d_o.id
+WHERE rs.rekam_medis_id =?";
+$stmt_obat = $mysqli->prepare($sql_obat);
+$stmt_obat->bind_param('i',$id_rekam_medis);
+$stmt_obat->execute();
+$result_obat = $stmt_obat->get_result();
+
+$sql_alat = "SELECT rma.*, a.nama as NamaAlat
+FROM rekam_medis_has_alat rma
+INNER JOIN alat a ON a.id = rma.alat_id
+WHERE rma.rekam_medis_id =?";
+$stmt_alat = $mysqli->prepare($sql_alat);
+$stmt_alat->bind_param('i',$id_rekam_medis);
+$stmt_alat->execute();
+$result_alat = $stmt_alat->get_result();
+
+$sql_layanan = "SELECT l.nama AS NamaLayanan
+FROM rekam_medis_has_layanan rml
+INNER JOIN layanan l ON l.id = rml.layanan_id
+WHERE rml.rekam_medis_id =?";
+$stmt_layanan = $mysqli->prepare($sql_layanan);
+$stmt_layanan->bind_param('i',$id_rekam_medis);
+$stmt_layanan->execute();
+$result_layanan = $stmt_layanan->get_result();
+$data_layanan = $result_layanan->fetch_assoc();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -53,6 +95,7 @@ $id_nota = $_GET['id_nota']
         .ttd th {
             padding-bottom: 4em;
         }
+        @media print{@page {size: landscape}}
     </style>
 </head>
 
@@ -65,18 +108,32 @@ $id_nota = $_GET['id_nota']
                     <td colspan='6' width='485' id='caption'>KLINIK GIGI</td>
                 </tr>
                 <tr>
-                    <td colspan='2'>Nama Pasien</td>
-                    <td class='left kop'>Suparman</td>
+                    <td colspan='2'>Nama Pasien : </td>
+                    <td class='left kop'><?= $data_nota['NamaPasien'] ?></td>
                     <td></td>
-                    <td>Tanggal</td>
-                    <td class='left kop'>Wonosobo, 22 Maret 2019</td>
+                    <td>Tanggal : </td>
+                    <td class='left kop'><?= date('d F y', strtotime($data_nota['tanggal'])) ?></td>
                 </tr>
                 <tr>
-                    <td colspan='2'>NO Nota</td>
+                    <td colspan='2'>No Nota : </td>
                     <td class='left kop'><?= $id_nota ?></td>
                     <td></td>
-                    <td>Pembuat Nota</td>
-                    <td class='left kop'>Sewa Harian</td>
+                    <td>Pembuat Nota : </td>
+                    <td class='left kop'><?= $data_nota['NamaKaryawan'] ?></td>
+                </tr>
+                <tr>
+                    <td colspan='2'>Layanan : </td>
+                    <td class='left kop'><?= $data_layanan['NamaLayanan'] ?></td>
+                    <td></td>
+                    <td>Jenis Pembayaran : </td>
+                    <td class='left kop'><?= $data_nota['jenis_pembayaran'] ?></td>
+                </tr>
+                <tr>
+                    <td colspan='2'>Keluhan : </td>
+                    <td class='left kop'><?= $data_nota['Keluhan'] ?></td>
+                    <td></td>
+                    <td>Diagnosa : </td>
+                    <td class='left kop'><?= $data_nota['Diagnosa'] ?></td>
                 </tr>
                 <tr>
                     <td></td>
@@ -95,13 +152,18 @@ $id_nota = $_GET['id_nota']
                     <th>TOTAL</th>
                     <th colspan='2'>KETERANGAN</th>
                 </tr>
+                <?php 
+                $counter = 1;
+                while($row = $result_obat->fetch_assoc() ) :?>
                 <tr>
-                    <td align='right'>1</td>
-                    <td>Rp 400.000</td>
-                    <td align='right'>1</td>
-                    <td>Rp 400.000</td>
-                    <td colspan='2'> Semayu</td>
+                    <td align='right'><?=  $counter ?></td>
+                    <td><?=  $row['NamaObat'] ?></td>
+                    <td align='right'><?=  $row['jumlah_pemakaian'] ?></td>
+                    <td>Rp. <?= number_format($row['harga']) ?></td>
+                    <td colspan='2'><?=  $row['keterangan'] ?></td>
                 </tr>
+                <?php $counter = $counter + 1; ?>
+                <?php endwhile; ?>
                 <tr>
                     <th>No</th>
                     <th>ALAT</th>
@@ -109,16 +171,21 @@ $id_nota = $_GET['id_nota']
                     <th>TOTAL</th>
                     <th colspan='2'>KETERANGAN</th>
                 </tr>
+                <?php 
+                $counter = 1;
+                while($row = $result_alat->fetch_assoc() ) :?>
                 <tr>
-                    <td align='right'>1</td>
-                    <td>Rp 400.000</td>
-                    <td align='right'>1</td>
-                    <td>Rp 400.000</td>
-                    <td colspan='2'> Semayu</td>
+                    <td align='right'><?=  $counter ?></td>
+                    <td><?=  $row['NamaAlat'] ?></td>
+                    <td align='right'><?=  $row['jumlah_pemakaian'] ?></td>
+                    <td>Rp. <?= number_format($row['harga']) ?></td>
+                    <td colspan='2'><?=  $row['keterangan'] ?></td>
                 </tr>
+                <?php $counter = $counter + 1; ?>
+                <?php endwhile; ?>
                 <tr>
                     <th colspan='3'> TOTAL</th>
-                    <td>Rp 400.000</td>
+                    <td>Rp. <?= number_format($data_nota['total_pembayaran']) ?></td>
                     <td colspan='2'></td>
                 </tr>
             </tbody>
