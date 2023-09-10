@@ -80,7 +80,7 @@
                             $("#tr_pasien" + key).append("<th>" + element.data["Jam"] + "</th>");
                             var action =
                                 `<th>  
-                <a href="../rekam_medis/create.php?reservasi=${element['IdReservasi']}&dokter=${element['IdJadwalDokter']}" class="btn btn-primary"><i class="fa fa-plus"></i></a> 
+                <a href="../rekam_medis/create.php?reservasi=${element.data['IdReservasi']}&dokter=${element.data['IdJadwalDokter']}" class="btn btn-primary"><i class="fa fa-plus"></i></a> 
             </th>`;
                             $("#tr_pasien" + key).append(action);
                             $("#hasil-jadwal-pasien").append("</tr>");

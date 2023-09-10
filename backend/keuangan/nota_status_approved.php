@@ -3,14 +3,12 @@ require_once( '../config.php' );
 session_start();
 $datas = [];
 try {
-    $currentDate = date('Y-m-d');
-    $sql = "SELECT rk.id as IdReservasi, rk.no_antrian as NoAntrian ,rk.jadwal_dokter_id  as IdJadwalDokter, dd.nama AS NamaDokter, dp.nama AS NamaPasien,dp.no_telp as NoTelp, rk.jam_reservasi AS Jam, rk.tanggal_reservasi AS Tanggal, rk.status as Status
-    FROM `reservasi_kllinik` rk INNER JOIN `data_pasien` dp ON rk.data_pasien_id_pasien = dp.id
-    INNER JOIN `jadwal_dokter` jd ON jd.id = rk.jadwal_dokter_id
-    INNER JOIN `data_dokter` dd ON jd.data_dokter_id = dd.id WHERE rk.tanggal_reservasi = '$currentDate' AND rk.status = 'approved'";
-
+    $sql = "SELECT n.id as IdNota, n.total_pembayaran as TotalPembayaran, n.jenis_pembayaran as JenisPembayaran, n.tanggal as TanggalNota , n.status as StatusNota, n.rekam_medis_id as IdRekamMedis, dp.id as IdPasien, dp.nama as NamaPasien
+FROM `nota` n INNER JOIN `rekam_medis` rm ON n.rekam_medis_id = rm.id
+INNER JOIN `reservasi_kllinik` rk ON rm.reservasi_kllinik_id = rk.id
+INNER JOIN `data_pasien` dp ON dp.id = rk.data_pasien_id_pasien WHERE n.status = 'approved'";
     $result = $mysqli->query( $sql );
-    
+
     if ( $result->num_rows > 0 ) {
         $tamps = [];
         while( $row = $result->fetch_assoc() ) {

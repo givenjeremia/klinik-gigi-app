@@ -1,6 +1,6 @@
 <?php 
 require_once('../config.php');
-$result = $mysqli->query('SELECT * FROM `data_karyawan`');
+$result = $mysqli->query('SELECT * FROM `data_karyawan` WHERE nama != "admin"');
 $datas = [];
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {

@@ -31,6 +31,11 @@ try {
             $stmt_resep->bind_param( 'iiidss', $new_id_rekam_medis, $value[ 'id_obat' ],  $value[ 'jumlah' ], $value[ 'total_harga' ], $value[ 'keterangan' ], $value[ 'aturan_pakai' ] );
             $stmt_resep->execute();
         }
+        // Add Nota
+        $sql_nota = 'INSERT INTO `nota`(`rekam_medis_id`) VALUES (?)';
+        $stmt_nota = $mysqli->prepare( $sql_nota );
+        $stmt_nota->bind_param( 'i', $new_id_rekam_medis);
+        $stmt_nota->execute();
         $mysqli->commit();
         echo json_encode( [ 'status' => 'success', 'msg' => 'Berhasil Tambah Rekam Medis' ] );
     } else {

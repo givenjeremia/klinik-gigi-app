@@ -3,7 +3,7 @@ require_once( '../config.php' );
 session_start();
 try {
     $nextDay = date('Y-m-d', strtotime("+1 day"));
-    $sql = "SELECT rk.id as IdReservasi, rk.no_antrian as NoAntrian , rk.jadwal_dokter_id  as IdJadwalDokter, dd.nama AS NamaDokter, dp.nama AS NamaPasien, rk.jam_reservasi AS Jam, rk.tanggal_reservasi AS Tanggal, rk.status as Status
+    $sql = "SELECT rk.id as IdReservasi, rk.no_antrian as NoAntrian , rk.jadwal_dokter_id  as IdJadwalDokter, dd.nama AS NamaDokter, dp.nama AS NamaPasien, dp.no_telp as NoTelp , rk.jam_reservasi AS Jam, rk.tanggal_reservasi AS Tanggal, rk.status as Status
     FROM `reservasi_kllinik` rk INNER JOIN `data_pasien` dp ON rk.data_pasien_id_pasien = dp.id
     INNER JOIN `jadwal_dokter` jd ON jd.id = rk.jadwal_dokter_id
     INNER JOIN `data_dokter` dd ON jd.data_dokter_id = dd.id WHERE rk.tanggal_reservasi = '$nextDay' AND rk.status = 'approved'";

@@ -44,7 +44,9 @@
           <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             class="nav-link dropdown-toggle">Keuangan</a>
           <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-            <!-- <li><a href="{{url('admin/transaksi-perias')}}" class="dropdown-item">Pemesanan</a></li> -->
+            <li><a href="../keuangan/pengajuan_nota.php" class="dropdown-item">Pengajuan Nota</a></li>
+            <li><a href="../keuangan/nota.php" class="dropdown-item">Nota</a></li>
+            <li><a href="../keuangan/catatan_keuangan.php" class="dropdown-item">Catatan Keuangan</a></li>
           </ul>
         </li>
         <?php endif; ?> 
@@ -74,10 +76,8 @@
           <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             class="nav-link dropdown-toggle">Reservasi</a>
           <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-            <?php if($_SESSION['auth']['role'] == 'pasien'): ?>
-            <li><a href="../reservasi/pengingat.php" class="dropdown-item">Pengingat</a></li>
-            <?php endif;?>
             <?php if(($_SESSION['auth']['role'] == 'admin' || $_SESSION['auth']['role'] == 'karyawan') && ($_SESSION['auth']['role'] !== 'dokter' || $_SESSION['auth']['role'] !== 'pasien') ) : ?>
+            <li><a href="../reservasi/pengingat.php" class="dropdown-item">Pengingat</a></li>
             <li><a href="../reservasi/pengajuan.php" class="dropdown-item">Pengajuan</a></li>
             <?php endif; ?>
             <li><a href="../reservasi/history.php" class="dropdown-item">History</a></li>
