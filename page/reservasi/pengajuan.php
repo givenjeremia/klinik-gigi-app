@@ -62,6 +62,7 @@
         </div>
     </div>
     <?php include '../layouts/script.php' ?>
+    <?php include '../layouts/format_tanggal.php' ?>
     <script src="../../js/pengajuan.js"></script>
     <?php if($_SESSION['auth']['role'] == 'admin' || $_SESSION['auth']['role'] == 'karyawan'  ): ?>
     <script>

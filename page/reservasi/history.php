@@ -28,26 +28,15 @@
                                             <?php endif; ?>
                                             <th>Tanggal</th>
                                             <th>Jam</th>
-                                            <th>Status</th>
+                                            <th>Status Reservasi</th>
+                                            <th>Status Kehadiran</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody id="hasil-reservasi">
 
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama Dokter</th>
-                                            <?php if($_SESSION['auth']['role'] != 'pasien' ): ?>
-                                            <th>Nama Pasien</th>
-                                            <?php endif; ?>
-                                            <th>Tanggal</th>
-                                            <th>Jam</th>
-                                            <th>Status</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </tfoot>
+                                
                                 </table>
                             </div>
                         </div>
@@ -57,6 +46,7 @@
         </div>
     </div>
     <?php include '../layouts/script.php' ?>
+    <?php include '../layouts/format_tanggal.php' ?>
     <script src="../../js/pasien_user.js"></script>
     <?php if($_SESSION['auth']['role'] == 'pasien' ): ?>
     <script>

@@ -64,43 +64,23 @@
                                                             <tr>
                                                                 <th>No</th>
                                                                 <th>Nama</th>
-                                                                <th>Jam</th>
+                                                                <th>Mulai Jam</th>
                                                                 <th>Hari</th>
-                                                                <th>Kuota Pasien</th>
+                                                                <th>Sisa Kuota Pasien</th>
                                                                 <th>Aksi</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody id='hasil_jadwal'>
-                                                            <!-- <tr>
-                                                                <td>dqwq</td>
-                                                            </tr> -->
+                                                      
                                                         </tbody>
-                                                        <tfoot>
-                                                            <tr>
-                                                                <th>No</th>
-                                                                <th>Nama</th>
-                                                                <th>Jam</th>
-                                                                <th>Hari</th>
-                                                                <th>Kuota Pasien</th>
-                                                                <th>Aksi</th>
-                                                            </tr>
-                                                        </tfoot>
+                                                    
                                                     </table>
                                                 </div>
                                             </div>
-                                            <!-- <div class="form-group">
-                                                <label for="exampleInputPassword1">Tanggal</label>
-                                                <input type="date" class="form-control" id="exampleInputPassword1" placeholder="Tanggal">
-                                            </div> -->
-                                            <!-- <div class="form-group">
-                                                <label for="exampleInputPassword1">Jam</label>
-                                                <input type="time" class="form-control" id="exampleInputPassword1" placeholder="Jam">
-                                            </div> -->
+                                         
                                         </form>
                                     </div>
-                                    <!-- <div class="card-footer">
-                                        <button type="button" class="btn btn-primary" id="btn-reservasi">Reservasi</button>
-                                    </div> -->
+                                   
                                 </div>
                             </section>
                         </div>

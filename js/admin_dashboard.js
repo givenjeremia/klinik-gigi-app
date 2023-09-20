@@ -83,10 +83,21 @@ function getReservasi() {
           $("#tr_pasien" + key).append("<th>" + element.data["NoAntrian"] + "</th>");
           $("#tr_pasien" + key).append("<th>" + element.data["NamaPasien"] + "</th>");
           $("#tr_pasien" + key).append("<th>" + element.data["Jam"] + "</th>");
-          var action =
-          `<th>  
-                <a href="../rekam_medis/create.php?reservasi=${element['IdReservasi']}&dokter=${element['IdJadwalDokter']}" class="btn btn-primary"><i class="fa fa-plus"></i></a> 
+          var action = ''
+          if(element.data['StatusKehadiran'] == 'pending'){
+            action =
+            `<th>  
+                <button onclick="kehadiran('${element.data['IdReservasi']}','hadir')" class="btn btn-primary"><i class="fa fa-check"></i></button> 
+                <button onclick="kehadiran('${element.data['IdReservasi']}','tidak hadir')"  class="btn btn-danger"><i class="fa fa-times"></i></button> 
             </th>`;
+          }
+          else{
+            action =
+            `<th>  
+              <a href="../rekam_medis/create.php?reservasi=${element.data['IdReservasi']}&dokter=${element.data['IdJadwalDokter']}" class="btn btn-primary"><i class="fa fa-plus"></i></a> 
+            </th>`
+
+          }
         $("#tr_pasien" + key).append(action);
           $("#hasil-jadwal-pasien").append("</tr>");
 
@@ -106,3 +117,35 @@ function getReservasi() {
   });
 }
 getReservasi();
+
+function kehadiran(id,status) {
+  var url = "../../backend/reservasi_klinik/update_status_kehadiran.php";
+  $.ajax(url, {
+    type: "post",
+    data: {
+      id: id,
+      status: status,
+    },
+    dataType: "json",
+    timeout: 500,
+    success: function (data, status, xhr) {
+      if (data.status == "success") {
+          Swal.fire({
+            title: "Success",
+            text: "Status Berhasil Diubah",
+            icon: "success",
+            showConfirmButton: true,
+          }).then(result => {
+            window.location.reload()
+          })
+        } else {
+          Swal.fire({
+            title: "Error",
+            text: "Status Gagal Di Ubah",
+            icon: "error",
+            showConfirmButton: true,
+          });
+        }
+    },
+  });
+}
