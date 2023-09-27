@@ -2,7 +2,7 @@
 require_once( '../config.php' );
 session_start();
 try {
-    $sql = "SELECT n.id as IdNota, n.total_pembayaran as TotalPembayaran, n.jenis_pembayaran as JenisPembayaran, n.tanggal as TanggalNota , n.status as StatusNota, n.rekam_medis_id as IdRekamMedis, dp.id as IdPasien, dp.nama as NamaPasien
+    $sql = "SELECT n.id as IdNota, n.total_pembayaran as TotalPembayaran, n.jenis_pembayaran as JenisPembayaran,n.sub_pembayaran as SubPembayaran, n.tanggal as TanggalNota , n.status as StatusNota, n.rekam_medis_id as IdRekamMedis, dp.id as IdPasien, dp.nama as NamaPasien
 FROM `nota` n INNER JOIN `rekam_medis` rm ON n.rekam_medis_id = rm.id
 INNER JOIN `reservasi_kllinik` rk ON rm.reservasi_kllinik_id = rk.id
 INNER JOIN `data_pasien` dp ON dp.id = rk.data_pasien_id_pasien";

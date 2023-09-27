@@ -59,14 +59,16 @@
         </li>
         <?php endif; ?>
 
-        <?php if($_SESSION['auth']['role'] == 'dokter') : ?>
+        <?php if($_SESSION['auth']['role'] == 'dokter'  || $_SESSION['auth']['role'] == 'admin' ) : ?>
         <li class="nav-item dropdown">
           <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             class="nav-link dropdown-toggle">Rekam Medis</a>
           <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
             <li><a href="../rekam_medis/index.php" class="dropdown-item">Riwayat</a></li>
+            <?php if($_SESSION['auth']['role'] == 'dokter') : ?>
             <li><a href="../reservasi/history.php" class="dropdown-item">Data Reservasi</a></li>
             <li><a href="../rekam_medis/create.php" class="dropdown-item">Buat</a></li>
+            <?php endif; ?>
           </ul>
         </li>
         <?php endif; ?>

@@ -38,9 +38,17 @@ function verifNotaForm(id,IdRekamMedis,NamaPasien,tanggal,tarif){
     $("#rekamMedisVerif").val(IdRekamMedis);
     $("#namaPasienVerif").val(NamaPasien);
     $("#tanggalVerif").val(tanggal);
-    $("#totalPembayaranVerif").val(tarif);
+    $("#totalPembayaranVerif").val(formatRupiah(tarif));
+    var total = parseInt(tarif) + 10000;
+    $("#totalTarifLabel").html(formatRupiah(total));
     $("#submit_edit").attr("key", id);
 }
+
+$('#totalPembayaranVerif').on('change',function(){
+  var value = $(this).val().replace(/\./g, '');
+  var total = parseInt(value) + 10000;
+  $("#totalTarifLabel").html(formatRupiah(total));
+})
 
 $("#submit_edit").on("click", function (e) {
     var id = $(this).attr("key");
@@ -65,12 +73,7 @@ $("#submit_edit").on("click", function (e) {
             icon: "success",
             showConfirmButton: true,
           }).then(result => {
-            $("#close_edit").click();
-            for (var key of form_data.keys()) {
-              form_data.delete(key);
-            }
-            $("#pengajuan-nota").DataTable().destroy();
-            getDataPengajuanNota() 
+            window.location.reload();
           })
         
         } else {
@@ -80,8 +83,9 @@ $("#submit_edit").on("click", function (e) {
             icon: "error",
             showConfirmButton: true,
           });
+
         }
-        getDataPengajuanNota() 
+
       },
     });
   });
@@ -145,13 +149,23 @@ function getDataDaftarNota() {
                     $("#tr_" + key).append("<th>" + element["NamaPasien"] + "</th>");
                     $("#tr_" + key).append("<th>" + convertDate(element["TanggalNota"]) + "</th>");
                     $("#tr_" + key).append("<th>" + element["IdRekamMedis"] + "</th>");
+                    $("#tr_" + key).append("<th>Rp. " + element["JenisPembayaran"] + "</th>");
+                    $("#tr_" + key).append("<th>Rp. " + formatRupiah(element["SubPembayaran"]) + "</th>");
                     $("#tr_" + key).append("<th>Rp. " + formatRupiah(element["TotalPembayaran"]) + "</th>");
-                    $("#tr_" + key).append("<th>" + (element["StatusNota"]) + "</th>");
-                    // <a href="#" class="btn btn-danger" onClick="tolakNota(` + element["IdNota"]  +`)"><i class="fa fa-trash"></i></a>
+                    var status = '';
+                    if(element["StatusNota"] == 'approved'){
+                      status = '<h5><span class="badge badge-success">Diterima</span></h5>'
+                    }
+                    else if(element["StatusNota"]=='rejected'){
+                      status = '<h5><span class="badge badge-danger">Ditolak</span></h5>'
+                    }
+                    else{
+                      status = '<h5><span class="badge badge-secondary">Menunggu Konfirmasi</span></h5>'
+                    }
+                    $("#tr_" + key).append("<th>" + status + "</th>");
                     var action =
                     `<th> 
                     <a href="../../page/keuangan/cetak_nota.php?id_nota=${element["IdNota"]}" target="_BLANK" class="btn btn-primary"><i class="fa fa-print"></i></a>
-
                     </th>`;
                     $("#tr_" + key).append(action);
                     $("#hasil-daftar-nota").append("</tr>");

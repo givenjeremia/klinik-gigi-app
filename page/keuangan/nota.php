@@ -27,6 +27,8 @@
                                             <th>Tanggal</th>
                                             <th>Rekam Medis</th>
                                             <th>Jenis Pembayaran</th>
+                                            <th>Sub Pembayaran</th>
+                                            <th>Total Pembayaran</th>
                                             <th>Status</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -34,18 +36,7 @@
                                     <tbody id="hasil-daftar-nota">
 
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nota</th>
-                                            <th>Nama Pasien</th>
-                                            <th>Tanggal</th>
-                                            <th>Rekam Medis</th>
-                                            <th>Jenis Pembayaran</th>
-                                            <th>Status</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </tfoot>
+                                  
                                 </table>
                                 
                             </div>

@@ -29,7 +29,7 @@
                                             <th>Diagnosa</th>
                                             <th>Tindakan</th>
                                             <th>Alat</th>
-                                            <th>Layanan</th>
+                                            <!-- <th>Layanan</th> -->
                                             <th>Obat</th>
                                             <th>Total Tarif</th>
                                         </tr>
@@ -37,20 +37,7 @@
                                     <tbody id="hasil">
 
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama Pasien</th>
-                                            <th>Tanggal Pemeriksaan</th>
-                                            <th>Keluhan</th>
-                                            <th>Diagnosa</th>
-                                            <th>Tindakan</th>
-                                            <th>Alat</th>
-                                            <th>Layanan</th>
-                                            <th>Obat</th>
-                                            <th>Total Tarif</th>
-                                        </tr>
-                                    </tfoot>
+                                 
                                 </table>
                             </div>
                         </div>

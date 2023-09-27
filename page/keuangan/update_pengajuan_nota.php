@@ -22,8 +22,8 @@
                         <input type="date" class="form-control" id="tanggalVerif" name="tanggal" required>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Total Tarif</label>
-                        <input type="number" class="form-control" id="totalPembayaranVerif" name="total_pembayaran" required>
+                        <label for="exampleInputPassword1" class="form-label">Total Tarif (Belum Termasuk Biaya Admin Rp. 10,000)</label>
+                        <input type="text" class="form-control format-rupiah" id="totalPembayaranVerif" name="total_pembayaran" required>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Jenis Pembayaran</label>
@@ -31,6 +31,9 @@
                             <option value="lunas">Lunas</option>
                             <option value="cicilan">Cicilan</option>
                         </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1"  class="form-label">Total: Rp. <span id="totalTarifLabel"></span></label>
                     </div>
                 </form>
             </div>

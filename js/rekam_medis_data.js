@@ -20,7 +20,6 @@ function getData() {
           $("#tr_" + key).append("<th>" + element.data["diagnosa"] + "</th>");
           $("#tr_" + key).append("<th>" + element.data["tindakan"] + "</th>");
           $("#tr_" + key).append("<th>" + element.data["Alat"] + "</th>");
-          $("#tr_" + key).append("<th>" + element.data["Layanan"] + "</th>");
           $("#tr_" + key).append("<th>" + element.data["Obat"] + "</th>");
           $("#tr_" + key).append(
             "<th>Rp. " + formatRupiah(element.data["total_tarif"]) + "</th>"

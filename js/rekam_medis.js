@@ -19,25 +19,25 @@ function getAlat() {
 }
 getAlat();
 
-function getLayanan() {
-  $("#cboLayanan").html();
-  $("#cboLayanan").append("<option value=''>Pilih Layanan</option>");
-  var url = "../../backend/rekam_medis/data_layanan_hari_ini.php";
-  $.ajax(url, {
-    dataType: "json",
-    timeout: 500,
-    success: function (data, status, xhr) {
-      if (data[0].status === "oke") {
-        data.forEach((element, key) => {
-          $("#cboLayanan").append(
-            `<option value="${element.data["id"]}" harga="${element.data["harga"]}" namaLayanan="${element.data["nama"]}">${element.data["nama"]}</option>`
-          );
-        });
-      }
-    },
-  });
-}
-getLayanan();
+// function getLayanan() {
+//   $("#cboLayanan").html();
+//   $("#cboLayanan").append("<option value=''>Pilih Layanan</option>");
+//   var url = "../../backend/rekam_medis/data_layanan_hari_ini.php";
+//   $.ajax(url, {
+//     dataType: "json",
+//     timeout: 500,
+//     success: function (data, status, xhr) {
+//       if (data[0].status === "oke") {
+//         data.forEach((element, key) => {
+//           $("#cboLayanan").append(
+//             `<option value="${element.data["id"]}" harga="${element.data["harga"]}" namaLayanan="${element.data["nama"]}">${element.data["nama"]}</option>`
+//           );
+//         });
+//       }
+//     },
+//   });
+// }
+// getLayanan();
 
 function getReservasi() {
   $("#cboReservasi").html();
@@ -49,7 +49,7 @@ function getReservasi() {
     success: function (data, status, xhr) {
       if (data[0].status === "oke") {
         data.forEach((element, key) => {
-          console.log(element.data['NamaPasien'])
+          // console.log(element.data['NamaPasien'])
           $("#cboReservasi").append(
             `<option value="${element.data['IdReservasi']}" idJadwal="${element.data['IdJadwal']}" >${element.data['NoAntrian']} - ${element.data['NamaPasien']}</option>`
           );
@@ -142,21 +142,36 @@ function deleteAlat(id) {
     $('#tr_alat_'+id).remove();
 }
 
-var harga_layanan = 0;
-$("#cboLayanan").on('change', function(){
-  var harga = $('#cboLayanan option:selected').attr("harga")
-  // Tambah harga
-  total_biaya = (parseInt(total_biaya) + parseInt(harga)) - harga_layanan
-  setTotalHarga(total_biaya)
-  // Set Harga Layanan
-  harga_layanan = parseInt(harga)
+// var harga_layanan = 0;
+// $("#cboLayanan").on('change', function(){
+//   var harga = $('#cboLayanan option:selected').attr("harga")
+//   // Tambah harga
+//   total_biaya = (parseInt(total_biaya) + parseInt(harga)) - harga_layanan
+//   setTotalHarga(total_biaya)
+//   // Set Harga Layanan
+//   harga_layanan = parseInt(harga)
   
-})
+// })
 
 $("#cboReservasi").on('change', function(){
   var jadwal_dokter_id = $('#cboReservasi option:selected').attr("IdJadwal")
   $('#jadwal_dokter_id').val(jadwal_dokter_id)  
 })
+
+var biaya_tindakan = 0
+$("#biaya_tindakan").on("change", function(){
+  var harga = $(this).val() != "" ? parseInt($(this).val().replace(/\./g, '')) : 0;
+  if (biaya_tindakan == 0) {
+    total_biaya = total_biaya+ harga;
+    biaya_tindakan = harga
+  }
+  else{
+    total_biaya= total_biaya - biaya_tindakan + harga;
+    biaya_tindakan = harga
+
+  }
+  setTotalHarga(total_biaya);
+});
 
 $('#btn-simpan-reservasi').on('click', function(e){
     e.preventDefault();

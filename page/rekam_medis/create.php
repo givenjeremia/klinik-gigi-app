@@ -21,15 +21,15 @@
                             <form id='FormCreateRekamMedis'>
                                 <div class='row'>
                                     <div class='col'>
-                                        <div class='mb-3'>
+                                        <!-- <div class='mb-3'>
                                             <label for='exampleInputPassword1' class='form-label'>Tanggal Pemeriksaan</label>
                                             <input type="date" name="tanggal_pemeriksaan" class="form-control">
-                                        </div>
-                                        <div class='mb-3'>
+                                        </div> -->
+                                        <!-- <div class='mb-3'>
                                             <label for='exampleInputPassword1' class='form-label'>Layanan</label>
                                             <select id="cboLayanan" name='layanan' class=' select2bs4 w-100' required>
                                             </select>
-                                        </div>
+                                        </div> -->
                                         <?php if(isset($_GET['reservasi']) && isset($_GET['dokter'])) : ?>
                                             <input type="hidden" name="reservasi" value="<?= $_GET['reservasi'] ?>">
                                             <input type="hidden" name="jadwal_dokter_id" value="<?= $_GET['dokter'] ?>">
@@ -52,6 +52,10 @@
                                         <div class='mb-3'>
                                             <label for='exampleInputPassword1' class='form-label'>Tindakan</label>
                                             <textarea name="tindakan" class="form-control"></textarea>
+                                        </div>
+                                         <div class='mb-3'>
+                                            <label for='exampleInputPassword1' class='form-label'>Biaya Tindakan</label>
+                                            <input type="text" class="form-control format-rupiah" name="biaya_tindakan" id="biaya_tindakan">
                                         </div>
                                         <div class='mb-3'>
                                             <h3>Total Biaya : Rp. <span id="total-biaya-text">0</span></h3>

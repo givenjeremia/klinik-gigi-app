@@ -1,4 +1,8 @@
 <script>
+    $(document).on('input', '.format-rupiah', function() {
+            $(this).val(formatRupiah(this.value));
+    })
+
     function formatRupiah(angka, prefix) {
         var number_string = angka.toString().replace(/[^,\d]/g, ''),
             split = number_string.split(','),

@@ -15,10 +15,11 @@ try {
 
     if($status == 'approved'){
         $jenis_pembayaran = $_POST['jenis_pembayaran'];
-        $total_pembayaran = $_POST['total_pembayaran'];
+        $sub_pembayaran = str_replace('.','',$_POST[ 'total_pembayaran' ]);
+        $total_pembayaran = $sub_pembayaran + 10000;
         $tanggal = $_POST['tanggal'];
-        $stmt = $mysqli->prepare('UPDATE `nota` SET `total_pembayaran`=?,`jenis_pembayaran`=?,`tanggal`=?,`data_karyawan_id`=?,`status`=? WHERE `id`=?');
-        $stmt->bind_param('dssisi',$total_pembayaran,$jenis_pembayaran,$tanggal,$id_karyawan,$status,$id);
+        $stmt = $mysqli->prepare('UPDATE `nota` SET `total_pembayaran`=?,`sub_pembayaran`=?,`jenis_pembayaran`=?,`tanggal`=?,`data_karyawan_id`=?,`status`=? WHERE `id`=?');
+        $stmt->bind_param('ddssisi',$total_pembayaran,$sub_pembayaran,$jenis_pembayaran,$tanggal,$id_karyawan,$status,$id);
         $stmt->execute();
         $eksekusi = $stmt->affected_rows;
         if ($eksekusi > 0) {
@@ -30,9 +31,10 @@ try {
     else{
         $jenis_pembayaran = null;
         $total_pembayaran = null;
+        $sub_pembayaran = null;
         $tanggal = null;
-        $stmt = $mysqli->prepare('UPDATE `nota` SET `total_pembayaran`=?,`jenis_pembayaran`=?,`tanggal`=?,`data_karyawan_id`=?,`status`=? WHERE `id`=?');
-        $stmt->bind_param('dssisi',$total_pembayaran,$jenis_pembayaran,$tanggal,$id_karyawan,$id);
+        $stmt = $mysqli->prepare('UPDATE `nota` SET `total_pembayaran`=?,`sub_pembayaran`=?,`jenis_pembayaran`=?,`tanggal`=?,`data_karyawan_id`=?,`status`=? WHERE `id`=?');
+        $stmt->bind_param('ddssisi',$total_pembayaran,$jenis_pembayaran,$tanggal,$id_karyawan,$id);
         $stmt->execute();
         $eksekusi = $stmt->affected_rows;
         if ($eksekusi > 0) {
