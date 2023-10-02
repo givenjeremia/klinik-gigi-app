@@ -29,6 +29,17 @@
                         <label for="exampleInputPassword1" class="form-label">Hari</label>
                         <input type="text" class="form-control" name="hari" id="hari_tambah"  required readonly>
                     </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">No Antrian (Dapat Berubah Ketika Disimpan)</label>
+                        <input type="text" class="form-control" id="no_antrian"  required readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Jam (Dapat Berubah Ketika Disimpan)</label>
+                        <input type="text" class="form-control" id="jam"  required readonly>
+                    </div>
+                    <input type="hidden" id="id_jadwal_dokter_hide">
+                    <input type="hidden" id="jam_jadwal_dokter_hide">
+
                 </form>
             </div>
             <div class="modal-footer">

@@ -23,6 +23,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama Dokter</th>
+                                            <th>No Antrian</th>
                                             <?php if($_SESSION['auth']['role'] != 'pasien' ): ?>
                                             <th>Nama Pasien</th>
                                             <?php endif; ?>

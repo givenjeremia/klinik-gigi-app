@@ -36,8 +36,9 @@ try {
         
         // Get No Antrian
         $now_date_with_time = date('Y-m-d H:i:s');
-        $stmt_antrian = $mysqli->prepare('SELECT MAX(`no_antrian`)+1 as NoAntrian FROM `reservasi_kllinik` WHERE `tanggal_reservasi`=?');
-        $stmt_antrian->bind_param('s',$now_date);
+        $now_date= date('Y-m-d');
+        $stmt_antrian = $mysqli->prepare('SELECT MAX(`no_antrian`)+1 as NoAntrian FROM `reservasi_kllinik` WHERE `tanggal_reservasi`=? AND `jadwal_dokter_id`=?');
+        $stmt_antrian->bind_param('si',$tanggal,$jadwal);
         $stmt_antrian->execute();
         $result_antrian = $stmt_antrian->get_result();
         $data_antrian = $result_antrian->fetch_assoc();
@@ -45,16 +46,25 @@ try {
         if ($data_antrian['NoAntrian']!= null) {
             $no_antrian = $data_antrian['NoAntrian'];
         }
+       
         // Data Jdwal
         $stmt_jadwal = $mysqli->prepare('SELECT * FROM `jadwal_dokter` WHERE `id` =?');
         $stmt_jadwal->bind_param('i',$jadwal);
         $stmt_jadwal->execute();
         $result_jadwal = $stmt_jadwal->get_result();
         $data_jadwal = $result_jadwal->fetch_assoc();
+         // Get jam
+         $originalTime = strtotime('2000-01-01 ' . $data_jadwal['jam']);
+         $menit_tambah = 0;
+         if ($no_antrian != 1) {
+            $menit_tambah = ($no_antrian -1) * 30;
+            $originalTime += $menit_tambah * 60;
+        }
+        $newTime = date('H:i:s', $originalTime);
         // Add Reservasi
         $status = 'pending';
         $stmt = $mysqli->prepare("INSERT INTO `reservasi_kllinik`(`no_antrian`, `tanggal_input_reservasi`, `tanggal_reservasi`, `jam_reservasi`, `status`, `jadwal_dokter_id`,`data_pasien_id_pasien`) VALUES (?,?,?,?,?,?,?)");
-        $stmt->bind_param('issssii', $no_antrian,$now_date_with_time,$tanggal, $data_jadwal['jam'],$status,$jadwal,$id_pasien);
+        $stmt->bind_param('issssii', $no_antrian,$now_date_with_time,$tanggal,$newTime ,$status,$jadwal,$id_pasien);
         $stmt->execute();
         $jumlah_yang_dieksekusi = $stmt->affected_rows;
         if ($jumlah_yang_dieksekusi > 0) {

@@ -11,6 +11,7 @@ function getDataHistoryByUser() {
           $("#hasil-reservasi").append("<tr class='data' id='tr_" + key + "'>");
           $("#tr_" + key).append("<th scope='row'>" + (key + 1) + "</th>");
           $("#tr_" + key).append("<th>" + element["NamaDokter"] + "</th>");
+          $("#tr_" + key).append("<th>" + element["NomorAntrian"] + "</th>");
           $("#tr_" + key).append("<th>" + convertDate(element["Tanggal"]) + "</th>");
           $("#tr_" + key).append("<th>" + element["Jam"] + "</th>");
           var status = element["Status"] == 'approved' ? '<h4><span class="badge rounded-pill px-3 py-1 bg-success">Disetujui</span></h4>' : '<h4><span class="badge rounded-pill px-3 py-1 bg-secondary">Menunggu Konfirmasi</span></h4>'
@@ -54,6 +55,7 @@ function getAllData() {
           $("#hasil-reservasi").append("<tr class='data' id='tr_" + key + "'>");
           $("#tr_" + key).append("<th scope='row'>" + (key + 1) + "</th>");
           $("#tr_" + key).append("<th>" + element["NamaDokter"] + "</th>");
+          $("#tr_" + key).append("<th>" + element["NomorAntrian"] + "</th>");
           $("#tr_" + key).append("<th>" + element["NamaPasien"] + "</th>");
           $("#tr_" + key).append("<th>" +convertDate(element["Tanggal"]) + "</th>");
           $("#tr_" + key).append("<th>" + element["Jam"] + "</th>");
