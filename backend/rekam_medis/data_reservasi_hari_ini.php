@@ -15,15 +15,17 @@ try {
         $id_dokter = $data_dokter['id'];
         // Set Now Date
         $formattedDate = date('Y-m-d');
-        $sql = "SELECT rk.id as IdReservasi, rk.status_kehadiran as StatusKehadiran ,rk.no_antrian as NoAntrian,jd.id as IdJadwalDokter, rk.jam_reservasi AS Jam, rk.tanggal_reservasi as Tanggal, dp.nama as NamaPasien, dp.id As IdPasien, jd.id as IdJadwal
+        $sql = "SELECT rk.id as IdReservasi, dd.nama as NamaDokter , rk.status_kehadiran as StatusKehadiran ,rk.no_antrian as NoAntrian,jd.id as IdJadwalDokter, rk.jam_reservasi AS Jam, rk.tanggal_reservasi as Tanggal, dp.nama as NamaPasien, dp.id As IdPasien, jd.id as IdJadwal
     FROM `reservasi_kllinik` rk INNER JOIN `data_pasien` dp ON rk.data_pasien_id_pasien = dp.id
     INNER JOIN `jadwal_dokter` as jd ON jd.id = rk.jadwal_dokter_id
+    INNER JOIN `data_dokter` as dd ON dd.id = jd.data_dokter_id
     WHERE rk.status = 'approved' AND `tanggal_reservasi` = '$formattedDate' AND jd.data_dokter_id = $id_dokter";
     } else {
         $formattedDate = date('Y-m-d');
-        $sql = "SELECT rk.id as IdReservasi, rk.status_kehadiran as StatusKehadiran, jd.id as IdJadwalDokter , rk.no_antrian as NoAntrian, rk.jam_reservasi AS Jam, rk.tanggal_reservasi as Tanggal, dp.nama as NamaPasien, dp.id As IdPasien, jd.id as IdJadwal
+        $sql = "SELECT rk.id as IdReservasi, dd.nama as NamaDokter , rk.status_kehadiran as StatusKehadiran, jd.id as IdJadwalDokter , rk.no_antrian as NoAntrian, rk.jam_reservasi AS Jam, rk.tanggal_reservasi as Tanggal, dp.nama as NamaPasien, dp.id As IdPasien, jd.id as IdJadwal
         FROM `reservasi_kllinik` rk INNER JOIN `data_pasien` dp ON rk.data_pasien_id_pasien = dp.id
         INNER JOIN `jadwal_dokter` as jd ON jd.id = rk.jadwal_dokter_id
+        INNER JOIN `data_dokter` as dd ON dd.id = jd.data_dokter_id
         WHERE rk.status = 'approved' AND `tanggal_reservasi` = '$formattedDate'";
     }
     $result = $mysqli->query($sql);

@@ -94,7 +94,7 @@ function getReservasi() {
           else{
             action =
             `<th>  
-              <a href="../rekam_medis/create.php?reservasi=${element.data['IdReservasi']}&dokter=${element.data['IdJadwalDokter']}" class="btn btn-primary"><i class="fa fa-plus"></i></a> 
+              <a href="../rekam_medis/create.php?reservasi=${element.data['IdReservasi']}&dokter=${element.data['IdJadwalDokter']}&namaDokter=${element.data['NamaDokter']}&tanggal=${convertDate(element.data['tanggal'])}&jam=${element.data['Jam']}" class="btn btn-primary"><i class="fa fa-plus"></i></a> 
             </th>`
 
           }

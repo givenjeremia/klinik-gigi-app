@@ -1,7 +1,7 @@
 <?php
 require_once('../../backend/config.php');
 $id_nota = $_GET['id_nota'];
-$sql_nota = "SELECT n.*,rm.keluhan as Keluhan, rm.diagnosa as Diagnosa, dk.nama AS NamaKaryawan, dp.nama as NamaPasien
+$sql_nota = "SELECT n.*,rm.keluhan as Keluhan, rm.tindakan as Tindakan, rm.biaya_tindakan as BiayaTindakan, rm.diagnosa as Diagnosa, dk.nama AS NamaKaryawan, dp.nama as NamaPasien
 FROM nota n INNER JOIN rekam_medis rm ON n.rekam_medis_id = rm.id
 INNER JOIN data_karyawan dk ON dk.id = n.data_karyawan_id
 INNER JOIN reservasi_kllinik rk ON rk.id = rm.reservasi_kllinik_id
@@ -32,15 +32,15 @@ $stmt_alat->bind_param('i',$id_rekam_medis);
 $stmt_alat->execute();
 $result_alat = $stmt_alat->get_result();
 
-$sql_layanan = "SELECT l.nama AS NamaLayanan
-FROM rekam_medis_has_layanan rml
-INNER JOIN layanan l ON l.id = rml.layanan_id
-WHERE rml.rekam_medis_id =?";
-$stmt_layanan = $mysqli->prepare($sql_layanan);
-$stmt_layanan->bind_param('i',$id_rekam_medis);
-$stmt_layanan->execute();
-$result_layanan = $stmt_layanan->get_result();
-$data_layanan = $result_layanan->fetch_assoc();
+// $sql_layanan = "SELECT l.nama AS NamaLayanan
+// FROM rekam_medis_has_layanan rml
+// INNER JOIN layanan l ON l.id = rml.layanan_id
+// WHERE rml.rekam_medis_id =?";
+// $stmt_layanan = $mysqli->prepare($sql_layanan);
+// $stmt_layanan->bind_param('i',$id_rekam_medis);
+// $stmt_layanan->execute();
+// $result_layanan = $stmt_layanan->get_result();
+// $data_layanan = $result_layanan->fetch_assoc();
 
 ?>
 <!DOCTYPE html>
@@ -122,19 +122,20 @@ $data_layanan = $result_layanan->fetch_assoc();
                     <td class='left kop'><?= $data_nota['NamaKaryawan'] ?></td>
                 </tr>
                 <tr>
-                    <td colspan='2'>Layanan : </td>
-                    <td class='left kop'><?= $data_layanan['NamaLayanan'] ?></td>
-                    <td></td>
-                    <td>Jenis Pembayaran : </td>
-                    <td class='left kop'><?= $data_nota['jenis_pembayaran'] ?></td>
-                </tr>
-                <tr>
                     <td colspan='2'>Keluhan : </td>
                     <td class='left kop'><?= $data_nota['Keluhan'] ?></td>
                     <td></td>
                     <td>Diagnosa : </td>
                     <td class='left kop'><?= $data_nota['Diagnosa'] ?></td>
                 </tr>
+                <tr>
+                    <!-- <td colspan='2'>Layanan : </td>
+                    <td class='left kop'><?= $data_layanan['NamaLayanan'] ?></td> -->
+                    <td></td>
+                    <td>Jenis Pembayaran : </td>
+                    <td class='left kop'><?= $data_nota['jenis_pembayaran'] ?></td>
+                </tr>
+            
                 <tr>
                     <td></td>
                     <td></td>
@@ -145,6 +146,18 @@ $data_layanan = $result_layanan->fetch_assoc();
                 </tr>
             </thead>
             <tbody>
+                <tr>
+                    <th>No</th>
+                    <th colspan='2'>TINDAKAN</th>
+                    <th>TOTAL</th>
+                    <th colspan='2'>KETERANGAN</th>
+                </tr>
+                <tr>
+                    <td align='right'>1</td>
+                    <td colspan='2'><?=  $data_nota['Tindakan'] ?></td>
+                    <td>Rp. <?= number_format($data_nota['BiayaTindakan']) ?></td>
+                    <td colspan='2'>-</td>
+                </tr>
                 <tr>
                     <th>No</th>
                     <th>OBAT</th>
