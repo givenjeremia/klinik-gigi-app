@@ -6,6 +6,9 @@ try {
     if ( isset( $_POST[ 'keluhan' ] ) && isset( $_POST[ 'biaya_tindakan' ] ) && isset( $_POST[ 'diagnosa' ] ) && isset( $_POST[ 'tindakan' ] ) && isset( $_POST[ 'total_biaya' ] ) && isset( $_POST[ 'reservasi' ] ) && isset( $_POST[ 'jadwal_dokter_id' ] ) )  {
         $tanggal_pemeriksaan = date('Y-m-d');
         $biaya_tindakan = str_replace('.','',$_POST[ 'biaya_tindakan' ]);
+
+ 
+
         // Insert Rekam Medis
         $sql_rekam_medis = 'INSERT INTO `rekam_medis`(`keluhan`, `diagnosa`, `tindakan`, `total_tarif`, `biaya_tindakan`, `tanggal_pemeriksaan`, `reservasi_kllinik_id`, `jadwal_dokter_id`) VALUES (?,?,?,?,?,?,?,?)';
         $stmt_rekam_medis = $mysqli->prepare( $sql_rekam_medis );
@@ -20,6 +23,18 @@ try {
             $stmt_alat->bind_param( 'iiids', $new_id_rekam_medis, $value[ 'id_alat' ], $value[ 'pemakaian' ], $value[ 'harga_alat' ], $value[ 'keterangan' ] );
             $stmt_alat->execute();
         }
+
+        // Insert Lampiran Jika Ada
+        if(isset($_FILES["lampiran"])) {
+            $targetDirectory = "../../assets/uploads/rekam_medis/".$new_id_rekam_medis.'/'; // Create a directory to store uploaded files
+            $targetFile = $targetDirectory . basename($_FILES["lampiran"]["name"]);
+            if (!file_exists($targetDirectory)) {
+                mkdir($targetDirectory, 0777, true);
+            }
+            chmod($targetDirectory, 0777);
+            move_uploaded_file($_FILES["lampiran"]["tmp_name"], $targetFile);
+        }
+
         // Insert Data Rekam Layanan
         // $sql_layanan = 'INSERT INTO `rekam_medis_has_layanan`(`rekam_medis_id`, `layanan_id`) VALUES (?,?)';
         // $stmt_layanan = $mysqli->prepare( $sql_layanan );

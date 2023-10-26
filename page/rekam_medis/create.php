@@ -19,7 +19,7 @@
                         <!-- /.card-header -->
                         <div class='card-body'>
                             
-                            <div class="row">
+                            <div class="row mb-3">
                                 <?php if (isset($_GET['namaDokter'])) : ?>
                                 <div class="col">
                                     Nama Dokter : <?= $_GET['namaDokter']  ?>
@@ -40,7 +40,7 @@
                                 <select id="cboLayanan" name='layanan' class=' select2bs4 w-100' required>
                                 </select>
                             </div> -->
-                            <form id='FormCreateRekamMedis'>
+                            <form id='FormCreateRekamMedis' enctype="multipart/form-data">
                                 <?php if (isset($_GET['reservasi']) && isset($_GET['dokter'])) : ?>
                                     <input type="hidden" name="reservasi" value="<?= $_GET['reservasi'] ?>">
                                     <input type="hidden" name="jadwal_dokter_id" value="<?= $_GET['dokter'] ?>">
@@ -157,6 +157,14 @@
 
                                             </tbody>
                                         </table>
+                                    </div>
+                                </div>
+
+                                <div class='mb-3'>
+                                    <label for='exampleInputPassword1' class='form-label'>Lampiran</label>
+                                    <div class="custom-file">
+                                        <input type="file" name="lampiran" class="custom-file-input" id="exampleInputFile">
+                                        <label class="custom-file-label" for="exampleInputFile">Pilih File</label>
                                     </div>
                                 </div>
 

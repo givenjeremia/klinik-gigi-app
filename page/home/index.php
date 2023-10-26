@@ -123,6 +123,7 @@ if ($user['role'] == 'admin' || $user['role'] == 'karyawan') {
         </div>
     </div>
     <?php include '../layouts/script.php' ?>
+    <?php include '../layouts/format_tanggal.php' ?>
     <script src="../../js/admin_dashboard.js"></script>
 </body>
 
