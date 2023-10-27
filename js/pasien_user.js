@@ -19,11 +19,11 @@ function getDataHistoryByUser() {
           var kehadiran = element["StatusKehadiran"] == 'hadir' ? '<h4><span class="badge rounded-pill px-3 py-1 bg-success">Hadir</span></h4>' : '<h4><span class="badge rounded-pill px-3 py-1 bg-danger">Tidak Hadir</span></h4>'
           $("#tr_" + key).append("<th>" + kehadiran + "</th>");
 
-          var action =
-          `<th>
-          <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalRekamMedis" onClick="rekamMedis(` +element["IdReservasi"] +`)"><i class="fa fa-file"></i></a>
-          </th>`;
-          $("#tr_" + key).append(action);
+          // var action =
+          // `<th>
+          // <a href="../../backend/rekam_medis/cetak_resep.php?rekam_medis=${element["IdReservasi"]}&nama_pasien=${element["NamaPasien"]}" class="btn btn-primary"><i class="fa fa-file"></i></a>
+          // </th>`;
+          // $("#tr_" + key).append(action);
           $("#hasil-reservasi").append("</tr>");
         });
 

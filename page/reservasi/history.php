@@ -31,7 +31,7 @@
                                             <th>Jam</th>
                                             <th>Status Reservasi</th>
                                             <th>Status Kehadiran</th>
-                                            <th>Aksi</th>
+                                            <!-- <th>Aksi</th> -->
                                         </tr>
                                     </thead>
                                     <tbody id="hasil-reservasi">

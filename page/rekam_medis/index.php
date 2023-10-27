@@ -32,6 +32,7 @@
                                             <!-- <th>Layanan</th> -->
                                             <th>Obat</th>
                                             <th>Total Tarif</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="hasil">
