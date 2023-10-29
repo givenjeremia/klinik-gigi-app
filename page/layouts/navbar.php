@@ -57,6 +57,9 @@
         <li class="nav-item">
           <a href="../layanan/index.php" class="nav-link">Layanan</a>
         </li>
+        <li class="nav-item">
+          <a href="../resep_obat/index.php" class="nav-link">Resep Obat</a>
+        </li>
         <?php endif; ?>
 
         <?php if($_SESSION['auth']['role'] == 'dokter'  || $_SESSION['auth']['role'] == 'admin' ) : ?>
@@ -69,6 +72,7 @@
             <li><a href="../reservasi/history.php" class="dropdown-item">Data Reservasi</a></li>
             <li><a href="../rekam_medis/create.php" class="dropdown-item">Buat</a></li>
             <?php endif; ?>
+            <li><a href="../resep_obat/index.php" class="dropdown-item">Resep Obat</a></li>
           </ul>
         </li>
         <?php endif; ?>

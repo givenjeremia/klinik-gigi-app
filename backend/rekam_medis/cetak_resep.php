@@ -38,14 +38,14 @@ $pdf->Cell(10, 7, '', 0, 1);
 $pdf->SetFont('Times', '', 10);
 
 $no=1;
-$data = mysqli_query($mysqli,"SELECT * FROM `resep_obat` ro INNER JOIN `data_obat` od ON ro.data_obat_id = od.id WHERE `rekam_medis_id` = $id_rekam_medis");
+$data = mysqli_query($mysqli,"SELECT ro.*,od.*, ro.harga as HargaTotal FROM `resep_obat` ro INNER JOIN `data_obat` od ON ro.data_obat_id = od.id WHERE `status`=1 AND `rekam_medis_id` = $id_rekam_medis");
 while ($d = $data->fetch_assoc()) {
     $pdf->Cell($fixedColumnWidth, 6, $no++, 1, 0, 'C');
     $pdf->Cell($variableColumnWidth, 6, $d['nama'], 1, 0);
     $pdf->Cell($variableColumnWidth, 6, $d['jumlah_pemakaian'], 1, 0);
     $pdf->Cell($variableColumnWidth, 6, $d['keterangan'], 1, 0);
     $pdf->Cell($variableColumnWidth, 6, $d['aturan_pakai'], 1, 0);
-    $pdf->Cell($variableColumnWidth, 6, number_format($d['harga']), 1, 1); // '1' here means move to the next line.
+    $pdf->Cell($variableColumnWidth, 6, number_format($d['HargaTotal']), 1, 1); // '1' here means move to the next line.
 }
 
 $pdf->Output('D','Resep '.$nama_pasien.'.pdf');
