@@ -25,7 +25,7 @@ function getData() {
             "<th>Rp. " + formatRupiah(element.data["total_tarif"]) + "</th>"
           );
 
-          $("#tr_" + key).append(`<th><a href="../../backend/rekam_medis/cetak_resep.php?rekam_medis=1&nama_pasien=${element.data["nama"]}" class="btn btn-primary"><i class="fa-solid fa-newspaper"></i></a> </th>`);
+          $("#tr_" + key).append(`<th><a href="../../backend/rekam_medis/cetak_resep.php?rekam_medis=${element.data["IdRM"]}&nama_pasien=${element.data["nama"]}" class="btn btn-primary"><i class="fa-solid fa-newspaper"></i></a> </th>`);
           
           $("#hasil").append("</tr>");
         });

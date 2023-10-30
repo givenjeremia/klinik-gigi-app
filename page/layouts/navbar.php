@@ -73,6 +73,7 @@
             <li><a href="../rekam_medis/create.php" class="dropdown-item">Buat</a></li>
             <?php endif; ?>
             <li><a href="../resep_obat/index.php" class="dropdown-item">Resep Obat</a></li>
+            <li><a href="../resep_obat/index.php" class="dropdown-item">Odontogram</a></li>
           </ul>
         </li>
         <?php endif; ?>

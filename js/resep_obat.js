@@ -16,7 +16,7 @@ function getData() {
             $("#tr_" + key).append("<th>Rp. " + formatRupiah(element.data["TotalHargaObat"]) + "</th>");
             var action =
               `<th>  
-                  <a href="../../backend/rekam_medis/cetak_resep.php?rekam_medis=${element.data["id"]}&nama_pasien=${element.data["NamaPasien"]}" class="btn btn-primary"><i class="fa fa-download" aria-hidden="true"></i> </a> 
+                  <a href="../../backend/rekam_medis/cetak_resep_pulang.php?rekam_medis=${element.data["id"]}&nama_pasien=${element.data["NamaPasien"]}" class="btn btn-primary"><i class="fa fa-download" aria-hidden="true"></i> </a> 
               </th>`;
             $("#tr_" + key).append(action);
             $("#hasil").append("</tr>");

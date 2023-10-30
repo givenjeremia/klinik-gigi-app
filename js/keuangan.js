@@ -134,7 +134,7 @@ function tolakNota(id) {
 
 function getDataDaftarNota() {
     $("#hasil-daftar-nota").html();
-    var url = "../../backend/keuangan/nota.php";
+    var url = "../../backend/keuangan/nota_status_approved.php";
     $.ajax(url, {
         dataType: "json",
         timeout: 500,
@@ -149,7 +149,7 @@ function getDataDaftarNota() {
                     $("#tr_" + key).append("<th>" + element["NamaPasien"] + "</th>");
                     $("#tr_" + key).append("<th>" + convertDate(element["TanggalNota"]) + "</th>");
                     $("#tr_" + key).append("<th>" + element["IdRekamMedis"] + "</th>");
-                    $("#tr_" + key).append("<th>Rp. " + element["JenisPembayaran"] + "</th>");
+                    $("#tr_" + key).append("<th>" + element["JenisPembayaran"] + "</th>");
                     $("#tr_" + key).append("<th>Rp. " + formatRupiah(element["SubPembayaran"]) + "</th>");
                     $("#tr_" + key).append("<th>Rp. " + formatRupiah(element["TotalPembayaran"]) + "</th>");
                     var status = '';

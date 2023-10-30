@@ -2,7 +2,7 @@
 require_once('../config.php');
 $datas = [];
 try {
-  $sql = "SELECT rk.*, dp.*,
+  $sql = "SELECT rk.id as IdRM, rk.*, dp.*,
   group_concat(DISTINCT a.nama ORDER BY a.nama DESC SEPARATOR ', ') as Alat, 
   group_concat(DISTINCT o.nama ORDER BY a.nama DESC SEPARATOR ', ') as Obat
   FROM `rekam_medis` rk
