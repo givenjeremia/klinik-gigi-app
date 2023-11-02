@@ -1,6 +1,10 @@
-function getData() {
+function getData(data) {
+  var dataTable = $("#example1").DataTable();
+  if ($.fn.DataTable.isDataTable("#example1")) {
+      dataTable.destroy();
+  }
     $("#hasil").html();
-    var url = "../../backend/odontogram/data.php";
+    var url = "../../backend/odontogram/get_data_by_id.php?id=" + data;
     $.ajax(url, {
       dataType: "json",
       timeout: 500, 
@@ -15,16 +19,13 @@ function getData() {
             $("#tr_" + key).append("<th>" + element.data["nomor_gigi"] + "</th>");
             $("#tr_" + key).append("<th>" + element.data["posisi"] + "</th>");
             $("#tr_" + key).append("<th>" + element.data["status"] + "</th>");
-            // var action =
-            //   `<th>  
-            //       <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit" onClick="updateData(` +
-            //   element.data["id"] +
-            //   `)"><i class="fa fa-pen"></i></a> 
-            //       <a href="#" class="btn btn-danger" onClick="deleteData(` +
-            //   element.data["id"] +
-            //   `)"><i class="fa fa-trash"></i></a>
-            //   </th>`;
-            // $("#tr_" + key).append(action);
+            var action =
+              `<th> 
+                  <a href="#" class="btn btn-danger" onClick="deleteData(` +
+              element.data["IdOdontogram"] +
+              `,`+element.data["rekam_medis_id"]+`)"><i class="fa fa-trash"></i></a>
+              </th>`;
+            $("#tr_" + key).append(action);
             $("#hasil").append("</tr>");
           });
           
@@ -32,17 +33,11 @@ function getData() {
             .DataTable({
               bDestroy: true,
               responsive: true,
-              buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
-            })
-            .buttons()
-            .container()
-            .appendTo("#example1_wrapper .col-md-6:eq(0)");
+            });
         }
       },
     });
 }
-  getData();
-  
   $("#submit_add").on("click", function (e) {
     var data_pasien = $('#cboRekamMedis').find(':selected').attr('key2')
     e.preventDefault();
@@ -109,7 +104,49 @@ function getData() {
   // CBO CHANGE
 
   $('#cboRekamMedis').on('change', function(){
-    
+    var value = $(this).val();
+    if (value !== ''){
+      getData(value)
+      onOndotogram(value)
+      $('#odontograma-content').removeClass('d-none')
+    }
+    else{
+      $('#odontograma-content').addClass('d-none')
+    }
   })
+
+  function deleteData(data,data_rm){
+    var form_data = new FormData();
+    form_data.append('odontogram',data)
+    var url = "../../backend/odontogram/delete.php";
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: form_data,
+      dataType: "json",
+      contentType: false,
+      processData: false,
+      success: function (data) {
+        if (data.status == "success") {
+          Swal.fire({
+            title: "Success",
+            text: "Odontogram Berhasil Ditambahkan",
+            icon: "success",
+            showConfirmButton: true,
+          }).then((result) => {
+            getData(data_rm)
+            onOndotogram(data_rm)
+          });
+        } else {
+          Swal.fire({
+            title: "Error",
+            text: "Odontogram Gagal Di Tambahkan",
+            icon: "error",
+            showConfirmButton: true,
+          });
+        }
+      },
+    });
+  }
 
 

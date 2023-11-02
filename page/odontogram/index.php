@@ -52,44 +52,47 @@
                             </div>
                         </div>
                     </div> -->
-                    <div class="row justify-content-center align-content-center mb-3">
-                            <div class="col-2">
-                                <h2>Odontograma</h2>
-                            </div>
-                            <div class="col-2 text-start">
-                                <label for="exampleInputPassword1" class="form-label">Aksi</label>
-                                <select id="cboAksiGigi" name="aksi_gigi" class="select2bs4" style="width: 100%;" required>
-                                    <option value="yellow">Caries</option>
-                                    <option value="green">Tambalan</option>
-                                    <option value="red">Brecket</option>
-                                </select>
-                            </div>
+                    <div id="odontograma-content" class="d-none">
+                        <div class="row justify-content-center align-content-center mb-3">
+                                <div class="col-2">
+                                    <h2>Odontograma</h2>
+                                </div>
+                                <div class="col-2 text-start">
+                                    <label for="exampleInputPassword1" class="form-label">Aksi</label>
+                                    <select id="cboAksiGigi" name="aksi_gigi" class="select2bs4" style="width: 100%;" required>
+                                        <option value="yellow" key="Caries">Caries</option>
+                                        <option value="green" key="Tambalan">Tambalan</option>
+                                        <option value="red" key="Brecket">Brecket</option>
+                                    </select>
+                                </div>
                         </div>
-                    <div id="odontograma-wrapper" class=" justify-content-center align-content-center text-center">
-                       
-                        <div id="odontograma"></div>
-                    </div>   
-                    <div class="card mt-2 ">
-                        <div class="card-header">
-                            <h3 class="card-title">Riwayat Odontogram</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table id="example1" class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Tanggal</th>
-                                            <th>Nama Pasien</th>
-                                            <th>Nomor Gigi</th>
-                                            <th>Posisi</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="hasil">
-    
-                                    </tbody>
-                                </table>
+                        <div id="odontograma-wrapper" class=" justify-content-center align-content-center text-center">
+                        
+                            <div id="odontograma"></div>
+                        </div>   
+                        <div class="card mt-2 ">
+                            <div class="card-header">
+                                <h3 class="card-title">Riwayat Odontogram</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Tanggal</th>
+                                                <th>Nama Pasien</th>
+                                                <th>Nomor Gigi</th>
+                                                <th>Posisi</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="hasil">
+        
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

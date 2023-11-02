@@ -1,3 +1,4 @@
+function onOndotogram(id_data){
 
 jQuery(function(){
 
@@ -63,7 +64,7 @@ jQuery(function(){
         //  caraInferior (I) - Bawah
         //  caraSuperior (S) - Atas
         //  caraCompleto (X) - Number
-        var url = "../../backend/odontogram/data.php";
+		var url = "../../backend/odontogram/get_data_by_id.php?id=" + id_data;
         $.ajax(url, {
             dataType: "json",
             timeout: 500, 
@@ -104,24 +105,22 @@ jQuery(function(){
             value.click(function(){
 	    		var me = $(this);
 	    		var cara = me.data('cara');
-                var aksi = $('#cboAksiGigi').val();
+                var aksi_color = $('#cboAksiGigi').val();
+                var aksi = $('#cboAksiGigi').find(':selected').attr('key');
                 var nomor_gigi = diente.id;
                 var posisi = cara;
-                alert('------')
-                console.log(nomor_gigi)
-        
+				var data_pasien = $('#cboRekamMedis').find(':selected').attr('key2');
+				var rekam_medis = $('#cboRekamMedis').find(':selected').val()
 
                 me.data('oldFill', me.attr('fill'));
-                me.attr('fill',  aksi);
-                // Ajax Add
-                var data_pasien = 7
+                me.attr('fill',  aksi_color);
                 var form_data = new FormData();
                 form_data.append('pasien',data_pasien)
                 form_data.append('nomor_gigi',nomor_gigi)
                 form_data.append('posisi',posisi)
-                form_data.append('rekam_medis',13)
-                form_data.append('status','Tambalan')
-                form_data.append('color','red')
+                form_data.append('rekam_medis',rekam_medis)
+                form_data.append('status',aksi)
+                form_data.append('color',aksi_color)
                 var url = "../../backend/odontogram/insert.php";
                 $.ajax({
                 type: "POST",
@@ -138,8 +137,9 @@ jQuery(function(){
                         icon: "success",
                         showConfirmButton: true,
                     }).then((result) => {
-                        getData();
+                        // getData();
                         me.attr("class", "disabled")
+						getData(rekam_medis)
                     });
                     } else {
                     Swal.fire({
@@ -273,3 +273,5 @@ jQuery(function(){
 
 
 });
+}
+
