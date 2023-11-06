@@ -10,9 +10,9 @@ try {
         $status = 1;
         foreach ( $obat as $key => $value ) {
 
-            $sql_resep = 'INSERT INTO `resep_obat`(`rekam_medis_id`, `data_obat_id`, `jumlah_pemakaian`, `harga`, `keterangan`, `aturan_pakai`,`status`) VALUES (?,?,?,?,?,?,?)';
+            $sql_resep = 'INSERT INTO `resep_obat`(`rekam_medis_id`, `data_obat_id`, `jumlah_pemakaian`, `harga`, `keterangan`, `aturan_pakai`,`status`,`status_kesediaan`) VALUES (?,?,?,?,?,?,?,?)';
             $stmt_resep = $mysqli->prepare( $sql_resep );
-            $stmt_resep->bind_param( 'iiidssi',  $id_rekam_medis, $value[ 'id_obat' ],  $value[ 'jumlah' ], $value[ 'total_harga' ], $value[ 'keterangan' ], $value[ 'aturan_pakai' ], $status);
+            $stmt_resep->bind_param( 'iiidssis',  $id_rekam_medis, $value[ 'id_obat' ],  $value[ 'jumlah' ], $value[ 'total_harga' ], $value[ 'keterangan' ], $value[ 'aturan_pakai' ], $status, $value[ 'status_kesediaan' ]);
             $stmt_resep->execute();
         }
 

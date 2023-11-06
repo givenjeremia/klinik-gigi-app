@@ -34,6 +34,15 @@
                                             <label for='exampleInputPassword1' class='form-label'>Keterangan</label>
                                             <input type="text" id="keterangan_obat" class="form-control">
                                         </div>
+                                        <div class="col">
+                                            <label for='exampleInputPassword1' class='form-label'>Status</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" name="status" type="checkbox" value="1" id="status_kesediaan">
+                                                <label class="form-check-label" for="status_kesediaan">
+                                                    Ada
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class=" col-6">
@@ -62,6 +71,7 @@
                                                     <th>Harga</th>
                                                     <th>Keterangan</th>
                                                     <th>Aturan Pakai</th>
+                                                    <th>Status Kesediaan</th>
                                                     <!-- <th>Aksi</th> -->
                                                 </tr>
                                             </thead>

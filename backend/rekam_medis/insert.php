@@ -16,12 +16,14 @@ try {
         $stmt_rekam_medis->execute();
         $new_id_rekam_medis = $mysqli->insert_id;
         // Insert Data Rekam Alat
-        $alat = $_POST[ 'alat' ];
-        foreach ( $alat as $key => $value ) {
-            $sql_alat = 'INSERT INTO `rekam_medis_has_alat`(`rekam_medis_id`, `alat_id`, `jumlah_pemakaian`, `harga`, `keterangan`) VALUES (?,?,?,?,?)';
-            $stmt_alat = $mysqli->prepare( $sql_alat );
-            $stmt_alat->bind_param( 'iiids', $new_id_rekam_medis, $value[ 'id_alat' ], $value[ 'pemakaian' ], $value[ 'harga_alat' ], $value[ 'keterangan' ] );
-            $stmt_alat->execute();
+        if(isset($_POST[ 'alat' ])){
+            $alat = $_POST[ 'alat' ];
+            foreach ( $alat as $key => $value ) {
+                $sql_alat = 'INSERT INTO `rekam_medis_has_alat`(`rekam_medis_id`, `alat_id`, `jumlah_pemakaian`, `harga`, `keterangan`) VALUES (?,?,?,?,?)';
+                $stmt_alat = $mysqli->prepare( $sql_alat );
+                $stmt_alat->bind_param( 'iiids', $new_id_rekam_medis, $value[ 'id_alat' ], $value[ 'pemakaian' ], $value[ 'harga_alat' ], $value[ 'keterangan' ] );
+                $stmt_alat->execute();
+            }
         }
 
         // Insert Lampiran Jika Ada
@@ -41,12 +43,15 @@ try {
         // $stmt_layanan->bind_param( 'ii', $new_id_rekam_medis, $_POST[ 'layanan' ] );
         // $stmt_layanan->execute();
         // Insert Resep
-        $obat = $_POST[ 'obat' ];
-        foreach ( $obat as $key => $value ) {
-            $sql_resep = 'INSERT INTO `resep_obat`(`rekam_medis_id`, `data_obat_id`, `jumlah_pemakaian`, `harga`, `keterangan`, `aturan_pakai`) VALUES (?,?,?,?,?,?)';
-            $stmt_resep = $mysqli->prepare( $sql_resep );
-            $stmt_resep->bind_param( 'iiidss', $new_id_rekam_medis, $value[ 'id_obat' ],  $value[ 'jumlah' ], $value[ 'total_harga' ], $value[ 'keterangan' ], $value[ 'aturan_pakai' ] );
-            $stmt_resep->execute();
+        if (isset($_POST[ 'obat' ])) {
+            $obat = $_POST[ 'obat' ];
+            $status_kesediaan = 1;
+            foreach ( $obat as $key => $value ) {
+                $sql_resep = 'INSERT INTO `resep_obat`(`rekam_medis_id`, `data_obat_id`, `jumlah_pemakaian`, `harga`, `keterangan`, `aturan_pakai`,`status_kesediaan`) VALUES (?,?,?,?,?,?,?)';
+                $stmt_resep = $mysqli->prepare( $sql_resep );
+                $stmt_resep->bind_param( 'iiidssi', $new_id_rekam_medis, $value[ 'id_obat' ],  $value[ 'jumlah' ], $value[ 'total_harga' ], $value[ 'keterangan' ], $value[ 'aturan_pakai' ],$status_kesediaan);
+                $stmt_resep->execute();
+            }
         }
         // Add Nota
         $sql_nota = 'INSERT INTO `nota`(`rekam_medis_id`) VALUES (?)';

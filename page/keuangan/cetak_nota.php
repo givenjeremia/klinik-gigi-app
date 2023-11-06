@@ -17,7 +17,7 @@ $id_rekam_medis = $data_nota['rekam_medis_id'];
 $sql_obat = "SELECT rs.*, d_o.nama as NamaObat
 FROM resep_obat rs 
 INNER JOIN data_obat d_o ON rs.data_obat_id = d_o.id
-WHERE rs.rekam_medis_id =?";
+WHERE rs.status_kesediaan=1 AND rs.rekam_medis_id =?";
 $stmt_obat = $mysqli->prepare($sql_obat);
 $stmt_obat->bind_param('i',$id_rekam_medis);
 $stmt_obat->execute();
