@@ -60,14 +60,58 @@
                                     <label for='exampleInputPassword1' class='form-label'>Diagnosa</label>
                                     <textarea name="diagnosa" class="form-control"></textarea>
                                 </div>
-                                <div class='mb-3'>
+                                <!-- <div class='mb-3'>
                                     <label for='exampleInputPassword1' class='form-label'>Tindakan</label>
                                     <textarea name="tindakan" class="form-control"></textarea>
                                 </div>
                                 <div class='mb-3'>
                                     <label for='exampleInputPassword1' class='form-label'>Biaya Tindakan</label>
                                     <input type="text" class="form-control format-rupiah" name="biaya_tindakan" id="biaya_tindakan">
+                                </div> -->
+                                <!-- Tindakan -->
+                                <div class='mb-3'>
+                                    <div class="row mb-1">
+                                        <div class="col">
+                                            <label for='exampleInputPassword1' class='form-label'>Layanan</label>
+                                            <select id="cboLayanan" class='select2bs4 w-100' required>
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            <label for='exampleInputPassword1' class='form-label'>Jumlah</label>
+                                            <input type="number" id="jumlah_tindakan" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class=" col-6">
+                                            <label for='exampleInputPassword1' class='form-label'>Keterangan</label>
+                                            <textarea id="keterangan_tindakan" class="form-control"></textarea>
+                                        </div>
+                                        <div class="col-3">
+                                            <label for='exampleInputPassword1' class='form-label'>&nbsp;</label>
+                                            <button  id="btn-tambah-tindakan" class="btn btn-primary d-block">Tambah Tindakan</button>
+                                        </div>
+                                    </div>
                                 </div>
+                                <div class='mb-3'>
+                                    <label for='exampleInputPassword1' class='form-label'>Tabel Tindakan</label>
+                                    <div class="table-responsive">
+                                        <table id="tableObat" class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nama</th>
+                                                    <th>Jumlah</th>
+                                                    <th>Harga</th>
+                                                    <th>Keterangan</th>
+                                                    <!-- <th>Aksi</th> -->
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tableTindakanBody">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- Obat -->
                                 <div class='mb-3'>
                                     <div class="row mb-1">
                                         <div class="col">

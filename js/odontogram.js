@@ -38,6 +38,8 @@ function getData(data) {
       },
     });
 }
+
+
   $("#submit_add").on("click", function (e) {
     var data_pasien = $('#cboRekamMedis').find(':selected').attr('key2')
     e.preventDefault();
@@ -147,6 +149,15 @@ function getData(data) {
         }
       },
     });
+  }
+
+
+  // IF AUTO
+  // alert($('#data_rekam_medis').val() )
+  if($('#data_rekam_medis').val() !== ""){
+    getData($('#data_rekam_medis').val())
+    onOndotogram($('#data_rekam_medis').val())
+    $('#odontograma-content').removeClass('d-none')
   }
 
 

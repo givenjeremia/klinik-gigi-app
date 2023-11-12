@@ -19,25 +19,25 @@ function getAlat() {
 }
 getAlat();
 
-// function getLayanan() {
-//   $("#cboLayanan").html();
-//   $("#cboLayanan").append("<option value=''>Pilih Layanan</option>");
-//   var url = "../../backend/rekam_medis/data_layanan_hari_ini.php";
-//   $.ajax(url, {
-//     dataType: "json",
-//     timeout: 500,
-//     success: function (data, status, xhr) {
-//       if (data[0].status === "oke") {
-//         data.forEach((element, key) => {
-//           $("#cboLayanan").append(
-//             `<option value="${element.data["id"]}" harga="${element.data["harga"]}" namaLayanan="${element.data["nama"]}">${element.data["nama"]}</option>`
-//           );
-//         });
-//       }
-//     },
-//   });
-// }
-// getLayanan();
+function getLayanan() {
+  $("#cboLayanan").html();
+  $("#cboLayanan").append("<option value=''>Pilih Layanan</option>");
+  var url = "../../backend/rekam_medis/data_layanan_hari_ini.php";
+  $.ajax(url, {
+    dataType: "json",
+    timeout: 500,
+    success: function (data, status, xhr) {
+      if (data[0].status === "oke") {
+        data.forEach((element, key) => {
+          $("#cboLayanan").append(
+            `<option value="${element.data["id"]}" harga="${element.data["harga"]}" namaLayanan="${element.data["nama"]}">${element.data["nama"]}</option>`
+          );
+        });
+      }
+    },
+  });
+}
+getLayanan();
 
 function getReservasi() {
   $("#cboReservasi").html();
@@ -138,6 +138,27 @@ $("#btn-tambah-alat").on("click", function(e){
     setTotalHarga(total_biaya)
 })
 
+var countTindakan = 1;
+$("#btn-tambah-tindakan").on("click", function(e){
+    e.preventDefault()
+    var layanan_id = $('#cboLayanan').val()
+    var nama_layanan = $('#cboLayanan option:selected').attr("namaLayanan")
+    var harga_layanan = $('#cboLayanan option:selected').attr("harga")
+    var jumlah  = $('#jumlah_tindakan').val()
+    var keterangan_tindakan = $('#keterangan_tindakan').val()
+    $('#tableTindakanBody').append(`<tr id="tr_layanan_${layanan_id}">`)
+    $('#tableTindakanBody').append(`<td>${nama_layanan} <input type="hidden" name="tindakan[${countTindakan}][id_layanan]" value="${layanan_id}"> </td>`)
+    $('#tableTindakanBody').append(`<td>Rp. ${formatRupiah(harga_layanan)} <input type="hidden" name="tindakan[${countTindakan}][harga_alat]" value="${harga_layanan}"></td>`)
+    $('#tableTindakanBody').append(`<td>${jumlah} <input type="hidden" name="tindakan[${countTindakan}][jumlah]" value="${jumlah}"> </td>`)
+    $('#tableTindakanBody').append(`<td>${keterangan_tindakan} <input type="hidden" name="tindakan[${countTindakan}][keterangan_tindakan]" value="${keterangan_tindakan}"></td>`)
+    // $('#tableObatBody').append(`<td><button></td>`)
+    $('#tableTindakanBody').append("</tr>")
+    countTindakan++;
+    // Tambah harga
+    total_biaya = parseInt(total_biaya) + parseInt(harga_layanan)
+    setTotalHarga(total_biaya)
+})
+
 function deleteAlat(id) {
     $('#tr_alat_'+id).remove();
 }
@@ -158,20 +179,20 @@ $("#cboReservasi").on('change', function(){
   $('#jadwal_dokter_id').val(jadwal_dokter_id)  
 })
 
-var biaya_tindakan = 0
-$("#biaya_tindakan").on("change", function(){
-  var harga = $(this).val() != "" ? parseInt($(this).val().replace(/\./g, '')) : 0;
-  if (biaya_tindakan == 0) {
-    total_biaya = total_biaya+ harga;
-    biaya_tindakan = harga
-  }
-  else{
-    total_biaya= total_biaya - biaya_tindakan + harga;
-    biaya_tindakan = harga
+// var biaya_tindakan = 0
+// $("#biaya_tindakan").on("change", function(){
+//   var harga = $(this).val() != "" ? parseInt($(this).val().replace(/\./g, '')) : 0;
+//   if (biaya_tindakan == 0) {
+//     total_biaya = total_biaya+ harga;
+//     biaya_tindakan = harga
+//   }
+//   else{
+//     total_biaya= total_biaya - biaya_tindakan + harga;
+//     biaya_tindakan = harga
 
-  }
-  setTotalHarga(total_biaya);
-});
+//   }
+//   setTotalHarga(total_biaya);
+// });
 
 $('#btn-simpan-reservasi').on('click', function(e){
     e.preventDefault();
@@ -192,8 +213,16 @@ $('#btn-simpan-reservasi').on('click', function(e){
             text: data.msg,
             icon: "success",
             showConfirmButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Kembali",
+            cancelButtonText: "Isi Odontrogram",
           }).then((result) => {
-            window.location.href = '../../page/rekam_medis/index.php';
+            if (result.isConfirmed) {
+                window.location.href = '../../page/rekam_medis/index.php';
+            }
+            else{
+                window.location.href = '../../page/odontogram/index.php?data='+data.data;
+            }
           });
         } else {
           Swal.fire({

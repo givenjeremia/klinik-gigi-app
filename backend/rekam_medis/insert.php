@@ -3,16 +3,13 @@ require_once( '../config.php' );
 session_start();
 $mysqli->begin_transaction();
 try {
-    if ( isset( $_POST[ 'keluhan' ] ) && isset( $_POST[ 'biaya_tindakan' ] ) && isset( $_POST[ 'diagnosa' ] ) && isset( $_POST[ 'tindakan' ] ) && isset( $_POST[ 'total_biaya' ] ) && isset( $_POST[ 'reservasi' ] ) && isset( $_POST[ 'jadwal_dokter_id' ] ) )  {
+    if ( isset( $_POST[ 'keluhan' ] )  && isset( $_POST[ 'diagnosa' ]  ) && isset( $_POST[ 'total_biaya' ] ) && isset( $_POST[ 'reservasi' ] ) && isset( $_POST[ 'jadwal_dokter_id' ] ) )  {
         $tanggal_pemeriksaan = date('Y-m-d');
-        $biaya_tindakan = str_replace('.','',$_POST[ 'biaya_tindakan' ]);
-
- 
-
+        // $biaya_tindakan = str_replace('.','',$_POST[ 'biaya_tindakan' ]);
         // Insert Rekam Medis
-        $sql_rekam_medis = 'INSERT INTO `rekam_medis`(`keluhan`, `diagnosa`, `tindakan`, `total_tarif`, `biaya_tindakan`, `tanggal_pemeriksaan`, `reservasi_kllinik_id`, `jadwal_dokter_id`) VALUES (?,?,?,?,?,?,?,?)';
+        $sql_rekam_medis = 'INSERT INTO `rekam_medis`(`keluhan`, `diagnosa`, `total_tarif`, `tanggal_pemeriksaan`, `reservasi_kllinik_id`, `jadwal_dokter_id`) VALUES (?,?,?,?,?,?)';
         $stmt_rekam_medis = $mysqli->prepare( $sql_rekam_medis );
-        $stmt_rekam_medis->bind_param( 'sssddsii', $_POST[ 'keluhan' ], $_POST[ 'diagnosa' ], $_POST[ 'tindakan' ], $_POST[ 'total_biaya' ],$biaya_tindakan, $tanggal_pemeriksaan, $_POST[ 'reservasi' ], $_POST[ 'jadwal_dokter_id' ] );
+        $stmt_rekam_medis->bind_param( 'ssdsii', $_POST[ 'keluhan' ], $_POST[ 'diagnosa' ], $_POST[ 'total_biaya' ], $tanggal_pemeriksaan, $_POST[ 'reservasi' ], $_POST[ 'jadwal_dokter_id' ] );
         $stmt_rekam_medis->execute();
         $new_id_rekam_medis = $mysqli->insert_id;
         // Insert Data Rekam Alat
@@ -42,14 +39,25 @@ try {
         // $stmt_layanan = $mysqli->prepare( $sql_layanan );
         // $stmt_layanan->bind_param( 'ii', $new_id_rekam_medis, $_POST[ 'layanan' ] );
         // $stmt_layanan->execute();
+        // Insert Data Tindakan
+        if (isset($_POST[ 'tindakan' ])) {
+            $tindakan = $_POST[ 'tindakan' ];
+            foreach ( $tindakan as $key => $value ) {
+                $sql_tindakan = 'INSERT INTO `tindakan`(`rekam_medis_id`, `layanan_id`, `jumlah`, `catatan`) VALUES (?,?,?,?)';
+                $stmt_tindakan = $mysqli->prepare( $sql_tindakan );
+                $stmt_tindakan->bind_param( 'iiss', $new_id_rekam_medis, $value[ 'id_layanan' ],  $value[ 'jumlah' ], $value[ 'keterangan_tindakan' ]);
+                $stmt_tindakan->execute();
+            }
+        }
         // Insert Resep
         if (isset($_POST[ 'obat' ])) {
             $obat = $_POST[ 'obat' ];
             $status_kesediaan = 1;
+            $status = 0;
             foreach ( $obat as $key => $value ) {
-                $sql_resep = 'INSERT INTO `resep_obat`(`rekam_medis_id`, `data_obat_id`, `jumlah_pemakaian`, `harga`, `keterangan`, `aturan_pakai`,`status_kesediaan`) VALUES (?,?,?,?,?,?,?)';
+                $sql_resep = 'INSERT INTO `resep_obat`(`rekam_medis_id`, `data_obat_id`, `jumlah_pemakaian`, `harga`, `keterangan`, `aturan_pakai`,`status_kesediaan`,`status`) VALUES (?,?,?,?,?,?,?,?)';
                 $stmt_resep = $mysqli->prepare( $sql_resep );
-                $stmt_resep->bind_param( 'iiidssi', $new_id_rekam_medis, $value[ 'id_obat' ],  $value[ 'jumlah' ], $value[ 'total_harga' ], $value[ 'keterangan' ], $value[ 'aturan_pakai' ],$status_kesediaan);
+                $stmt_resep->bind_param( 'iiidssii', $new_id_rekam_medis, $value[ 'id_obat' ],  $value[ 'jumlah' ], $value[ 'total_harga' ], $value[ 'keterangan' ], $value[ 'aturan_pakai' ],$status_kesediaan,$status);
                 $stmt_resep->execute();
             }
         }
@@ -59,7 +67,12 @@ try {
         $stmt_nota->bind_param( 'i', $new_id_rekam_medis);
         $stmt_nota->execute();
         $mysqli->commit();
-        echo json_encode( [ 'status' => 'success', 'msg' => 'Berhasil Tambah Rekam Medis' ] );
+        echo json_encode( [ 
+            'status' => 'success', 
+            'msg' => 'Berhasil Tambah Rekam Medis',
+            'data'=>$new_id_rekam_medis,
+            'tanggal' => date('d F y',strtotime($tanggal_pemeriksaan)),
+        ] );
     } else {
         echo json_encode( [ 'status' => 'failed', 'msg' => 'Harap Periksa Inputan'] );
     }

@@ -120,33 +120,47 @@ function getReservasi() {
 getReservasi();
 
 function kehadiran(id,status) {
-  var url = "../../backend/reservasi_klinik/update_status_kehadiran.php";
-  $.ajax(url, {
-    type: "post",
-    data: {
-      id: id,
-      status: status,
-    },
-    dataType: "json",
-    timeout: 500,
-    success: function (data, status, xhr) {
-      if (data.status == "success") {
-          Swal.fire({
-            title: "Success",
-            text: "Status Berhasil Diubah",
-            icon: "success",
-            showConfirmButton: true,
-          }).then(result => {
-            window.location.reload()
-          })
-        } else {
-          Swal.fire({
-            title: "Error",
-            text: "Status Gagal Di Ubah",
-            icon: "error",
-            showConfirmButton: true,
-          });
-        }
-    },
+  Swal.fire({
+    title: "Konfirmasi",
+    text: "Apakah anda yakin akan mengkonfirmasi kehadiran?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Hadir",
+    cancelButtonText: "Batal",
+    reverseButtons: true,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      var url = "../../backend/reservasi_klinik/update_status_kehadiran.php";
+      $.ajax(url, {
+        type: "post",
+        data: {
+          id: id,
+          status: status,
+        },
+        dataType: "json",
+        timeout: 500,
+        success: function (data, status, xhr) {
+          if (data.status == "success") {
+              Swal.fire({
+                title: "Success",
+                text: "Status Berhasil Diubah",
+                icon: "success",
+                showConfirmButton: true,
+              }).then(result => {
+                window.location.reload()
+              })
+            } else {
+              Swal.fire({
+                title: "Error",
+                text: "Status Gagal Di Ubah",
+                icon: "error",
+                showConfirmButton: true,
+              });
+            }
+        },
+      });
+    }
   });
 }

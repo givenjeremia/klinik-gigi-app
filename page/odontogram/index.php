@@ -19,11 +19,19 @@
                 <div class="content">
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Rekam Medis</label>
+                        <input type="hidden" id="data_rekam_medis" value="<?= isset($_GET['data']) ? $_GET['data'] : '' ?>">
+                        <?php if(!isset($_GET['data'])): ?>
                         <select id="cboRekamMedis" name="rekam_medis" class="select2bs4" style="width: 100%;" required>
                             <option value="">Pilih Rekam Medis</option>
                             <option value="laki-laki">Laki - Laki</option>
                             <option value="Perempuan">Perempuan</option>
                         </select>
+                        <?php else:?>
+                        
+                        <h5>Rekam Medis : <span><?= $_GET['data'] ?></span></h5>
+                        <!-- <h5>Pasien : <span id="data-pasien"><?= $_GET['data'] ?></span></h5>
+                        <h5>Tanggal : <span id="data-tanggal"><?= $_GET['data'] ?></span></h5> -->
+                        <?php endif;?>
                     </div>
                     <!-- <button type="button" onclick="formAddData()" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalTambah">
                         Add Odontogram
