@@ -27,6 +27,7 @@
             <li><a href="../perawat/index.php" class="dropdown-item">Perawat</a></li>
             <li><a href="../karyawan/index.php" class="dropdown-item">Karyawan</a></li>
             <li><a href="../obat/index.php" class="dropdown-item">Obat</a></li>
+            <li><a href="../spesialis/index.php" class="dropdown-item">Spesialis</a></li>
             <li><a href="../layanan/index.php" class="dropdown-item">Layanan</a></li>
           </ul>
         </li>

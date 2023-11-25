@@ -13,11 +13,11 @@
             <div class="container-fluid pr-5 pl-5 pt-3">
                 <div class="content">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalTambah">
-                        Add Dokter
+                        Add Spesialis
                     </button>
                     <div class="card mt-2">
                         <div class="card-header">
-                            <h3 class="card-title">Data Master Dokter</h3>
+                            <h3 class="card-title">Data Master Spesialis</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -27,33 +27,31 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
-                                            <th>Alamat</th>
-                                            <th>No Telepon</th>
-                                            <th>Jenis Kelamin</th>
-                                            <th>Spesialis</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody id="hasil">
 
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
-                        <!-- /.card-body -->
                     </div>
-                    <?php include_once('create.php') ?>
-                    <?php include_once('update.php') ?>
-                    <?php include_once('jadwal/index.php') ?>
-                    <?php include_once('jadwal/create.php') ?>
-                    <?php include_once('jadwal/update.php') ?>
                 </div>
             </div>
         </div>
     </div>
+    <?php include_once('create.php') ?>
+    <?php include_once('update.php') ?>
     <?php include '../layouts/script.php' ?>
-    <script src="../../js/dokter.js"></script>
-    <script src="../../js/dokter_jadwal.js"></script>
+    <script src="../../js/spesialis.js"></script>
 </body>
 
 </html>

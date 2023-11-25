@@ -36,6 +36,8 @@
 <script src="../../assets/plugins/fullcalendar/main.js"></script>
 <script src="../../assets/plugins/sweetalert2/sweetalert2.min.js"></script>
 <script src="../../assets/plugins/select2/js/select2.full.min.js"></script>
+<!-- BS-Stepper -->
+<script src="../../assets/plugins/bs-stepper/js/bs-stepper.min.js"></script>
 
 <script>
     $('.select2').select2()
