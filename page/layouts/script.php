@@ -47,6 +47,9 @@
     })
 </script>
 
+<!-- Enkrip Dekrip -->
+<script src="../../js/enkrip_dekrip.js"></script>
+
 <script>
     $('#btn-logout').on('click', function (e) {
         e.preventDefault();

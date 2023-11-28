@@ -93,9 +93,17 @@ function getReservasi() {
           }
           else{
             console.log(element.data['Tanggal'])
+            // action =
+            // `<th>  
+            //   <a href="../rekam_medis/create.php?reservasi=${element.data['IdReservasi']}&dokter=${element.data['IdJadwalDokter']}&namaDokter=${element.data['NamaDokter']}&tanggal=${convertDate(element.data['Tanggal'])}&jam=${element.data['Jam']}&spesialis_id=${element.data['spesialis_id']}&spesialis_nama=${element.data['spesialis_nama']}" class="btn btn-primary"><i class="fa fa-plus"></i></a> 
+            // </th>`
+            var pasien = CryptoJS.AES.encrypt(element.data['IdPasien'], 'Klinik-GIGI-APPS');
+            var reservasi = CryptoJS.AES.encrypt(element.data['IdReservasi'], 'Klinik-GIGI-APPS');
+            var tanggal = CryptoJS.AES.encrypt(element.data['Tanggal'], 'Klinik-GIGI-APPS');
+            var dokter = CryptoJS.AES.encrypt(element.data['IdJadwalDokter'], 'Klinik-GIGI-APPS');
             action =
             `<th>  
-              <a href="../rekam_medis/create.php?reservasi=${element.data['IdReservasi']}&dokter=${element.data['IdJadwalDokter']}&namaDokter=${element.data['NamaDokter']}&tanggal=${convertDate(element.data['Tanggal'])}&jam=${element.data['Jam']}" class="btn btn-primary"><i class="fa fa-plus"></i></a> 
+              <a href="../rekam_medis/riwayat.php?data=${pasien}&reservasi=${reservasi}&tanggal=${tanggal}&dokter=${dokter}" class="btn btn-primary"><i class="fa fa-plus"></i></a> 
             </th>`
 
           }

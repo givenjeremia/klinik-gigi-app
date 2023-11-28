@@ -20,9 +20,13 @@ function getAlat() {
 getAlat();
 
 function getLayanan() {
+  var spesialis = $('#spesialis').val();
   $("#cboLayanan").html();
   $("#cboLayanan").append("<option value=''>Pilih Layanan</option>");
   var url = "../../backend/rekam_medis/data_layanan_hari_ini.php";
+  if (spesialis){
+    var url = "../../backend/rekam_medis/data_layanan_hari_ini.php?spesialis="+spesialis;
+  }
   $.ajax(url, {
     dataType: "json",
     timeout: 500,
@@ -198,6 +202,14 @@ $('#btn-simpan-reservasi').on('click', function(e){
     e.preventDefault();
     var form = document.querySelector("#FormCreateRekamMedis");
     var form_data = new FormData(form);
+    var reservasi = $('#reservasi').val();
+    var bytes  = CryptoJS.AES.decrypt(reservasi.toString(), 'Klinik-GIGI-APPS');
+    var reservasi = bytes.toString(CryptoJS.enc.Utf8);
+    form_data.append('reservasi',reservasi)
+    var jadwal_dokter_id = $('#dokter').val();
+    var bytes  = CryptoJS.AES.decrypt(jadwal_dokter_id.toString(), 'Klinik-GIGI-APPS');
+    var jadwal_dokter_id = bytes.toString(CryptoJS.enc.Utf8);
+    form_data.append('jadwal_dokter_id',jadwal_dokter_id)
     var url = "../../backend/rekam_medis/insert.php";
     $.ajax({
       type: "POST",
@@ -235,3 +247,4 @@ $('#btn-simpan-reservasi').on('click', function(e){
       },
     });
 })
+

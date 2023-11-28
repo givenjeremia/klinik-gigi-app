@@ -1,5 +1,8 @@
 function getDetailPasien(){
     var id_pasien = $('#id_pasien').val();
+    var bytes  = CryptoJS.AES.decrypt(id_pasien.toString(), 'Klinik-GIGI-APPS');
+    var id_pasien = bytes.toString(CryptoJS.enc.Utf8);
+
     if(id_pasien != ''){
         var url = "../../backend/pasien/get_data_by_id.php";
         $.ajax(url, {
@@ -19,19 +22,21 @@ function getDetailPasien(){
               $("#umur_pasien").html(data[0].data.usia+ ' Tahun')
             }
             else{
-                window.location.href ='/'
+                // window.location.href ='/'
             }
           },
         });
     }
     else{
-        window.location.href ='/'
+        // window.location.href ='/'
     }
 }
 getDetailPasien();
 
 function getRekamMedisPasien(){
     var id_pasien = $('#id_pasien').val();
+    var bytes  = CryptoJS.AES.decrypt(id_pasien.toString(), 'Klinik-GIGI-APPS');
+    var id_pasien = bytes.toString(CryptoJS.enc.Utf8);
     if(id_pasien != ''){
         var url = "../../backend/rekam_medis/get_data_by_id_pasien.php";
         $.ajax(url, {
@@ -76,7 +81,7 @@ function getRekamMedisPasien(){
         });
     }
     else{
-        window.location.href ='/'
+        // window.location.href ='/'
     }
 }
 getRekamMedisPasien();
@@ -84,3 +89,30 @@ getRekamMedisPasien();
 function detailRekamMedis(id){
 
 }
+
+function showTambahRekamMedis(){
+  var date = new Date();
+  var dateString = date.toISOString().split('T')[0];
+  var tanggal = $('#tanggal').val();
+  // alert(tanggal)
+  var bytes  = CryptoJS.AES.decrypt(tanggal.toString(), 'Klinik-GIGI-APPS');
+  // alert(bytes)
+  var tanggal = bytes.toString(CryptoJS.enc.Utf8);
+
+  // Dekrip
+  var id_reservasi = $('#id_reservasi').val();
+  // var bytes  = CryptoJS.AES.decrypt(id_reservasi.toString(), 'Klinik-GIGI-APPS');
+  // var id_reservasi = bytes.toString(CryptoJS.enc.Utf8);
+  var id_jadwal_dokter = $('#dokter').val();
+  // var bytes  = CryptoJS.AES.decrypt(id_jadwal_dokter.toString(), 'Klinik-GIGI-APPS');
+  // var id_jadwal_dokter= bytes.toString(CryptoJS.enc.Utf8);
+
+  if(dateString == tanggal){
+    var action = `
+    <a href="../rekam_medis/create_v2.php?reservasi=${id_reservasi}&dokter=${id_jadwal_dokter}" class="btn btn-primary" target="_blank">
+        Tambah Rekam Medis
+    </a>`
+    $('#card-tools-rekam-medis').html(action); 
+  }
+}
+showTambahRekamMedis()

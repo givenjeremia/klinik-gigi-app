@@ -34,6 +34,11 @@
                             <option value="Sunday">Minggu</option>
                         </select>
                     </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Spesialis</label>
+                        <select id="cboSpesialis" name="spesialis" class="select2bs4 w-100" required>
+                        </select>
+                    </div>
                     
                 </form>
             </div>

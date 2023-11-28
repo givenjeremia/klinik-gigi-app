@@ -14,6 +14,7 @@ function getData() {
             $("#tr_" + key).append("<th>" + element.data["jenis"] + "</th>");
             $("#tr_" + key).append("<th>Rp. " + formatRupiah(element.data["harga"]) + "</th>");
             $("#tr_" + key).append("<th>" + element.data["hari_dokter"] + "</th>");
+            $("#tr_" + key).append("<th>" + element.data["spesialis"] + "</th>");
             if (data[0].role != 'pasien'){
               var action =
                 `<th>  
@@ -29,6 +30,26 @@ function getData() {
     });
   }
   getData();
+
+  // List Spesialis
+  function listSpesialis(){
+    $("#cboSpesialis").html();
+    $("#cboSpesialis").append("<option value=''>Pilih Spesialis</option>");
+    var url = "../../backend/spesialis/data.php";
+    $.ajax(url, {
+      dataType: "json", // type of response data
+      timeout: 500, // timeout milliseconds
+      success: function (data, status, xhr) {
+        if (data[0].status === "oke") {
+          data.forEach((element, key) => {
+            $("#cboSpesialis").append(
+              `<option value="${element.data["id"]}">${element.data["nama"]}</option>`
+            );
+          });
+        }
+      },
+    });
+  }
   
   $("#submit_add").on("click", function (e) {
     e.preventDefault();

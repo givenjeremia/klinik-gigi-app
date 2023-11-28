@@ -14,7 +14,7 @@
             <div class="container-fluid pr-5 pl-5 pt-3">
                 <div class="content">
                     <?php if($_SESSION['auth']['role'] !== 'pasien') : ?>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalTambah">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" onclick="listSpesialis()" data-target="#exampleModalTambah">
                         Add Layanan
                     </button>
                     <?php endif; ?>
@@ -33,6 +33,7 @@
                                             <th>Jenis</th>
                                             <th>Harga</th>
                                             <th>Hari</th>
+                                            <th>Spesialis</th>
                                             <?php if($_SESSION['auth']['role'] !== 'pasien') : ?>
                                             <th>Aksi</th>
                                             <?php endif; ?>
@@ -41,18 +42,6 @@
                                     <tbody id="hasil">
 
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama</th>
-                                            <th>Jenis</th>
-                                            <th>Harga</th>
-                                            <th>Hari</th>
-                                            <?php if($_SESSION['auth']['role'] !== 'pasien') : ?>
-                                            <th>Aksi</th>
-                                            <?php endif; ?>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                             </div>
                         </div>

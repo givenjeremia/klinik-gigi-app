@@ -11,7 +11,11 @@
         <?php include '../layouts/navbar.php' ?>
         <div class="content-wrapper">
             <div class="container-fluid pr-5 pl-5 pt-3">
-                <input type="hidden" id="id_pasien" value="<?= $_GET['data'] ?>">
+                <input type="hidden" id="id_pasien" value="<?= str_replace(' ', '+', $_GET['data']) ?>">
+                <input type="hidden" id="id_reservasi" value="<?=  str_replace(' ', '+', $_GET['reservasi'])?>">
+                <input type="hidden" id="tanggal" value="<?=  str_replace(' ', '+', $_GET['tanggal']) ?>">
+                <input type="hidden" id="dokter" value="<?=  str_replace(' ', '+', $_GET['dokter']) ?>">
+
                 <h3>Riwayat Pemeriksaan Perawatan</h3>
                 <div class="content">
                     <div class="card mt-2">
@@ -49,10 +53,10 @@
                     <div class="card mt-2">
                         <div class="card-header">
                             <h3 class="card-title">Rekam Medis</h3>
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalTambah">
+                            <div class="card-tools" id="card-tools-rekam-medis">
+                                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalTambah">
                                     Tambah Rekam Medis
-                                </button>
+                                </button> -->
                             </div>
                         </div>
                         <div class="card-body">
@@ -85,6 +89,9 @@
     <?php include '../layouts/format_rupiah.php' ?>
 
     <script src="../../js/rekam_medis_riwayat.js"></script>
+    <script>
+        
+    </script>
 </body>
 
 </html>

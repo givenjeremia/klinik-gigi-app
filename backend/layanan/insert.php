@@ -2,8 +2,8 @@
 require_once( '../config.php' );
 try {
     $harga = str_replace( '.', '', $_POST[ 'harga' ] );
-    $stmt = $mysqli->prepare( 'INSERT INTO `layanan`(`nama`, `jenis`, `harga`, `hari_dokter`) VALUES (?,?,?,?)' );
-    $stmt->bind_param( 'ssds', $_POST[ 'nama' ], $_POST[ 'jenis' ], $harga, $_POST[ 'hari_dokter' ] );
+    $stmt = $mysqli->prepare( 'INSERT INTO `layanan`(`nama`, `jenis`, `harga`, `hari_dokter`,`spesialis_id`) VALUES (?,?,?,?,?)' );
+    $stmt->bind_param( 'ssdsi', $_POST[ 'nama' ], $_POST[ 'jenis' ], $harga, $_POST[ 'hari_dokter' ],$_POST[ 'spesialis' ] );
     $stmt->execute();
     $jumlah_yang_dieksekusi = $stmt->affected_rows;
     if ( $jumlah_yang_dieksekusi > 0 ) {

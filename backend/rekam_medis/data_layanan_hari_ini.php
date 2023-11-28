@@ -5,7 +5,11 @@ $datas = [];
 try {
     // Set Now Date
     $day_now = date("l");
+    $spesialis = isset($_GET['spesialis']) ? $_GET['spesialis'] : null ;
     $sql = "SELECT * FROM `layanan` WHERE `hari_dokter` = '$day_now'";
+    if($spesialis){
+        $sql = "SELECT * FROM `layanan` WHERE `hari_dokter` = '$day_now' AND `spesialis_id`='$spesialis'";
+    }
     $result = $mysqli->query( $sql );
     if ( $result->num_rows > 0 ) {
         while ( $row = $result->fetch_assoc() ) {

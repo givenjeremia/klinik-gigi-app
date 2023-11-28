@@ -17,8 +17,7 @@
                             <h3 class='card-title'>Buat Rekam Medis</h3>
                         </div>
                         <!-- /.card-header -->
-                        <div class='card-body'>
-                            
+                        <div class='card-body'>   
                             <div class="row mb-3">
                                 <?php if (isset($_GET['namaDokter'])) : ?>
                                 <div class="col">
@@ -29,6 +28,14 @@
                                 <div class="col">
                                     Tanggal / Waktu : <?= $_GET['tanggal'].' / '.$_GET['jam']    ?>
                                 </div>
+                                <?php endif; ?>
+                                <?php if (isset($_GET['spesialis_nama'])) : ?>
+                                <div class="col">
+                                    Spesialis : <?= $_GET['spesialis_nama']    ?>
+                                </div>
+                                <?php endif; ?>
+                                <?php if (isset($_GET['spesialis_id']) && $_GET['spesialis_id']  ) : ?>
+                                    <input type="hidden" name="spesialis" id="spesialis" value="<?= $_GET['spesialis_id'] ?>">
                                 <?php endif; ?>
                             </div>
                             <!-- <div class='mb-3'>

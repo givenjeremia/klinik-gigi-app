@@ -10,7 +10,7 @@ $hari_list = [
     'Friday' => 'Jumat',
     'Saturday' => 'Sabtu'
 ];
-$result = $mysqli->query('SELECT * FROM `layanan`');
+$result = $mysqli->query('SELECT l.*, s.nama as spesialis_nama FROM `layanan` l LEFT JOIN `spesialis` s ON s.id = l.spesialis_id');
 $datas = [];
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
@@ -19,6 +19,7 @@ if ($result->num_rows > 0) {
             'nama'=> $row['nama'],
             'jenis'=> $row['jenis'],
             'harga'=> $row['harga'],
+            'spesialis'=> $row['spesialis_nama'] ? $row['spesialis_nama'] : 'Umum',
             'hari_dokter'=> $hari_list[$row['hari_dokter']],
         ];
         array_push($datas,[
