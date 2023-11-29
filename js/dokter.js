@@ -49,6 +49,26 @@ function getData() {
   }
   getData();
   
+  function listSpesialis(){
+    $("#cboSpesialis").html();
+    $("#cboSpesialis").append("<option value=''>Pilih Spesialis</option>");
+    $("#cboSpesialis").append("<option value='umum'>Umum</option>");
+    var url = "../../backend/spesialis/data.php";
+    $.ajax(url, {
+      dataType: "json", // type of response data
+      timeout: 500, // timeout milliseconds
+      success: function (data, status, xhr) {
+        if (data[0].status === "oke") {
+          data.forEach((element, key) => {
+            $("#cboSpesialis").append(
+              `<option value="${element.data["id"]}">${element.data["nama"]}</option>`
+            );
+          });
+        }
+      },
+    });
+  }
+
   $("#submit_add").on("click", function (e) {
     e.preventDefault();
     console.log("masuk")
@@ -76,6 +96,7 @@ function getData() {
               form_data.delete(key);
             }
             getData();
+            window.location.reload();
           });
         } else {
           Swal.fire({
@@ -143,6 +164,8 @@ function getData() {
             }
             $("#example1").DataTable().destroy();
             getData();
+            window.location.reload();
+
           })
         
         } else {

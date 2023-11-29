@@ -30,6 +30,12 @@
                         </select>
                     </div>
                     <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Spesialis</label>
+                        <select id="cboSpesialis" name="spesialis" class="form-control" required>
+       
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Username</label>
                         <input type="text" class="form-control" name="username">
                     </div>

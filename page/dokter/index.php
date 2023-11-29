@@ -12,7 +12,7 @@
         <div class="content-wrapper">
             <div class="container-fluid pr-5 pl-5 pt-3">
                 <div class="content">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalTambah">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" onclick="listSpesialis()" data-target="#exampleModalTambah">
                         Add Dokter
                     </button>
                     <div class="card mt-2">

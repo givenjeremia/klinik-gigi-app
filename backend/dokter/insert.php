@@ -10,9 +10,16 @@ try {
 
     if ($user_check > 0) {
         $newUserId = $mysqli->insert_id;
-        $stmt = $mysqli->prepare("INSERT INTO `data_dokter`(`nama`, `alamat`, `no_telp`, `jenis_kelamin`, `user_id`) VALUES (?,?,?,?,?)");
-        $stmt->bind_param('ssisi', $_POST['nama'], $_POST['alamat'], $_POST['no_telp'], $_POST['jenis_kelamin'], $newUserId);
-        $stmt->execute();
+        if($_POST['spesialis'] == 'umum'){
+            $stmt = $mysqli->prepare("INSERT INTO `data_dokter`(`nama`, `alamat`, `no_telp`, `jenis_kelamin`, `user_id`) VALUES (?,?,?,?,?)");
+            $stmt->bind_param('ssisi', $_POST['nama'], $_POST['alamat'], $_POST['no_telp'], $_POST['jenis_kelamin'], $newUserId);
+            $stmt->execute();
+        }
+        else{
+            $stmt = $mysqli->prepare("INSERT INTO `data_dokter`(`nama`, `alamat`, `no_telp`, `jenis_kelamin`,`spesialis_id`, `user_id`) VALUES (?,?,?,?,?,?)");
+            $stmt->bind_param('ssisii', $_POST['nama'], $_POST['alamat'], $_POST['no_telp'], $_POST['jenis_kelamin'] , $_POST['spesialis'], $newUserId);
+            $stmt->execute();
+        }
         $jumlah_yang_dieksekusi = $stmt->affected_rows;
         if ($jumlah_yang_dieksekusi > 0) {
             echo json_encode(['status' => 'success', 'nama' => $_POST['nama']]);
