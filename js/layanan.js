@@ -13,7 +13,7 @@ function getData() {
             $("#tr_" + key).append("<th>" + element.data["nama"] + "</th>");
             $("#tr_" + key).append("<th>" + element.data["jenis"] + "</th>");
             $("#tr_" + key).append("<th>Rp. " + formatRupiah(element.data["harga"]) + "</th>");
-            $("#tr_" + key).append("<th>" + element.data["hari_dokter"] + "</th>");
+            // $("#tr_" + key).append("<th>" + element.data["hari_dokter"] + "</th>");
             $("#tr_" + key).append("<th>" + element.data["spesialis"] + "</th>");
             if (data[0].role != 'pasien'){
               var action =
@@ -71,6 +71,7 @@ function getData() {
             icon: "success",
             showConfirmButton: true,
           }).then((result) => {
+            window.location.reload()
             $("#close_add").click();
             // Reset Value
             for (var key of form_data.keys()) {

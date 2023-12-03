@@ -32,7 +32,7 @@
                                             <th>Nama</th>
                                             <th>Jenis</th>
                                             <th>Harga</th>
-                                            <th>Hari</th>
+                                            <!-- <th>Hari</th> -->
                                             <th>Spesialis</th>
                                             <?php if($_SESSION['auth']['role'] !== 'pasien') : ?>
                                             <th>Aksi</th>

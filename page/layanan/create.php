@@ -21,7 +21,7 @@
                         <label for="exampleInputPassword1" class="form-label">Harga</label>
                         <input type="text" class="form-control format-rupiah" name="harga" required>
                     </div>
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Hari</label>
                         <select name="hari_dokter" class="select2bs4 w-100" required>
                             <option value="">Pilih Hari</option>
@@ -33,7 +33,7 @@
                             <option value="Friday">Sabtu</option>
                             <option value="Sunday">Minggu</option>
                         </select>
-                    </div>
+                    </div> -->
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Spesialis</label>
                         <select id="cboSpesialis" name="spesialis" class="select2bs4 w-100" required>

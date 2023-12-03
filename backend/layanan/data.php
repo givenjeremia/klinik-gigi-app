@@ -20,7 +20,7 @@ if ($result->num_rows > 0) {
             'jenis'=> $row['jenis'],
             'harga'=> $row['harga'],
             'spesialis'=> $row['spesialis_nama'] ? $row['spesialis_nama'] : 'Umum',
-            'hari_dokter'=> $hari_list[$row['hari_dokter']],
+            // 'hari_dokter'=> $hari_list[$row['hari_dokter']],
         ];
         array_push($datas,[
             'status'=> 'oke',
