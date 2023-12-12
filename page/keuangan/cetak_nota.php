@@ -32,6 +32,14 @@ $stmt_alat->bind_param('i',$id_rekam_medis);
 $stmt_alat->execute();
 $result_alat = $stmt_alat->get_result();
 
+$sql_tindakan = "SELECT t.*, l.nama as NamaTindakan, l.harga as HargaTindakan 
+FROM `tindakan` t INNER JOIN `layanan` l ON l.id = t.layanan_id
+WHERE t.rekam_medis_id =?";
+$stmt_tindakan = $mysqli->prepare($sql_tindakan);
+$stmt_tindakan->bind_param('i',$id_rekam_medis);
+$stmt_tindakan->execute();
+$result_tindakan = $stmt_tindakan->get_result();
+
 // $sql_layanan = "SELECT l.nama AS NamaLayanan
 // FROM rekam_medis_has_layanan rml
 // INNER JOIN layanan l ON l.id = rml.layanan_id
@@ -148,15 +156,24 @@ $result_alat = $stmt_alat->get_result();
             <tbody>
                 <tr>
                     <th>No</th>
-                    <th colspan='2'>TINDAKAN</th>
+                    <th>TINDAKAN</th>
+                    <th>JUMLAH</th>
                     <th>TOTAL</th>
                     <th colspan='2'>KETERANGAN</th>
                 </tr>
                 <tr>
-                    <td align='right'>1</td>
-                    <td colspan='2'><?=  $data_nota['Tindakan'] ?></td>
-                    <td>Rp. <?= number_format($data_nota['BiayaTindakan']) ?></td>
-                    <td colspan='2'>-</td>
+                <?php 
+                    $counter = 1;
+                    while($row = $result_tindakan->fetch_assoc() ) :?>
+                    <tr>
+                        <td align='right'><?=  $counter ?></td>
+                        <td><?=  $row['NamaTindakan'] ?></td>
+                        <td align='right'><?=  $row['jumlah'] ?></td>
+                        <td>Rp. <?= number_format($row['HargaTindakan']) ?></td>
+                        <td colspan='2'><?=  $row['catatan'] ?></td>
+                    </tr>
+                    <?php $counter = $counter + 1; ?>
+                    <?php endwhile; ?>
                 </tr>
                 <tr>
                     <th>No</th>

@@ -36,7 +36,7 @@
                                         <div class="form-group row">
                                             <label for="inputEmail3" class="col-sm-2 col-form-label">Tanggal</label>
                                             <div class="col-sm-10">
-                                                <input type="date" class="form-control" name="tanggal">
+                                                <input type="date" class="form-control" name="tanggal" value="<?php echo date('Y-m-d'); ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -82,6 +82,32 @@
                                             </tr>
                                         </thead>
                                         <tbody id="hasil-daftar-tindakan">
+    
+                                        </tbody>
+                                      
+                                    </table>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Alat -->
+                        <div class="card mt-2">
+                            <div class="card-header">
+                                <h3 class="card-title">Alat</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="daftar-alat" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Alat</th>
+                                                <th>Jumlah</th>
+                                                <th>Keterangan</th>
+                                                <th>Harga</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="hasil-daftar-alat">
     
                                         </tbody>
                                       
@@ -188,6 +214,43 @@
             });
         }
     </script>
+       <!-- Get Alat Funtion  -->
+    <script>
+        function getAlat(id){
+            $("#hasil-daftar-tindakan").html();
+            var url = "../../backend/keuangan/get_alat_by_rm_id.php?rekam_medis="+id;
+            $.ajax(url, {
+                dataType: "json",
+                timeout: 500,
+                success: function (data, status, xhr) {
+                    // success callback function
+                    if (data[0].status === "oke") {
+                    $(".data-daftar-alat").remove();
+            
+                    data.forEach((element, key) => {
+                        $("#hasil-daftar-alat").append("<tr class='data-daftar-alat' id='tr_daftar-alat_" + key + "'>");
+                        $("#tr_daftar-alat_" + key).append("<th scope='row'>" + (key + 1) + "</th>");
+                        $("#tr_daftar-alat_" + key).append("<th>" + element.data["NamaAlat"] + "</th>");
+                        $("#tr_daftar-alat_" + key).append("<th>" + element.data["jumlah_pemakaian"] + "</th>");
+                        $("#tr_daftar-alat_" + key).append("<th>" + element.data["keterangan"] + "</th>");
+                        $("#tr_daftar-alat_" + key).append("<th>Rp. " +formatRupiah(element.data["harga"]) + "</th>");
+                        $("#hasil-daftar-tindakan").append("</tr>");
+                    });
+                    
+                    $("#daftar-tindakan")
+                        .DataTable({
+                        bDestroy: true,
+                        responsive: true,
+                        buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+                        })
+                        .buttons()
+                        .container()
+                        .appendTo("#example1_wrapper .col-md-6:eq(0)");
+                    }
+                },
+            });
+        }
+    </script>
     <!-- Get Obat Funtion -->
     <script>
          function getObat(id){
@@ -247,6 +310,7 @@
 
         getTindakan(rekam_medis_id)
         getObat(rekam_medis_id)   
+        getAlat(rekam_medis_id)   
     </script>
     <!-- Harga -->
     <script>
@@ -259,15 +323,19 @@
         var total_tarif  = bytes.toString(CryptoJS.enc.Utf8);
         var total_tarif = parseInt(total_tarif) + 10000
         setTotalTarif(total_tarif)
+        // console.log("Total Tarif Awal : " +total_tarif)
         function setHarga(data){
-            var harga = $(data).attr('harga');
             var total = 0
+            var harga = $(data).attr('harga');
             if($(data).is(":checked")){
                 total = parseInt(total_tarif) + parseInt(harga)
             }
             else{
                 total = parseInt(total_tarif) - parseInt(harga)
             }
+            total_tarif= total
+            // console.log("Total tarif Ubah : " + total)
+            // console.log("Total Tarif Fix :" +total_tarif)
             setTotalTarif(total)
         }
         
@@ -285,6 +353,7 @@
                     var form = document.querySelector("#FormPengajuanNota");
                     var form_data = new FormData(form);
                     form_data.append('id',nota_id)
+                    form_data.append('rekam_medis_id',rekam_medis_id)
                     form_data.append('status','approved');
                     var url = "../../backend/keuangan/new_update_pengajuan_nota.php";
                     $.ajax({

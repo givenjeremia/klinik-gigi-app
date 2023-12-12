@@ -2,8 +2,10 @@
 require_once('../config.php');
 session_start();
 
+
 try {
     $id = $_POST['id'];
+    
     $status = $_POST['status'];
     // Data Karyawan By Auth
     $id_user = $_SESSION['auth']['id'];
@@ -13,8 +15,10 @@ try {
     $result_karyawan = $stmt_karyawan->get_result();
     $data_karyawan = $result_karyawan->fetch_assoc();
     $id_karyawan = $data_karyawan['id'];
-
+   
     if($status == 'approved'){
+        $rekam_medis_id = $_POST['rekam_medis_id'];
+        // Update Status Bayar Obat
         $jenis_pembayaran = $_POST['jenis_pembayaran'];
         $sub_pembayaran = $_POST['total-harga'] - 10000;
         $total_pembayaran = $sub_pembayaran + 10000;
@@ -23,13 +27,12 @@ try {
         $stmt->bind_param('ddssisi',$total_pembayaran,$sub_pembayaran,$jenis_pembayaran,$tanggal,$id_karyawan,$status,$id);
         $stmt->execute();
         $eksekusi = $stmt->affected_rows;
+        
         if ($eksekusi > 0) {
-            // Update Status Bayar Obat
             if(isset($_POST['bayarObat'])){
-                $status = 1;
-                foreach ($_POST['bayarObat'] as $key => $value) {
-                    $stmt2 = $mysqli->prepare('UPDATE `resep_obat` SET `status_bayar`=? WHERE `rekam_medis_id`=? AND `data_obat_id` =?');
-                    $stmt2->bind_param('iii',$status,$id,$value);
+                foreach ($_POST['bayarObat'] as  $id_obat) {
+                    $stmt2 = $mysqli->prepare('UPDATE `resep_obat` SET `status_bayar`=1 WHERE `rekam_medis_id`=? AND `data_obat_id` =?');
+                    $stmt2->bind_param('ii',$rekam_medis_id,$id_obat);
                     $stmt2->execute();
                     $eksekusi2 = $stmt2->affected_rows;
                 }
