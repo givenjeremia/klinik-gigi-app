@@ -1,6 +1,6 @@
 <?php 
 require_once('../config.php');
-$result = $mysqli->query('SELECT * FROM `new_odontogram` o INNER JOIN `kondisi_odontogram` ao ON o.kondisi_odontogram_id = ao.id;');
+$result = $mysqli->query('SELECT nomor_gigi FROM new_odontogram GROUP BY nomor_gigi;');
 $datas = [];
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {

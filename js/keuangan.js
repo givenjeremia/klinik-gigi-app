@@ -15,9 +15,14 @@ function getDataPengajuanNota() {
                     $("#tr_" + key).append("<th>" + element["NamaPasien"] + "</th>");
                     $("#tr_" + key).append("<th>" + convertDate(element["TanggalPemeriksaan"]) + "</th>");
                     $("#tr_" + key).append("<th>Rp. " + formatRupiah(element["TotalTarif"]) + "</th>");
+                    // <a href="#" class="btn btn-success" data-toggle="modal" data-target="#exampleModalVerifNota" onClick="verifNotaForm(` + element["IdNota"] +`,` + element["IdRekamMedis"] +`,'` + element["NamaPasien"] +`','` + element["TanggalPemeriksaan"] +`',` + element["TotalTarif"] +`)"><i class="fa fa-check"></i></a> 
+                    var id_nota = CryptoJS.AES.encrypt(element['IdNota'], 'Klinik-GIGI-APPS');
+                    var pasien_nama = CryptoJS.AES.encrypt(element['NamaPasien'], 'Klinik-GIGI-APPS');
+                    var rekam_medis = CryptoJS.AES.encrypt(element["IdRekamMedis"], 'Klinik-GIGI-APPS');
+                    var totalTarif = CryptoJS.AES.encrypt(element["TotalTarif"], 'Klinik-GIGI-APPS');
                     var action =
                     `<th>
-                    <a href="#" class="btn btn-success" data-toggle="modal" data-target="#exampleModalVerifNota" onClick="verifNotaForm(` + element["IdNota"] +`,` + element["IdRekamMedis"] +`,'` + element["NamaPasien"] +`','` + element["TanggalPemeriksaan"] +`',` + element["TotalTarif"] +`)"><i class="fa fa-check"></i></a> 
+                    <a target="_blank" href="../keuangan/new_pengajuan_nota.php?nota=${id_nota}&pasien=${pasien_nama}&rekam-medis=${rekam_medis}&total-tarif=${totalTarif}" class="btn btn-success"><i class="fa fa-check"></i></a> 
                     <a href="#" class="btn btn-danger" onClick="tolakNota(` + element["IdNota"]  +`)"><i class="fa fa-trash"></i></a>
                     </th>`;
                     $("#tr_" + key).append(action);

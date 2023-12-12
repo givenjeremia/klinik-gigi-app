@@ -233,7 +233,7 @@ $('#btn-simpan-reservasi').on('click', function(e){
                 window.location.href = '../../page/rekam_medis/index.php';
             }
             else{
-                window.location.href = '../../page/odontogram/index.php?data='+data.data;
+                window.location.href = '../../page/odontogram/data.php?data='+data.data;
             }
           });
         } else {

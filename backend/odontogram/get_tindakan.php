@@ -1,6 +1,6 @@
 <?php 
 require_once('../config.php');
-$result = $mysqli->query('SELECT * FROM `action_odontogram`');
+$result = $mysqli->query('SELECT * FROM `odontogram_tindakan`');
 $datas = [];
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {

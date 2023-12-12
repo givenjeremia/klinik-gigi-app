@@ -61,7 +61,7 @@ function getRekamMedisPasien(){
                   $("#tr_" + key).append(`
                   <th>
                   <button onclick="detailRekamMedis(${element.data["id"]})" data-toggle="modal" data-target="#modal-lg" class="btn btn-info"><i class="fa fa-info"></i></button> 
-                  <a href="'../../../../page/odontogram/index.php?data=${element.data["id"]}"  target="_blank" class="btn btn-secondary"><i class="fa fa-tooth"></i></a> 
+                  <a href="'../../../../page/odontogram/data.php?data=${element.data["id"]}"  target="_blank" class="btn btn-secondary"><i class="fa fa-tooth"></i></a> 
                   </th>
                   `);
                   

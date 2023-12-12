@@ -32,13 +32,19 @@ try {
     $result = $mysqli->query($sql);
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            $data = [
-                $row
-            ];
-            array_push($datas, [
-                'status' => 'oke',
-                'data' => $row
-            ]);
+            $sql2= 'SELECT * FROM `rekam_medis` WHERE `reservasi_kllinik_id`='.$row['IdReservasi'];
+            $result2 = $mysqli->query($sql2);
+            $data = [];
+            if ($result2->num_rows > 0) {
+            }
+            else{
+                array_push($datas, [
+                    'status' => 'oke',
+                    'data' => $row
+                ]);
+               
+            }
+            
         }
     } else {
         array_push($datas, [

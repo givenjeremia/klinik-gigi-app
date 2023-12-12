@@ -55,9 +55,9 @@ try {
             $status_kesediaan = 1;
             $status = 0;
             foreach ( $obat as $key => $value ) {
-                $sql_resep = 'INSERT INTO `resep_obat`(`rekam_medis_id`, `data_obat_id`, `jumlah_pemakaian`, `harga`, `keterangan`, `aturan_pakai`,`status_kesediaan`,`status`) VALUES (?,?,?,?,?,?,?,?)';
+                $sql_resep = 'INSERT INTO `resep_obat`(`rekam_medis_id`, `data_obat_id`, `jumlah_pemakaian`, `harga`, `keterangan`, `aturan_pakai`,`status_kesediaan`,`status`,`status_bayar`) VALUES (?,?,?,?,?,?,?,?,?)';
                 $stmt_resep = $mysqli->prepare( $sql_resep );
-                $stmt_resep->bind_param( 'iiidssii', $new_id_rekam_medis, $value[ 'id_obat' ],  $value[ 'jumlah' ], $value[ 'total_harga' ], $value[ 'keterangan' ], $value[ 'aturan_pakai' ],$status_kesediaan,$status);
+                $stmt_resep->bind_param( 'iiidssiii', $new_id_rekam_medis, $value[ 'id_obat' ],  $value[ 'jumlah' ], $value[ 'total_harga' ], $value[ 'keterangan' ], $value[ 'aturan_pakai' ],$status_kesediaan,$status,$status_kesediaan);
                 $stmt_resep->execute();
             }
         }
