@@ -19,7 +19,7 @@ try {
     FROM `reservasi_kllinik` rk INNER JOIN `data_pasien` dp ON rk.data_pasien_id_pasien = dp.id
     INNER JOIN `jadwal_dokter` as jd ON jd.id = rk.jadwal_dokter_id
     INNER JOIN `data_dokter` as dd ON dd.id = jd.data_dokter_id
-    WHERE rk.status = 'approved' AND `tanggal_reservasi` = '$formattedDate' AND jd.data_dokter_id = $id_dokter";
+    WHERE rk.status = 'approved' AND rk.status_kehadiran = 'hadir' AND `tanggal_reservasi` = '$formattedDate' AND jd.data_dokter_id = $id_dokter";
     } else {
         $formattedDate = date('Y-m-d');
         $sql = "SELECT rk.id as IdReservasi, dd.nama as NamaDokter,dd.spesialis_id as spesialis_id, coalesce(s.nama, 'Umum') as spesialis_nama , rk.status_kehadiran as StatusKehadiran, jd.id as IdJadwalDokter , rk.no_antrian as NoAntrian, rk.jam_reservasi AS Jam, rk.tanggal_reservasi as Tanggal, dp.nama as NamaPasien, dp.id As IdPasien, jd.id as IdJadwal

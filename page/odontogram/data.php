@@ -39,6 +39,7 @@
                             <div class="col-2">
                                 <h2>Odontograma</h2>
                             </div>
+                            <?php if($_SESSION['auth']['role'] != 'perawat') : ?>
                             <div class="col-2 text-start">
                                 <label for="exampleInputPassword1" class="form-label">Aksi</label>
                                 <select id="cboAksiGigi" name="aksi_gigi" class="select2bs4" style="width: 100%;"
@@ -48,6 +49,7 @@
                                         <option value="red" key="Brecket">Brecket</option> -->
                                 </select>
                             </div>
+                            <?php endif;?>
                         </div>
                         <div id="odontograma-wrapper" class=" justify-content-center align-content-center text-center">
 
@@ -69,7 +71,9 @@
                                                 <th>Nomor Gigi</th>
                                                 <th>Kondisi</th>
                                                 <th>Tindakan</th>
+                                                <?php if($_SESSION['auth']['role'] != 'perawat') :?>
                                                 <th>Action</th>
+                                                <?php endif;?>
                                             </tr>
                                         </thead>
                                         <tbody id="hasil-riwayat">
@@ -134,8 +138,10 @@
                             $("#tr_" + key).append("<th>" + element.data["nomor_gigi"] + "</th>");
                             $("#tr_" + key).append("<th>" + element.data["Kondisi"] + "</th>");
                             $("#tr_" + key).append("<th>" + element.data["Tindakan"] + "</th>");
-                            var action =`<th> <a href="#" class="btn btn-danger" onClick="deleteData(` + element.data["id"] +`,` + element.data["rekam_medis_id"] + `)"><i class="fa fa-trash"></i></a></th>`;
-                            $("#tr_" + key).append(action);
+                            if('<?= $_SESSION['auth']['role'] ?>' != 'perawat'){
+                                var action =`<th> <a href="#" class="btn btn-danger" onClick="deleteData(` + element.data["id"] +`,` + element.data["rekam_medis_id"] + `)"><i class="fa fa-trash"></i></a></th>`;
+                                $("#tr_" + key).append(action);
+                            }
                             $("#hasil-riwayat").append("</tr>");
                         });
 

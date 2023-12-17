@@ -117,7 +117,7 @@ var hariToIndo = {
   'Saturday': 'Sabtu'
 };
 
-function jadwalDataAllReservasi() {
+function jadwalDataAllReservasi(role) {
   var url = "../../backend/reservasi_klinik/jadwal_dokter.php";
   $.ajax(url, {
       type: "GET",
@@ -135,12 +135,14 @@ function jadwalDataAllReservasi() {
             $("#tr_jadwal" + key).append("<th>" + element["jam"] + "</th>");
             $("#tr_jadwal" + key).append("<th>" + hariToIndo[element["hari"]] + "</th>");
             $("#tr_jadwal" + key).append("<th>" + element["kuota"] + "</th>");
-            var action =
-              `<th>
-                  <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalJadwalReservasi" onClick="createReservasi(` +
-              element["id_jadwal"] +`,'`+ element['jam'] +`')"><i class="fa fa-book"></i></a> 
-              </th>`;
-            $("#tr_jadwal" + key).append(action);
+            if(role != 'perawat'){
+              var action =
+                `<th>
+                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalJadwalReservasi" onClick="createReservasi(` +
+                element["id_jadwal"] +`,'`+ element['jam'] +`')"><i class="fa fa-book"></i></a> 
+                </th>`;
+              $("#tr_jadwal" + key).append(action);
+            }
             $("#hasil").append("</tr>");
           });
           
@@ -148,6 +150,7 @@ function jadwalDataAllReservasi() {
             .DataTable({
               bDestroy: true,
               responsive: true,
+              order: [[3, 'desc']]
             })
         }
       },

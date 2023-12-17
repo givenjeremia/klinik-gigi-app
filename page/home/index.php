@@ -4,7 +4,10 @@ $user = $_SESSION['auth'];
 if ($user['role'] == 'admin' || $user['role'] == 'karyawan') {
 } else if ($user['role'] == 'dokter') {
     header("location:../home/dokter.php");
-} else {
+}else if ($user['role'] == 'perawat') {
+    header("location:../home/perawat.php");
+}
+else {
     header("location:../home/pasien.php");
 }
 ?>

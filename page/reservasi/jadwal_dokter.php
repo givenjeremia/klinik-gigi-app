@@ -26,22 +26,14 @@
                                             <th>Jam</th>
                                             <th>Hari</th>
                                             <th>Kuota Pasien</th>
+                                            <?php if($_SESSION['auth']['role'] !== 'perawat') : ?>
                                             <th>Aksi</th>
+                                            <?php endif;?>
                                         </tr>
                                     </thead>
                                     <tbody id='hasil_jadwal'>
 
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama</th>
-                                            <th>Jam</th>
-                                            <th>Hari</th>
-                                            <th>Kuota Pasien</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -54,8 +46,8 @@
     <?php include '../layouts/script.php' ?>
     <script src='../../js/dokter_jadwal.js'></script>
     <script>
-        jadwalDataAllReservasi()
-        getDataPasien()
+        jadwalDataAllReservasi('<?= $_SESSION['auth']['role'] ?>');
+        // getDataPasien()
     </script>
 
 </body>

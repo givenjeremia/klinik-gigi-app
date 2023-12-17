@@ -147,6 +147,21 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col">
+                                        <div class="form-group row ">
+                                        
+                                            <label for="inputEmail3" class="col-auto col-form-label">Biaya Admin</label>
+                                            <div class="col">
+                                                <input type="text" class="form-control" value="10.000" readonly>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col mx-5">
+                                     
+                                    </div>
+                                </div>    
+                                <div class="row">
+                                    <div class="col">
                                         <div class="form-group row">
                                             <label for="inputEmail3" class="col-auto col-form-label">Metode Pembayaran</label>
                                             <div class="col">

@@ -8,6 +8,9 @@ if($_SESSION['auth']){
     else if($user['role'] == 'dokter') {
         header("location: page/home/dokter.php");
     }
+    else if($user['role'] == 'perawat') {
+        header("location: page/home/perawat.php");
+    }
     else{
         header("location: page/home/pasien.php");
     }

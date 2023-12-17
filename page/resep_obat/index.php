@@ -12,7 +12,7 @@
         <div class="content-wrapper">
             <div class="container-fluid pr-5 pl-5 pt-3">
                 <div class="content">
-                    <?php if($_SESSION['auth']['role'] !== 'pasien') : ?>
+                    <?php if($_SESSION['auth']['role'] !== 'pasien' && $_SESSION['auth']['role'] !== 'perawat') : ?>
                     <a type="button" class="btn btn-primary" href="create.php">
                         Add Resep Obat
                     </a>
