@@ -138,8 +138,7 @@ function jadwalDataAllReservasi(role) {
             if(role != 'perawat'){
               var action =
                 `<th>
-                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalJadwalReservasi" onClick="createReservasi(` +
-                element["id_jadwal"] +`,'`+ element['jam'] +`')"><i class="fa fa-book"></i></a> 
+                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalJadwalReservasi" onClick="createReservasi(${element["id_jadwal"]},'${element['jam']}','${role}')"><i class="fa fa-book "></i></a> 
                 </th>`;
               $("#tr_jadwal" + key).append(action);
             }
@@ -158,31 +157,7 @@ function jadwalDataAllReservasi(role) {
 }
 
 
-function createReservasi(id,jam) {
-  var url = "../../backend/reservasi_klinik/data_by_id.php";
- 
 
-  $.ajax(url, {
-    type: "post",
-    data: {
-      id: id,
-    },
-    dataType: "json",
-    timeout: 500,
-    success: function (data, status, xhr) {
-      if (data[0].status == "success") {
-        $('#jadwal_tambah').val(id);
-        $("#hari_tambah").val(hariToIndo[data[0].data.hari]);
-        $("#no_antrian").val("");
-        $('#jam').val("");
-
-        $('#id_jadwal_dokter_hide').val(id);
-        $('#jam_jadwal_dokter_hide').val(jam);
-      }
-    },
-  });
-
-}
 
 $('#tanggal_tambah').on('change',function(e){
   var value = $(this).val();
@@ -273,4 +248,49 @@ function getDataPasien() {
           }
       }
   });
+}
+
+function createReservasi(id,jam,role) {
+  if(role!= 'pasien'){
+    getDataPasien()
+    // alert(role)
+  //   $.ajax({
+  //     type: "GET",
+  //     url: "../../backend/pasien/data.php",
+  //     dataType: "json",
+  //     success: function(data) {
+  //         $('#pasienReservasi').empty();
+  //         if (data[0].status == 'oke') {
+  //             $('#pasienReservasi').append('<option value="">Pilih Nama Pasien</option>');
+  //             $.each(data, function(i, item) {
+  //                 console.log(item)
+  //                 $('#pasienReservasi').append('<option value="' + item.data["id"] + '">' + item.data["nama"]+'</option>');
+  //             });
+  //         } else {
+  //             $('#pasienReservasi').append('<option value="">Tidak Ada Pasien</option>');
+  //         }
+  //     }
+  // });
+  }
+  var url = "../../backend/reservasi_klinik/data_by_id.php";
+  $.ajax(url, {
+    type: "post",
+    data: {
+      id: id,
+    },
+    dataType: "json",
+    timeout: 500,
+    success: function (data, status, xhr) {
+      if (data[0].status == "success") {
+        $('#jadwal_tambah').val(id);
+        $("#hari_tambah").val(hariToIndo[data[0].data.hari]);
+        $("#no_antrian").val("");
+        $('#jam').val("");
+
+        $('#id_jadwal_dokter_hide').val(id);
+        $('#jam_jadwal_dokter_hide').val(jam);
+      }
+    },
+  });
+
 }

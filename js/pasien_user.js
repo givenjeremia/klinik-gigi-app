@@ -60,11 +60,13 @@ function getAllData() {
           $("#tr_" + key).append("<th>" +convertDate(element["Tanggal"]) + "</th>");
           $("#tr_" + key).append("<th>" + element["Jam"] + "</th>");
           $("#tr_" + key).append("<th>" + element["Status"] + "</th>");
-          var action =
-            `<th>  
-                  <a href="../rekam_medis/create.php?reservasi=${element['IdReservasi']}&dokter=${element['IdJadwalDokter']}" class="btn btn-primary"><i class="fa fa-plus"></i></a> 
-              </th>`;
-          $("#tr_" + key).append(action);
+          $("#tr_" + key).append("<th>" + element["Kehadiran"] + "</th>");
+
+          // var action =
+          //   `<th>  
+          //         <a href="../rekam_medis/create.php?reservasi=${element['IdReservasi']}&dokter=${element['IdJadwalDokter']}" class="btn btn-primary"><i class="fa fa-plus"></i></a> 
+          //     </th>`;
+          // $("#tr_" + key).append(action);
           $("#hasil-reservasi").append("</tr>");
         });
 
