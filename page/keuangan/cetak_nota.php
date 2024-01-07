@@ -214,6 +214,11 @@ $result_tindakan = $stmt_tindakan->get_result();
                 <?php $counter = $counter + 1; ?>
                 <?php endwhile; ?>
                 <tr>
+                    <th colspan='3'>BIAYA ADMIN</th>
+                    <td>Rp. <?= number_format(10000) ?></td>
+                    <td colspan='2'></td>
+                </tr>
+                <tr>
                     <th colspan='3'> TOTAL</th>
                     <td>Rp. <?= number_format($data_nota['total_pembayaran']) ?></td>
                     <td colspan='2'></td>
