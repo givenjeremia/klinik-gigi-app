@@ -157,7 +157,14 @@
                                         </div>
                                     </div>
                                     <div class="col mx-5">
-                                     
+                                        <div class=" d-none form-group row" id="biaya-pendafaran">
+                                            
+                                            <label for="inputEmail3" class="col-auto col-form-label">Biaya Pendaftaran</label>
+                                            <div class="col">
+                                                <input type="text" id="biaya-pendaftaran-value" class="form-control" value="10.000" readonly>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>    
                                 <div class="row">
@@ -268,7 +275,7 @@
     </script>
     <!-- Get Obat Funtion -->
     <script>
-         function getObat(id){
+        function getObat(id){
             $("#hasil-daftar-obat").html();
             var url = "../../backend/keuangan/get_obat_by_rm_id.php?rekam_medis="+id;
             $.ajax(url, {
@@ -327,6 +334,30 @@
         getObat(rekam_medis_id)   
         getAlat(rekam_medis_id)   
     </script>
+    <!-- Get Biaya Pendaftaran Awal -->
+    <script>
+        var biayaPendaftaran = 0
+        function geBiayaPendaftaran(id){
+            var url = "../../backend/keuangan/get_count_nota.php?rekam_medis="+id;
+            $.ajax(url, {
+                dataType: "json",
+                timeout: 500,
+                success: function (data, status, xhr) {
+                    // success callback function
+                    if (data[0].status === "success") {
+                        if(data[0].data == 0){
+                            alert(data[0].data)
+                            biayaPendaftaran = 10000
+                            $("#biaya-pendafaran").removeClass('d-none');
+                            $("#biaya-pendafaran-value").val('10.000');
+
+                        }
+                    }
+                },
+            });
+        }
+        geBiayaPendaftaran(rekam_medis_id)
+    </script>
     <!-- Harga -->
     <script>
         function setTotalTarif(data){
@@ -336,7 +367,7 @@
         var total_tarif = $('#total_tarif').val();
         var bytes  = CryptoJS.AES.decrypt(total_tarif.toString(), 'Klinik-GIGI-APPS');
         var total_tarif  = bytes.toString(CryptoJS.enc.Utf8);
-        var total_tarif = parseInt(total_tarif) + 10000
+        var total_tarif = parseInt(total_tarif) + 10000 + parseInt(biayaPendaftaran)
         setTotalTarif(total_tarif)
         // console.log("Total Tarif Awal : " +total_tarif)
         function setHarga(data){
