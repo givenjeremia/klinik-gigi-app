@@ -144,7 +144,7 @@ function detailRekamMedis(id) {
             "<th>" + element.data["catatan"] + "</th>"
           );
           $("#tr_daftar-tindakan_" + key).append(
-            "<th>Rp. " + formatRupiah(element.data["harga"]) + "</th>"
+            "<th>Rp. " + formatRupiah(parseInt(element.data["harga"]) * parseInt(element.data["jumlah"])) + "</th>"
           );
           $("#hasil-daftar-tindakan").append("</tr>");
         });

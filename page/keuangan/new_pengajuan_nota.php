@@ -218,7 +218,7 @@
                         $("#tr_daftar-tindakan_" + key).append("<th>" + element.data["nama"] + "</th>");
                         $("#tr_daftar-tindakan_" + key).append("<th>" + element.data["jumlah"] + "</th>");
                         $("#tr_daftar-tindakan_" + key).append("<th>" + element.data["catatan"] + "</th>");
-                        $("#tr_daftar-tindakan_" + key).append("<th>Rp. " +formatRupiah(element.data["harga"]) + "</th>");
+                        $("#tr_daftar-tindakan_" + key).append("<th>Rp. " +formatRupiah(parseInt(element.data["harga"]) * parseInt( element.data["jumlah"])) + "</th>");
                         $("#hasil-daftar-tindakan").append("</tr>");
                     });
                     
@@ -334,30 +334,7 @@
         getObat(rekam_medis_id)   
         getAlat(rekam_medis_id)   
     </script>
-    <!-- Get Biaya Pendaftaran Awal -->
-    <script>
-        var biayaPendaftaran = 0
-        function geBiayaPendaftaran(id){
-            var url = "../../backend/keuangan/get_count_nota.php?rekam_medis="+id;
-            $.ajax(url, {
-                dataType: "json",
-                timeout: 500,
-                success: function (data, status, xhr) {
-                    // success callback function
-                    if (data[0].status === "success") {
-                        if(data[0].data == 0){
-                            alert(data[0].data)
-                            biayaPendaftaran = 10000
-                            $("#biaya-pendafaran").removeClass('d-none');
-                            $("#biaya-pendafaran-value").val('10.000');
-
-                        }
-                    }
-                },
-            });
-        }
-        geBiayaPendaftaran(rekam_medis_id)
-    </script>
+   
     <!-- Harga -->
     <script>
         function setTotalTarif(data){
@@ -367,7 +344,7 @@
         var total_tarif = $('#total_tarif').val();
         var bytes  = CryptoJS.AES.decrypt(total_tarif.toString(), 'Klinik-GIGI-APPS');
         var total_tarif  = bytes.toString(CryptoJS.enc.Utf8);
-        var total_tarif = parseInt(total_tarif) + 10000 + parseInt(biayaPendaftaran)
+        var total_tarif = parseInt(total_tarif) + 10000
         setTotalTarif(total_tarif)
         // console.log("Total Tarif Awal : " +total_tarif)
         function setHarga(data){
@@ -385,6 +362,33 @@
             setTotalTarif(total)
         }
         
+    </script>
+     <!-- Get Biaya Pendaftaran Awal -->
+     <script>
+        let biayaPendaftaran = 0
+        function getBiayaPendaftaran(id){
+            var url = "../../backend/keuangan/get_count_nota.php?rekam_medis="+id;
+            $.ajax(url, {
+                dataType: "json",
+                timeout: 500,
+                success: function (data, status, xhr) {
+                    // success callback function
+                    if (data[0].status === "success") {
+                        if(data[0].data == 0){
+                            biayaPendaftaran = parseInt(total_tarif)+ 10000
+                            $("#biaya-pendafaran").removeClass('d-none');
+                            $("#biaya-pendafaran-value").val('10.000');
+                        }
+                        else{
+                            biayaPendaftaran = parseInt(total_tarif) + 0
+                        }
+                        setTotalTarif(biayaPendaftaran)
+                    }
+                },
+            });
+        }
+        getBiayaPendaftaran(rekam_medis_id)
+
     </script>
     <!-- Submit -->
     <script>
