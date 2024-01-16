@@ -6,7 +6,7 @@ try {
     // Set Now Date
     $day_now = date("l");
     $spesialis = isset($_GET['spesialis']) ? $_GET['spesialis'] : null ;
-    $sql = "SELECT * FROM `layanan` WHERE `spesialis_id` is null";
+    $sql = "SELECT * FROM `layanan` WHERE `spesialis_id` IS NULL OR `spesialis_id` = 0;";
     if($spesialis){
         $sql = "SELECT * FROM `layanan` WHERE `spesialis_id`='$spesialis'";
     }
