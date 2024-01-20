@@ -10,7 +10,7 @@ try {
     if ($user_check > 0) {
         $newUserId = $mysqli->insert_id;
         $stmt = $mysqli->prepare("INSERT INTO `data_pasien`(`nama`, `usia`, `tempat_tanggal_lahir`, `alamat`, `no_telp`, `tanggal_daftar`, `jenis_kelamin`,`user_id`) VALUES (?,?,?,?,?,?,?,?)");
-        $stmt->bind_param('ssssissi',$_POST['nama'],$_POST['usia'],$_POST['tempat_tanggal_lahir'],$_POST['alamat'],$_POST['no_telp'],$_POST['tanggal_daftar'],$_POST['jenis_kelamin'],$newUserId);
+        $stmt->bind_param('sssssssi',$_POST['nama'],$_POST['usia'],$_POST['tempat_tanggal_lahir'],$_POST['alamat'],$_POST['no_telp'],$_POST['tanggal_daftar'],$_POST['jenis_kelamin'],$newUserId);
         $stmt->execute();
         $jumlah_yang_dieksekusi = $stmt->affected_rows;
         if($jumlah_yang_dieksekusi > 0){

@@ -74,6 +74,7 @@ function getData() {
               form_data.delete(key);
             }
             getData();
+            window.location.reload();
           });
         } else {
           Swal.fire({
@@ -141,6 +142,7 @@ function getData() {
             }
             $("#example1").DataTable().destroy();
             getData();
+            window.location.reload();
           })
         
         } else {

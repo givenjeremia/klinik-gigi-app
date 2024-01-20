@@ -70,6 +70,7 @@ $("#submit_add").on("click", function (e) {
             form_data.delete(key);
           }
           getData();
+          window.location.reload();
         });
       } else {
         Swal.fire({
@@ -133,6 +134,8 @@ $("#submit_edit").on("click", function (e) {
           }
           $("#example1").DataTable().destroy();
           getData();
+          window.location.reload();
+
         })
       
       } else {
