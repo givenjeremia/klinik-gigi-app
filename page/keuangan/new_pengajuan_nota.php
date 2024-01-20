@@ -346,6 +346,7 @@
         var total_tarif  = bytes.toString(CryptoJS.enc.Utf8);
         var total_tarif = parseInt(total_tarif) + 10000
         setTotalTarif(total_tarif)
+        alert(total_tarif)
         // console.log("Total Tarif Awal : " +total_tarif)
         function setHarga(data){
             var total = 0
