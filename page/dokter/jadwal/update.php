@@ -15,7 +15,17 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Hari</label>
-                        <input type="text" class="form-control" id="hariEdit" name="hari" required>
+                        <select name="hari" id="hariEdit" class="form-control w-100" required>
+                            <option value="">Pilih Hari</option>
+                            <option value="Monday">Senin</option>
+                            <option value="Tuesday">Selasa</option>
+                            <option value="Wednesday">Rabu</option>
+                            <option value="Thursday">Kamis</option>
+                            <option value="Friday">Jum'at</option>
+                            <option value="Saturday">Sabtu</option>
+                            <option value="Sunday">Minggu</option>
+                        </select>
+                        <!-- <input type="text" class="form-control" id="hariEdit" name="hari" required> -->
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Kuota Pasien</label>

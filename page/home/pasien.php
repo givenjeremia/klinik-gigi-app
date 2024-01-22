@@ -172,6 +172,7 @@
                             $("#hasil_jadwal").append("<tr class='data_jadwal' id='tr_jadwal_" + key + "'>");
                             $("#tr_jadwal_" + key).append("<td scope='row'>" + (key + 1) + "</td>");
                             $("#tr_jadwal_" + key).append("<td>" + element.nama_dokter + "</td>");
+                            $("#tr_jadwal_" + key).append("<td>" + element.spesialis_nama + "</td>");
                             $("#tr_jadwal_" + key).append("<td>" + element.jam + "</td>");
                             $("#tr_jadwal_" + key).append("<td>" + hariToIndo[element.hari] + "</td>");
                             $("#tr_jadwal_" + key).append("<td>" + element.kuota + "</td>");

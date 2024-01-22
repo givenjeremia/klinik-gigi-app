@@ -101,7 +101,7 @@ function updateJadwalData(id) {
         $("#jamEdit").val(data[0].data.jam);
         $("#hariEdit").val(data[0].data.hari);
         $("#kuotaPasienEdit").val(data[0].data.kuota_pasien);
-        $("#submit_edit").attr("key", data[0].data.id);
+        $("#submit_edit_jadwal").attr("key", data[0].data.id);
       }
     },
   });
@@ -294,3 +294,44 @@ function createReservasi(id,jam,role) {
   });
 
 }
+
+$("#submit_edit_jadwal").on("click", function (e) {
+  var id = $(this).attr("key");
+  e.preventDefault();
+  var form = document.querySelector("#FormTambahEditJadwalDokter");
+  var form_data = new FormData(form);
+  form_data.append('id', id);
+  var url = "../../backend/dokter/jadwal/update.php";
+  $.ajax({
+    type: "POST",
+    url: url,
+    data: form_data,
+    dataType: "json",
+    contentType: false,
+    processData: false,
+    success: function (data, status, xhr) {
+      if (data.status == "success") {
+        Swal.fire({
+          title: "Success",
+          text: "Jadwal Dokter Berhasil Diubah",
+          icon: "success",
+          showConfirmButton: true,
+        }).then(result => {
+          $("#close_edit_jadwal").click();
+          $("#tableJadwalDokter").DataTable().destroy();
+          jadwalData($('#data-dokter').val())
+
+        })
+      
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "Jadwal Dokter Gagal Di Ubah",
+          icon: "error",
+          showConfirmButton: true,
+        });
+      }
+      jadwalData($('#data-dokter').val())
+    },
+  });
+});
