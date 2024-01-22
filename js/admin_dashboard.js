@@ -81,6 +81,7 @@ function getReservasi() {
           );
           $("#tr_pasien" + key).append("<th scope='row'>" + (key + 1) + "</th>");
           $("#tr_pasien" + key).append("<th>" + element.data["NoAntrian"] + "</th>");
+          $("#tr_pasien" + key).append("<th>" + element.data["NamaDokter"] + "</th>");
           $("#tr_pasien" + key).append("<th>" + element.data["NamaPasien"] + "</th>");
           $("#tr_pasien" + key).append("<th>" + element.data["Jam"] + "</th>");
           var action = ''

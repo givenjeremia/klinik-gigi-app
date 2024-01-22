@@ -43,6 +43,7 @@ else {
                                             <tr>
                                                 <th>No</th>
                                                 <th>No Antrian</th>
+                                                <th>Dokter</th>
                                                 <th>Nama Pasien</th>
                                                 <th>Jam Reservasi</th>
                                                 <th>Aksi</th>
@@ -55,6 +56,7 @@ else {
                                             <tr>
                                                 <th>No</th>
                                                 <th>No Antrian</th>
+                                                <th>Dokter</th>
                                                 <th>Nama Pasien</th>
                                                 <th>Jam Reservasi</th>
                                                 <th>Aksi</th>
@@ -127,7 +129,7 @@ else {
     </div>
     <?php include '../layouts/script.php' ?>
     <?php include '../layouts/format_tanggal.php' ?>
-    <script src="../../js/admin_dashboard.js"></script>
+<script src="../../js/admin_dashboard.js"></script>
 </body>
 
 </html>

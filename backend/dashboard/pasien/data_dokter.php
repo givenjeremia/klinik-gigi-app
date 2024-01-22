@@ -10,7 +10,7 @@ $day_now = date( 'l' );
 // $data_pasien = $result_pasien->fetch_assoc();
 // $id_pasien = $data_pasien[ 'id' ];
 
-$sql = "SELECT dd.id as id_dokter, dd.nama as nama_dokter,coalesce(s.nama, 'Umum') as spesialis_nama, jd.id as id_jadwal , jd.jam as jam, jd.hari as hari, jd.kuota_pasien as kuota FROM `data_dokter` dd INNER JOIN `jadwal_dokter` jd ON dd.id = jd.data_dokter_id LEFT JOIN `spesialis` s ON s.id = dd.spesialis_id WHERE jd.hari = '$day_now'";
+$sql = "SELECT dd.id as id_dokter, dd.nama as nama_dokter,coalesce(s.nama, 'Umum') as spesialis_nama, jd.id as id_jadwal , jd.jam as jam, jd.hari as hari, jd.kuota_pasien as kuota FROM `data_dokter` dd INNER JOIN `jadwal_dokter` jd ON dd.id = jd.data_dokter_id LEFT JOIN `spesialis` s ON s.id = dd.spesialis_id WHERE jd.kuota_pasien > 0 AND jd.hari = '$day_now' ";
 $result = $mysqli->query( $sql );
 $datas = [];
 if ( $result->num_rows > 0 ) {

@@ -17,8 +17,17 @@ try {
     $jadwal = $_POST['jadwal'];
     $hari = $_POST['hari'];
     $tanggal = $_POST['tanggal'];
+    // Cek Jadwal Kuota
+    $sql_jadwal = 'SELECT * FROM `jadwal_dokter` WHERE `id`=?';
+    $stmt_jadwal = $mysqli->prepare($sql_jadwal);
+    $stmt_jadwal->bind_param('i',$jadwal);
+    $stmt_jadwal->execute();
+    $result_jadwal = $stmt_jadwal->get_result();
+    $data_jadwal = $result_jadwal->fetch_assoc();
+    $kuota_pasien = $data_jadwal['kuota_pasien'];
+    // Hari By tanggal
     $hari_by_tanggal = $day_now = date("l",strtotime($tanggal));
-    if ($hari_list[$hari_by_tanggal] == $hari) {
+    if ($hari_list[$hari_by_tanggal] == $hari  && $kuota_pasien > 0) {
         // Get Data Pasien By Auth 
         $id_pasien = 0;
         if($_SESSION['auth']['role'] == 'pasien'){
@@ -75,7 +84,7 @@ try {
         $stmt->close();
     }
     else{
-        echo json_encode(['status' => 'failed','msg' => 'Harap Masukan Tanggal Sesuai Hari']);
+        echo json_encode(['status' => 'failed','msg' => 'Harap Masukan Tanggal Sesuai Hari / Kuota Pasien Sudah Habis']);
     }
 
 
