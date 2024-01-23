@@ -346,7 +346,6 @@
         var total_tarif  = bytes.toString(CryptoJS.enc.Utf8);
         var total_tarif = parseInt(total_tarif) + 10000
         setTotalTarif(total_tarif)
-        alert(total_tarif)
         // console.log("Total Tarif Awal : " +total_tarif)
         function setHarga(data){
             var total = 0
@@ -360,7 +359,27 @@
             total_tarif= total
             // console.log("Total tarif Ubah : " + total)
             // console.log("Total Tarif Fix :" +total_tarif)
-            setTotalTarif(total)
+            var url = "../../backend/keuangan/get_count_nota.php?rekam_medis="+rekam_medis_id;
+            $.ajax(url, {
+                dataType: "json",
+                timeout: 500,
+                success: function (data, status, xhr) {
+                    // success callback function
+                    if (data[0].status === "success") {
+                        if(data[0].data == 0){
+                            biayaPendaftaran = parseInt(total_tarif)+ 10000
+                            $("#biaya-pendafaran").removeClass('d-none');
+                            $("#biaya-pendafaran-value").val('10.000');
+                        }
+                        else{
+                            biayaPendaftaran = parseInt(total_tarif) + 0
+                        }
+
+                        setTotalTarif(biayaPendaftaran)
+                    }
+                },
+            });
+            // setTotalTarif(total)
         }
         
     </script>
@@ -383,6 +402,7 @@
                         else{
                             biayaPendaftaran = parseInt(total_tarif) + 0
                         }
+
                         setTotalTarif(biayaPendaftaran)
                     }
                 },
