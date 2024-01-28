@@ -51,6 +51,60 @@
     <?php include_once('create.php') ?>
     <?php include_once('update.php') ?>
     <?php include '../layouts/script.php' ?>
+    <!-- Get Data -->
+    <script>
+        function getData() {
+        // Dikosongkan 
+            $("#hasil").html();
+            // Url BE
+            var url = "../../backend/spesialis/data.php";
+            // Jquery Ajax
+            $.ajax(
+            url, {
+            dataType: "json", 
+            timeout: 500,
+            success: function (data, status) {
+                console.log(status);
+                if (data[0].status === "oke") {
+                $(".data").remove();
+                // Lopping
+                data.forEach((element, key) => {
+                    $("#hasil").append("<tr class='data' id='tr_" + key + "'>");
+                    $("#tr_" + key).append("<th scope='row'>" + (key + 1) + "</th>");
+                    $("#tr_" + key).append("<th>" + element.data["nama"] + "</th>");
+                    var action =
+                    `<th>  
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit" onClick="updateData(` +
+                    element.data["id"] +
+                    `)"><i class="fa fa-pen"></i></a> 
+                        <a href="#" class="btn btn-danger" onClick="deleteData(` +
+                    element.data["id"] +
+                    `)"><i class="fa fa-trash"></i></a>
+                    </th>`;
+                    $("#tr_" + key).append(action);
+                    $("#hasil").append("</tr>");
+                });
+                // Datatable
+                $("#example1")
+                    .DataTable({
+                    bDestroy: true,
+                    responsive: true,
+                    buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+                    })
+                    .buttons()
+                    .container()
+                    .appendTo("#example1_wrapper .col-md-6:eq(0)");
+                }
+            },
+            });
+        }
+        getData();
+  
+    </script>
+    <!-- Insert Data -->
+    <script>
+        
+    </script>
     <script src="../../js/spesialis.js"></script>
 </body>
 
