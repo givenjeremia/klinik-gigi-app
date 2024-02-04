@@ -59,6 +59,18 @@ try {
                 $stmt_resep = $mysqli->prepare( $sql_resep );
                 $stmt_resep->bind_param( 'iiidssiii', $new_id_rekam_medis, $value[ 'id_obat' ],  $value[ 'jumlah' ], $value[ 'total_harga' ], $value[ 'keterangan' ], $value[ 'aturan_pakai' ],$status_kesediaan,$status,$status_kesediaan);
                 $stmt_resep->execute();
+
+                // Cek  Stok Obat Jika null 
+                $stmt_obat = $mysqli->prepare('SELECT * FROM `data_obat` WHERE `id`=?');
+                $stmt_obat->bind_param('i',$value[ 'id_obat' ]);
+                $stmt_obat->execute();
+                $result_obat = $stmt_obat->get_result()->fetch_assoc();
+                // Update Stok
+                $stok_now = $result_obat['stok'];
+                $stok_sisa = $stok_now - $value[ 'jumlah' ];
+                $stmt_obat = $mysqli->prepare('UPDATE `data_obat` SET `stok`=? WHERE `id`=?');
+                $stmt_obat->bind_param('si',$stok_sisa,$value[ 'id_obat' ]);
+                $stmt_obat->execute();
             }
         }
         // Add Nota

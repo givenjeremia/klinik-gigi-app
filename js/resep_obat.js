@@ -67,7 +67,7 @@ function getData() {
         if (data[0].status === "oke") {
           data.forEach((element, key) => {
             $("#cboObat").append(
-              `<option value="${element.data["id"]}" harga="${element.data["harga"]}" namaObat="${element.data["nama"]}">${element.data["nama"]}</option>`
+              `<option value="${element.data["id"]}" harga="${element.data["harga"]}" namaObat="${element.data["nama"]}" stokObat="${element.data["stok"]}">${element.data["nama"]}</option>`
             );
           });
         }
@@ -90,27 +90,36 @@ $("#btn-tambah-obat").on("click", function(e){
     e.preventDefault()
     var obat_id = $('#cboObat').val()
     if(obat_id != ""){
-      var status_kesediaan = $('#status_kesediaan').is(":checked") ?  1 : 0;
-      var status_kesediaan_text = status_kesediaan == 0 ?  'Tidak Ada' : 'Ada';
-      var nama_obat = $('#cboObat option:selected').attr("namaObat")
-      var harga_obat = $('#cboObat option:selected').attr("harga")
-      var keterangan_obat = $('#keterangan_obat').val()
-      var aturan_pakai = $('#aturan_pakai').val()
-      var jumlah = $('#jumlah').val()
-      var total_harga = parseInt(jumlah) * parseInt(harga_obat)
-      $('#tableObatBody').append(`<tr id="tr_obat_${obat_id}">`)
-      $('#tableObatBody').append(`<td>${nama_obat} <input type="hidden" name="obat[${countObat}][id_obat]" value="${obat_id}"> </td>`)
-      $('#tableObatBody').append(`<td>${jumlah} <input type="hidden" name="obat[${countObat}][jumlah]" value="${jumlah}"> </td>`)
-      $('#tableObatBody').append(`<td>Rp. ${formatRupiah(total_harga)} <input type="hidden" name="obat[${countObat}][total_harga]" value="${total_harga}"></td>`)
-      $('#tableObatBody').append(`<td>${keterangan_obat} <input type="hidden" name="obat[${countObat}][keterangan]" value="${keterangan_obat}"> </td>`)
-      $('#tableObatBody').append(`<td>${aturan_pakai} <input type="hidden" name="obat[${countObat}][aturan_pakai]" value="${aturan_pakai}"> </td>`)
-      $('#tableObatBody').append(`<td>${status_kesediaan_text} <input type="hidden" name="obat[${countObat}][status_kesediaan]" value="${status_kesediaan}"> </td>`)
-      // $('#tableObatBody').append(`<td><button></td>`)
-      $('#tableObatBody').append("</tr>")
-      countObat++;
-      // Tambah harga
-      total_biaya = parseInt(total_biaya) + parseInt(total_harga)
-      setTotalHarga(total_biaya)
+      if( $('#cboObat option:selected').attr("stokObat")  != 0){
+        var status_kesediaan = $('#status_kesediaan').is(":checked") ?  1 : 0;
+        var status_kesediaan_text = status_kesediaan == 0 ?  'Tidak Ada' : 'Ada';
+        var nama_obat = $('#cboObat option:selected').attr("namaObat")
+        var harga_obat = $('#cboObat option:selected').attr("harga")
+        var keterangan_obat = $('#keterangan_obat').val()
+        var aturan_pakai = $('#aturan_pakai').val()
+        var jumlah = $('#jumlah').val()
+        var total_harga = parseInt(jumlah) * parseInt(harga_obat)
+        $('#tableObatBody').append(`<tr id="tr_obat_${obat_id}">`)
+        $('#tableObatBody').append(`<td>${nama_obat} <input type="hidden" name="obat[${countObat}][id_obat]" value="${obat_id}"> </td>`)
+        $('#tableObatBody').append(`<td>${jumlah} <input type="hidden" name="obat[${countObat}][jumlah]" value="${jumlah}"> </td>`)
+        $('#tableObatBody').append(`<td>Rp. ${formatRupiah(total_harga)} <input type="hidden" name="obat[${countObat}][total_harga]" value="${total_harga}"></td>`)
+        $('#tableObatBody').append(`<td>${keterangan_obat} <input type="hidden" name="obat[${countObat}][keterangan]" value="${keterangan_obat}"> </td>`)
+        $('#tableObatBody').append(`<td>${aturan_pakai} <input type="hidden" name="obat[${countObat}][aturan_pakai]" value="${aturan_pakai}"> </td>`)
+        $('#tableObatBody').append(`<td>${status_kesediaan_text} <input type="hidden" name="obat[${countObat}][status_kesediaan]" value="${status_kesediaan}"> </td>`)
+        // $('#tableObatBody').append(`<td><button></td>`)
+        $('#tableObatBody').append("</tr>")
+        countObat++;
+        // Tambah harga
+        total_biaya = parseInt(total_biaya) + parseInt(total_harga)
+        setTotalHarga(total_biaya)
+      }else{
+        Swal.fire({
+          title: "Error",
+          text: 'Stok Obat Habis',
+          icon: "error",
+          showConfirmButton: true,
+        });
+      }
     }
     else{
       Swal.fire({

@@ -58,6 +58,7 @@
                                         <div class="form-group">
                                             <label class="d-blok">Usia</label>
                                             <h4 id="usia_label">Usia</h4>
+                                            <input type="hidden" id="usia_value">
                              
                                         </div>
                                     </div>
@@ -224,6 +225,7 @@
                         data.forEach((element, key) => {
                             $('#nama_label').html(element.data["NamaPasien"])
                             $('#usia_label').html(element.data["UsiaPasien"])
+                            $('#usia_value').val(element.data["UsiaPasien"])
                             $('#alamat_label').html(element.data["alamatPasien"])
                             $('#tanggal_lahir_label').html(element.data["ttlPasien"])
                             $('#jenis_kelamin_label').html(element.data["jenisKelaminPasien"])

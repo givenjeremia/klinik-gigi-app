@@ -1,4 +1,32 @@
 function getOdontogram(rekam_medis_data) {
+    var balita = [
+        {
+            id: "18",
+            path: {
+                s: "M 21.1343,34.8341 V 85.8577 H 72.1579 V 34.8341 Z",
+                c: "M 32.3595,46.0593 V 74.6325 H 60.9327 V 46.0593 Z",
+                l: "M 21.1343,74.6325 V 85.8577 L 32.3595,74.6325 V 46.0593 L 21.1343,34.8341 v 11.2252 z",
+                r: "M 72.1579,74.6325 V 85.8577 L 60.9327,74.6325 V 46.0593 L 72.1579,34.8341 v 11.2252 z",
+                b: "M 60.9327,85.8577 H 72.1579 L 60.9327,74.6325 H 32.3595 L 21.1343,85.8577 h 11.2252 z",
+                t: "M 60.9327,34.8341 H 72.1579 L 60.9327,46.0593 H 32.3595 L 21.1343,34.8341 h 11.2252 z",
+            },
+            cap: { x: "29.1712", y: "105.2181" },
+            top: { x: "46.101799", y: "30.7647" },
+        },
+        {
+            id: "48",
+            path: {
+                s: "m 21.1343,374.9916 v 51.0236 h 51.0236 v -51.0236 z",
+                c: "M 32.3595,386.2168 V 414.79 h 28.5732 v -28.5732 z",
+                l: "m 21.1343,414.79 v 11.2252 L 32.3595,414.79 V 386.2168 L 21.1343,374.9916 v 11.2252 z",
+                r: "m 72.1579,414.79 v 11.2252 L 60.9327,414.79 v -28.5732 l 11.2252,-11.2252 v 11.2252 z",
+                b: "M 60.9327,426.0152 H 72.1579 L 60.9327,414.79 H 32.3595 l -11.2252,11.2252 h 11.2252 z",
+                t: "M 60.9327,374.9916 H 72.1579 L 60.9327,386.2168 H 32.3595 L 21.1343,374.9916 h 11.2252 z",
+            },
+            cap: { x: "26.579201", y: "445.37561" },
+            top: { x: "46.101799", y: "370.92221" },
+        },
+    ]
     var odontogram = function (opt) {
         "use strict";
         const _AUTO_NONE_ = 50,
@@ -54,55 +82,55 @@ function getOdontogram(rekam_medis_data) {
             _STS_NONVITAL_ = 5,
             //--------------
             tmp = `
-    <g class="{id}-grp">
-    <path data="{ids}" class="tdg {id}-base" d="{ps}" />
-    <path data="{ids}" class="tdg {id}-center" d="{pc}" />
-    <path data="{ids}" class="tdg {id}-left" d="{pl}" />
-    <path data="{ids}" class="tdg {id}-right" d="{pr}" />
-    <path data="{ids}" class="tdg {id}-bottom" d="{pb}" />
-    <path data="{ids}" class="tdg {id}-top" d="{pt}" />
-    <path data="{ids}" class="{id}-status" d="{ps}" fill="none"/>
-    <text y="{cy}" x="{cx}"><tspan class="tdg-cap">{ids}</tspan></text>
-    <text y="{ty}" x="{tx}"><tspan class="tdg-ext {id}-ext"></tspan></text>
-    </g>
-    `,
+                    <g class="{id}-grp">
+                    <path data="{ids}" class="tdg {id}-base" d="{ps}" />
+                    <path data="{ids}" class="tdg {id}-center" d="{pc}" />
+                    <path data="{ids}" class="tdg {id}-left" d="{pl}" />
+                    <path data="{ids}" class="tdg {id}-right" d="{pr}" />
+                    <path data="{ids}" class="tdg {id}-bottom" d="{pb}" />
+                    <path data="{ids}" class="tdg {id}-top" d="{pt}" />
+                    <path data="{ids}" class="{id}-status" d="{ps}" fill="none"/>
+                    <text y="{cy}" x="{cx}"><tspan class="tdg-cap">{ids}</tspan></text>
+                    <text y="{ty}" x="{tx}"><tspan class="tdg-ext {id}-ext"></tspan></text>
+                    </g>
+                    `,
             tmpdefs = `
-    <defs>
-    <style type="text/css">
-    .tdg-svg{zoom:{zoom}%;-moz-transform: scale({scale});-moz-transform-origin: 0 0;}
-    .tdg{fill:white;stroke:black;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none}
-    .tdg-cap{font-size:18px;font-family:Arial;font-weight: bold}
-    .tdg-ext{font-size:18px;font-family:Arial;font-weight: normal}
-    .tdg-sign{stroke:grey;stroke-width:6}
-    .tdg-img{fill:url(cancel.png)}
-    .tdg-cmd{margin:0 10px 10px; font-size:16px;font-family:Arial;font-weight: normal;}
-    .tdg-none{fill:white}
-    .tdg-caries{fill:rgba(0,0,0,0.5)}
-    .tdg-tblogam{fill:rgba(255,0,255,0.6)}
-    .tdg-tbnon{fill:rgba(0,128,255,0.6)}
-    .tdg-mklogam{fill:rgba(255,0,0,0.6)}
-    .tdg-mknon{fill:rgba(0,240,240,0.8)}
-    </style>
-    <pattern id="img-hilang" width="50" height="50">
-     <path style="fill:grey;fill-opacity:0.8" d="m 0,0 0,51.0236 51.0236,0 L 51.0236,0 0,0 Z" />
-     <path style="fill:red;fill-rule:evenodd" d="M 0,0 51.0236,51.0236" />
-     <path style="fill:red;fill-rule:evenodd" d="m 0.747,4.3544 c -0.996,-0.996 -0.996,-2.6114 0,-3.6074 0.996,-0.996 2.6114,-0.996 3.6074,0 L 25.5118,21.9044 46.6692,0.747 c 0.996,-0.996 2.6114,-0.996 3.6074,0 0.996,0.996 0.996,2.6114 0,3.6074 L 29.1193,25.5118 50.2766,46.6692 c 0.996,0.996 0.996,2.6114 0,3.6074 -0.996,0.996 -2.6114,0.996 -3.6074,0 L 25.5118,29.1193 4.3544,50.2766 c -0.996,0.996 -2.6114,0.996 -3.6074,0 -0.996,-0.996 -0.996,-2.6114 0,-3.6074 L 21.9044,25.5118 0.747,4.3544 Z" />
-     <path style="fill:red;fill-rule:evenodd" d="M 51.0236,0 0,51.0236" />
-    </pattern>
-    <pattern id="img-akar" width="50" height="50">
-     <path style="fill:white;fill-opacity:0.8" d="M 0,0 V 51.0236 H 51.0236 V 0 Z" />
-     <path style="fill:#1b1918;fill-rule:evenodd" d="M 22.4352,42.6772 14.4993,29.659 2.6374,40.315 l 2.29,1.1023 5.5638,-4.9866 8.9167,14.5929 h 2.6186 L 48.3698,2.467 h 0.0165 V 0 H 45.588 Z" />
-    </pattern>
-    <pattern id="img-jembatan" width="50" height="50">
-     <path style="fill:white;fill-opacity:0.8;fill-rule:evenodd" d="M 0,0 V 51.0236 H 51.0236 V 0 Z" />
-     <path style="fill:brown;fill-rule:evenodd" d="M 0,20.0597 V 30.964 H 51.0236 V 20.0597 Z" />
-    </pattern>
-    <pattern id="img-tiruan" width="50" height="50">
-     <path style="fill:white;fill-opacity:0.8;fill-rule:evenodd" d="M 0,0 V 51.0236 H 51.0236 V 0 Z" />
-     <path style="fill:yellow;fill-rule:evenodd" d="M 0,20.0597 V 30.964 H 51.0236 V 20.0597 Z" />
-    </pattern>
-    </defs>
-    `,
+                <defs>
+                <style type="text/css">
+                .tdg-svg{zoom:{zoom}%;-moz-transform: scale({scale});-moz-transform-origin: 0 0;}
+                .tdg{fill:white;stroke:black;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none}
+                .tdg-cap{font-size:18px;font-family:Arial;font-weight: bold}
+                .tdg-ext{font-size:18px;font-family:Arial;font-weight: normal}
+                .tdg-sign{stroke:grey;stroke-width:6}
+                .tdg-img{fill:url(cancel.png)}
+                .tdg-cmd{margin:0 10px 10px; font-size:16px;font-family:Arial;font-weight: normal;}
+                .tdg-none{fill:white}
+                .tdg-caries{fill:rgba(0,0,0,0.5)}
+                .tdg-tblogam{fill:rgba(255,0,255,0.6)}
+                .tdg-tbnon{fill:rgba(0,128,255,0.6)}
+                .tdg-mklogam{fill:rgba(255,0,0,0.6)}
+                .tdg-mknon{fill:rgba(0,240,240,0.8)}
+                </style>
+                <pattern id="img-hilang" width="50" height="50">
+                <path style="fill:grey;fill-opacity:0.8" d="m 0,0 0,51.0236 51.0236,0 L 51.0236,0 0,0 Z" />
+                <path style="fill:red;fill-rule:evenodd" d="M 0,0 51.0236,51.0236" />
+                <path style="fill:red;fill-rule:evenodd" d="m 0.747,4.3544 c -0.996,-0.996 -0.996,-2.6114 0,-3.6074 0.996,-0.996 2.6114,-0.996 3.6074,0 L 25.5118,21.9044 46.6692,0.747 c 0.996,-0.996 2.6114,-0.996 3.6074,0 0.996,0.996 0.996,2.6114 0,3.6074 L 29.1193,25.5118 50.2766,46.6692 c 0.996,0.996 0.996,2.6114 0,3.6074 -0.996,0.996 -2.6114,0.996 -3.6074,0 L 25.5118,29.1193 4.3544,50.2766 c -0.996,0.996 -2.6114,0.996 -3.6074,0 -0.996,-0.996 -0.996,-2.6114 0,-3.6074 L 21.9044,25.5118 0.747,4.3544 Z" />
+                <path style="fill:red;fill-rule:evenodd" d="M 51.0236,0 0,51.0236" />
+                </pattern>
+                <pattern id="img-akar" width="50" height="50">
+                <path style="fill:white;fill-opacity:0.8" d="M 0,0 V 51.0236 H 51.0236 V 0 Z" />
+                <path style="fill:#1b1918;fill-rule:evenodd" d="M 22.4352,42.6772 14.4993,29.659 2.6374,40.315 l 2.29,1.1023 5.5638,-4.9866 8.9167,14.5929 h 2.6186 L 48.3698,2.467 h 0.0165 V 0 H 45.588 Z" />
+                </pattern>
+                <pattern id="img-jembatan" width="50" height="50">
+                <path style="fill:white;fill-opacity:0.8;fill-rule:evenodd" d="M 0,0 V 51.0236 H 51.0236 V 0 Z" />
+                <path style="fill:brown;fill-rule:evenodd" d="M 0,20.0597 V 30.964 H 51.0236 V 20.0597 Z" />
+                </pattern>
+                <pattern id="img-tiruan" width="50" height="50">
+                <path style="fill:white;fill-opacity:0.8;fill-rule:evenodd" d="M 0,0 V 51.0236 H 51.0236 V 0 Z" />
+                <path style="fill:yellow;fill-rule:evenodd" d="M 0,20.0597 V 30.964 H 51.0236 V 20.0597 Z" />
+                </pattern>
+                </defs>
+                `,
             odt = [
                 {
                     id: "18",
@@ -805,6 +833,8 @@ function getOdontogram(rekam_medis_data) {
         };
         _pv.clear = () => {
             data = [];
+            
+     
             odt.map((v) => {
                 data.push({
                     id: parseInt(v.id),
@@ -860,19 +890,13 @@ function getOdontogram(rekam_medis_data) {
             else t.attr("class", a + " tdg-sign");
         };
         _pv.refresh = () => {
-            // console.log("fresh data")
-            // console.log(data)
-            // console.log("loaddata")
-            // data.push({
-            //     id: 18,
-            //     sts: 2,
-            //     fill: { top: 0, bottom: 0, left: 0, right: 0, center: 0 },
-            //     ext: 0,
-            //   });
-            // console.log(data)
             var data_api = []
             console.log("Rekam Medis Data",rekam_medis_data)
             var url = "../../backend/odontogram/new_get_data_by_id.php?rekam_medis=" + rekam_medis_data
+            
+            
+           
+
             $.ajax(url, {
                 dataType: "json",
                 timeout: 500,
@@ -1002,6 +1026,9 @@ function getOdontogram(rekam_medis_data) {
                 '" class="tdg-svg" version="1.1">';
             svg += tmpdefs.replace(/{zoom}/g, zoom).replace(/{scale}/g, scale);
             svg += "<g>";
+            
+            // Cek odt
+
             odt.map((v) => {
                 svg += tmp
                     .replace(/{id}/g, pub.pid + "-" + pub.obj + "-" + v.id)
