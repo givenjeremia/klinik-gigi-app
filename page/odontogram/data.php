@@ -35,6 +35,56 @@
                         <?php endif;?>
                     </div>
                     <div id="odontograma-content" class="d-none">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label class="d-blok">Nama</label>
+                                            <h4 id="nama_label">Nama</h4>
+                             
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label class="d-blok">Alamat</label>
+                                            <h4 id="alamat_label">Alamat</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label class="d-blok">Usia</label>
+                                            <h4 id="usia_label">Usia</h4>
+                             
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label class="d-blok">Tanggal Lahir</label>
+                                            <h4 id="tanggal_lahir_label">Tanggal Lahir</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label class="d-blok">Telepon</label>
+                                            <h4 id="telepon_label">Telepon</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label class="d-blok">Jenis Kelamin</label>
+                                            <h4 id="jenis_kelamin_label">Jenis Kelamin</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row justify-content-center align-content-center mb-3">
                             <div class="col-2">
                                 <h2>Odontograma</h2>
@@ -161,6 +211,39 @@
         }
 
     </script>
+    <!-- getProfile -->
+    <script>
+        function getProfil(data) {
+            var url = "../../backend/odontogram/profil.php?id=" + data;
+            $.ajax(url, {
+                dataType: "json",
+                timeout: 500,
+                success: function (data, status, xhr) {
+                    console.log(data[0].status)
+                    if (data[0].status === "oke") {
+                        data.forEach((element, key) => {
+                            $('#nama_label').html(element.data["NamaPasien"])
+                            $('#usia_label').html(element.data["UsiaPasien"])
+                            $('#alamat_label').html(element.data["alamatPasien"])
+                            $('#tanggal_lahir_label').html(element.data["ttlPasien"])
+                            $('#jenis_kelamin_label').html(element.data["jenisKelaminPasien"])
+                            $('#telepon_label').html(element.data["telpPasien"])
+
+
+
+
+
+                        });
+
+                    }
+                    else{
+                        console.log("gagal riwayat")
+                    }
+                },
+            });
+        }
+
+    </script>
     <script>
         function deleteData(id,rekam_medis){
             var form_data = new FormData();
@@ -214,6 +297,8 @@
                         `<option value="${element.data['id']}" key2="${element.data['IdPasien']}">${element.data['id']} - ${element.data['NamaPasien']} - ${convertDate(element.data['tanggal_pemeriksaan'])}</option>`
                         );
                     });
+                    // Add Input
+
                 }
             },
             });
@@ -223,6 +308,7 @@
             var value = $(this).val();
             if (value !== ''){
                 getData(value)
+                getProfil(value)
                 getOdontogram(value)
                 $('#odontograma-content').removeClass('d-none')
             }
