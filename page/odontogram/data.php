@@ -230,11 +230,6 @@
                             $('#tanggal_lahir_label').html(element.data["ttlPasien"])
                             $('#jenis_kelamin_label').html(element.data["jenisKelaminPasien"])
                             $('#telepon_label').html(element.data["telpPasien"])
-
-
-
-
-
                         });
 
                     }
@@ -296,7 +291,7 @@
                 if (data[0].status == "oke") {
                     data.forEach((element, key) => {
                         $("#cboRekamMedis").append(
-                        `<option value="${element.data['id']}" key2="${element.data['IdPasien']}">${element.data['id']} - ${element.data['NamaPasien']} - ${convertDate(element.data['tanggal_pemeriksaan'])}</option>`
+                        `<option value="${element.data['id']}" usiaPasien="${element.data['UsiaPasien']}" key2="${element.data['IdPasien']}">${element.data['id']} - ${element.data['NamaPasien']} - ${convertDate(element.data['tanggal_pemeriksaan'])}</option>`
                         );
                     });
                     // Add Input
@@ -309,8 +304,8 @@
         $('#cboRekamMedis').on('change', function(){
             var value = $(this).val();
             if (value !== ''){
-                getData(value)
                 getProfil(value)
+                getData(value)
                 getOdontogram(value)
                 $('#odontograma-content').removeClass('d-none')
             }
