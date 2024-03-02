@@ -289,7 +289,7 @@
                     data.forEach((element, key) => {
                         $("#hasil-daftar-obat").append("<tr class='data-daftar-obat' id='tr_daftar-obat_" + key + "'>");
                         var cb = ` <div class='form-check'>
-                        <input name="bayarObat[${key+1}]" onchange="setHarga(this)" stok="${element.data["stokObat"]}" harga="${element.data["harga"]}" value="${element.data["data_obat_id"]}" type='checkbox' class='form-check-input' ${element.data["status_bayar"] == 1 ? 'checked' : ''} ${element.data["status_bayar"] == 1 ? 'disabled' : ''}>
+                        <input name="bayarObat[${key+1}]" onchange="setHarga(this)" qty="${element.data["jumlah_pemakaian"]}" stok="${element.data["stokObat"]}" harga="${element.data["harga"]}" value="${element.data["data_obat_id"]}" type='checkbox' class='form-check-input' ${element.data["status_bayar"] == 1 ? 'checked' : ''} ${element.data["status_bayar"] == 1 ? 'disabled' : ''}>
                         </div>`
                         $("#tr_daftar-obat_" + key).append("<th>"+ cb +" </th>");
                         $("#tr_daftar-obat_" + key).append("<th>" + (key + 1) + "</th>");
@@ -351,7 +351,9 @@
             var total = 0
             var harga = $(data).attr('harga');
             var stok = $(data).attr('stok');
-            if (stok > 0) {
+            var qty = $(data).attr('qty');
+            var total  = parseInt(stok) - parseInt(qty);
+            if (total > 0) {
                 if($(data).is(":checked")){
                     total = parseInt(total_tarif) + parseInt(harga)
                 }
