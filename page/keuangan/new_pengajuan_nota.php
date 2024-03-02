@@ -289,7 +289,7 @@
                     data.forEach((element, key) => {
                         $("#hasil-daftar-obat").append("<tr class='data-daftar-obat' id='tr_daftar-obat_" + key + "'>");
                         var cb = ` <div class='form-check'>
-                        <input name="bayarObat[${key+1}]" onchange="setHarga(this)" harga="${element.data["harga"]}" value="${element.data["data_obat_id"]}" type='checkbox' class='form-check-input' ${element.data["status_bayar"] == 1 ? 'checked' : ''} ${element.data["status_bayar"] == 1 ? 'disabled' : ''}>
+                        <input name="bayarObat[${key+1}]" onchange="setHarga(this)" stok="${element.data["stokObat"]}" harga="${element.data["harga"]}" value="${element.data["data_obat_id"]}" type='checkbox' class='form-check-input' ${element.data["status_bayar"] == 1 ? 'checked' : ''} ${element.data["status_bayar"] == 1 ? 'disabled' : ''}>
                         </div>`
                         $("#tr_daftar-obat_" + key).append("<th>"+ cb +" </th>");
                         $("#tr_daftar-obat_" + key).append("<th>" + (key + 1) + "</th>");
@@ -350,35 +350,46 @@
         function setHarga(data){
             var total = 0
             var harga = $(data).attr('harga');
-            if($(data).is(":checked")){
-                total = parseInt(total_tarif) + parseInt(harga)
-            }
-            else{
-                total = parseInt(total_tarif) - parseInt(harga)
-            }
-            total_tarif= total
-            // console.log("Total tarif Ubah : " + total)
-            // console.log("Total Tarif Fix :" +total_tarif)
-            var url = "../../backend/keuangan/get_count_nota.php?rekam_medis="+rekam_medis_id;
-            $.ajax(url, {
-                dataType: "json",
-                timeout: 500,
-                success: function (data, status, xhr) {
-                    // success callback function
-                    if (data[0].status === "success") {
-                        if(data[0].data == 0){
-                            biayaPendaftaran = parseInt(total_tarif)+ 10000
-                            $("#biaya-pendafaran").removeClass('d-none');
-                            $("#biaya-pendafaran-value").val('10.000');
+            var stok = $(data).attr('stok');
+            if (stok > 0) {
+                if($(data).is(":checked")){
+                    total = parseInt(total_tarif) + parseInt(harga)
+                }
+                else{
+                    total = parseInt(total_tarif) - parseInt(harga)
+                }
+                total_tarif= total
+                // console.log("Total tarif Ubah : " + total)
+                // console.log("Total Tarif Fix :" +total_tarif)
+                var url = "../../backend/keuangan/get_count_nota.php?rekam_medis="+rekam_medis_id;
+                $.ajax(url, {
+                    dataType: "json",
+                    timeout: 500,
+                    success: function (data, status, xhr) {
+                        // success callback function
+                        if (data[0].status === "success") {
+                            if(data[0].data == 0){
+                                biayaPendaftaran = parseInt(total_tarif)+ 10000
+                                $("#biaya-pendafaran").removeClass('d-none');
+                                $("#biaya-pendafaran-value").val('10.000');
+                            }
+                            else{
+                                biayaPendaftaran = parseInt(total_tarif) + 0
+                            }
+    
+                            setTotalTarif(biayaPendaftaran)
                         }
-                        else{
-                            biayaPendaftaran = parseInt(total_tarif) + 0
-                        }
-
-                        setTotalTarif(biayaPendaftaran)
-                    }
-                },
-            });
+                    },
+                });
+            } else {
+                $(data).prop( "checked", false );
+                Swal.fire({
+                    title: "Error",
+                    text: "Stok Obat Kurang Dari 0",
+                    icon: "error",
+                    showConfirmButton: true,
+                });
+            }
             // setTotalTarif(total)
         }
         

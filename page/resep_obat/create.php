@@ -71,7 +71,7 @@
                                                     <th>Harga</th>
                                                     <th>Keterangan</th>
                                                     <th>Aturan Pakai</th>
-                                                    <th>Status Kesediaan</th>
+                                                    <!-- <th>Status Kesediaan</th> -->
                                                     <!-- <th>Aksi</th> -->
                                                 </tr>
                                             </thead>

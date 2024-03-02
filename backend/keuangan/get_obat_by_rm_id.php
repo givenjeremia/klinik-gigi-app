@@ -4,7 +4,7 @@ require_once('../config.php');
 $datas = [];
 try {
     $rekam_medis = $_GET['rekam_medis'];
-    $sql = "SELECT o.nama as NamaObat,ro.* FROM `resep_obat` ro INNER JOIN `data_obat` o ON o.id = ro.data_obat_id 
+    $sql = "SELECT o.nama as NamaObat, o.stok as stokObat,ro.* FROM `resep_obat` ro INNER JOIN `data_obat` o ON o.id = ro.data_obat_id 
             WHERE ro.status_kesediaan =1 AND ro.rekam_medis_id = ".$rekam_medis;
     $result = $mysqli->query($sql);
     if ($result->num_rows > 0) {
