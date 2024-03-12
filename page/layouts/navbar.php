@@ -29,6 +29,7 @@
             <li><a href="../obat/index.php" class="dropdown-item">Obat</a></li>
             <li><a href="../spesialis/index.php" class="dropdown-item">Spesialis</a></li>
             <li><a href="../layanan/index.php" class="dropdown-item">Layanan</a></li>
+            <li><a href="../keluhan/index.php" class="dropdown-item">Keluhan</a></li>
           </ul>
         </li>
 

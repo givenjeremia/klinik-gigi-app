@@ -192,63 +192,101 @@
         });
 
         function createReservasi(id,jam) {
-  var url = "../../backend/reservasi_klinik/data_by_id.php";
- 
+             var url = "../../backend/reservasi_klinik/data_by_id.php";
+            $.ajax(url, {
+                type: "post",
+                data: {
+                id: id,
+                },
+                dataType: "json",
+                timeout: 500,
+                success: function (data, status, xhr) {
+                if (data[0].status == "success") {
+                    $('#jadwal_tambah').val(id);
+                    $("#hari_tambah").val(hariToIndo[data[0].data.hari]);
+                    $("#no_antrian").val("");
+                    $('#jam').val("");
 
-  $.ajax(url, {
-    type: "post",
-    data: {
-      id: id,
-    },
-    dataType: "json",
-    timeout: 500,
-    success: function (data, status, xhr) {
-      if (data[0].status == "success") {
-        $('#jadwal_tambah').val(id);
-        $("#hari_tambah").val(hariToIndo[data[0].data.hari]);
-        $("#no_antrian").val("");
-        $('#jam').val("");
+                    $('#id_jadwal_dokter_hide').val(id);
+                    $('#jam_jadwal_dokter_hide').val(jam);
+                    // Get Keluhan 
+                    var url_keluhan = "../../backend/keluhan/data.php";
+                    $.ajax(url_keluhan, {
+                        type: "get",
+                        dataType: "json",
+                        timeout: 500,
+                        success: function (data, status, xhr) {
+    
+                            $('#keluhanCreate').html("");
+                            if (data[0].status == "oke") {
+                                data.forEach((element, key) => {
+                                    var html = `
+                                    <div class="form-check">
+                                        <input class="form-check-input" onClick="perkiraanWaktu(this)" waktu="${element.data['waktu']}" type="checkbox" name="keluhan[]" value="${element.data['id']}" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            ${element.data['nama']} - (${element.data['waktu']} Menit)
+                                        </label>
+                                    </div>`
+                                    $('#keluhanCreate').append(html);
 
-        $('#id_jadwal_dokter_hide').val(id);
-        $('#jam_jadwal_dokter_hide').val(jam);
-      }
-    },
-  });
 
-}
+                                   
+                                });
+                            }
+                        },
+                    });
+                }
+                },
+            });
 
-$('#tanggal_tambah').on('change',function(e){
-  var value = $(this).val();
-  var id = $('#id_jadwal_dokter_hide').val();
-  var jam = $('#jam_jadwal_dokter_hide').val();
-  var url_antrian = "../../backend/reservasi_klinik/get_nomor_antrian.php";
-  $.ajax(url_antrian, {
-    type: "post",
-    data: {
-      id_jadwal_dokter: id,
-      tanggal_reservasi: value
-    },
-    dataType: "json",
-    timeout: 500,
-    success: function (data, status, xhr) {
-      console.log(data.no_antrian);
-      if (data.status == "success") {
-     
-        const originalTime = new Date(`${data.tanggal}T${jam}`);
-        console.log(originalTime)
-        var menit_tambah = 0;
-        if(data.no_antrian != 1){
-          menit_tambah = (parseInt(data.no_antrian) - 1)  * 30
-          originalTime.setMinutes(originalTime.getMinutes() + menit_tambah);
         }
-        const newTime = originalTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' , hour12: false });
-        // console.log(newTime);
-        $("#no_antrian").val(data.no_antrian);
-        $('#jam').val(newTime);
-      }
-    },
-  });
-})
+
+        var waktu = 0
+        function perkiraanWaktu(element){
+            var checked = $(element).is(':checked');
+            var value = $(element).attr('waktu');
+            if(checked){
+                waktu = parseInt(waktu) + parseInt(value)
+            }
+            else{
+                waktu = parseInt(waktu) - parseInt(value)
+            }
+            $('#perkiraan_waktu_create').html(waktu);
+        }
+
+        $('#tanggal_tambah').on('change',function(e){
+        var value = $(this).val();
+        var id = $('#id_jadwal_dokter_hide').val();
+        var jam = $('#jam_jadwal_dokter_hide').val();
+        var url_antrian = "../../backend/reservasi_klinik/get_nomor_antrian.php";
+        $.ajax(url_antrian, {
+            type: "post",
+            data: {
+            id_jadwal_dokter: id,
+            tanggal_reservasi: value
+            },
+            dataType: "json",
+            timeout: 500,
+            success: function (data, status, xhr) {
+            console.log(data.no_antrian);
+            if (data.status == "success") {
+            
+                const originalTime = new Date(`${data.tanggal}T${jam}`);
+                console.log(originalTime)
+                var menit_tambah = 0;
+                if(data.no_antrian != 1){
+                menit_tambah = (parseInt(data.no_antrian) - 1)  * 30
+                originalTime.setMinutes(originalTime.getMinutes() + menit_tambah);
+                }
+                const newTime = originalTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' , hour12: false });
+                // console.log(newTime);
+                $("#no_antrian").val(data.no_antrian);
+                $('#jam').val(newTime);
+            }
+            },
+        });
+        })
+        
         $('#submit_add_reservasi').on('click', function() {
             var form = document.querySelector("#FormCreateReservasi");
             var form_data = new FormData(form);

@@ -47,7 +47,7 @@
     <script src='../../js/dokter_jadwal.js'></script>
     <script>
         jadwalDataAllReservasi('<?= $_SESSION['auth']['role'] ?>');
-        // getDataPasien()
+                                                
     </script>
 
 </body>

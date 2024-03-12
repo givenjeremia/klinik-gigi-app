@@ -37,6 +37,15 @@
                         <label for="exampleInputPassword1" class="form-label">Jam (Dapat Berubah Ketika Disimpan)</label>
                         <input type="text" class="form-control" id="jam"  required readonly>
                     </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Keluhan</label>
+                        <div id="keluhanCreate">
+                            
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Perkiraan Waktu : <span id="perkiraan_waktu_create">0</span> Menit</label>
+                    </div>
                     <input type="hidden" id="id_jadwal_dokter_hide">
                     <input type="hidden" id="jam_jadwal_dokter_hide">
 

@@ -51,6 +51,10 @@ try {
         $data_cek = $result_cek->fetch_assoc();
         $pernah = $data_cek['Pernah'];
         if($pernah != 1){
+            if(!isset($_POST['keluhan'])){
+                echo json_encode(['status' => 'failed','msg' => 'Harap Pilih Keluhan']);
+                die();
+            }
             // Get No Antrian
             $now_date_with_time = date('Y-m-d H:i:s');
             $now_date= date('Y-m-d');
@@ -85,6 +89,14 @@ try {
             $stmt->execute();
             $jumlah_yang_dieksekusi = $stmt->affected_rows;
             if ($jumlah_yang_dieksekusi > 0) {
+                // get id
+                $id_reservasi = $stmt->insert_id;
+                $keluhan = $_POST['keluhan'];
+                foreach ($keluhan as $key => $value) {
+                    $stmt = $mysqli->prepare("INSERT INTO `keluhan_reservasi`(`keluhan_id`, `reservasi_id`) VALUES (?,?)");
+                    $stmt->bind_param('ii', $value,$id_reservasi);
+                    $stmt->execute();
+                }
                 echo json_encode(['status' => 'success','msg'=>'Berhasil Tambah Reservasi']);
             } else {
                 echo json_encode(['status' => 'failed','msg' => 'Gagal Tambah Reservasi']);

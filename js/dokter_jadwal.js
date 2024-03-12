@@ -289,10 +289,50 @@ function createReservasi(id,jam,role) {
 
         $('#id_jadwal_dokter_hide').val(id);
         $('#jam_jadwal_dokter_hide').val(jam);
+         // Get Keluhan 
+         var url_keluhan = "../../backend/keluhan/data.php";
+         $.ajax(url_keluhan, {
+             type: "get",
+             dataType: "json",
+             timeout: 500,
+             success: function (data, status, xhr) {
+
+                 $('#keluhanCreate').html("");
+                 if (data[0].status == "oke") {
+                     data.forEach((element, key) => {
+                         var html = `
+                         <div class="form-check">
+                             <input class="form-check-input" onClick="perkiraanWaktu(this)" waktu="${element.data['waktu']}" type="checkbox" name="keluhan[]" value="${element.data['id']}" id="flexCheckDefault">
+                             <label class="form-check-label" for="flexCheckDefault">
+                                 ${element.data['nama']} - (${element.data['waktu']} Menit)
+                             </label>
+                         </div>`
+                         $('#keluhanCreate').append(html);
+
+
+                        
+                     });
+                 }
+             },
+         });
       }
     },
   });
 
+}
+
+
+var waktu = 0
+function perkiraanWaktu(element){
+    var checked = $(element).is(':checked');
+    var value = $(element).attr('waktu');
+    if(checked){
+        waktu = parseInt(waktu) + parseInt(value)
+    }
+    else{
+        waktu = parseInt(waktu) - parseInt(value)
+    }
+    $('#perkiraan_waktu_create').html(waktu);
 }
 
 $("#submit_edit_jadwal").on("click", function (e) {

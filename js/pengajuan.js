@@ -9,10 +9,12 @@ function getDataPengajuan() {
             if (data[0].status === "oke") {
                 $(".data").remove();
                 data[0].data.forEach((element, key) => {
+                    var keluhan = element["Keluhan"] ? element["Keluhan"] : '-'
                     $("#hasil-pengajuan-reservasi").append("<tr class='data' id='tr_" + key + "'>");
                     $("#tr_" + key).append("<th scope='row'>" + (key + 1) + "</th>");
                     $("#tr_" + key).append("<th>" + element["NamaDokter"] + "</th>");
                     $("#tr_" + key).append("<th>" + element["NamaPasien"] + "</th>");
+                    $("#tr_" + key).append("<th>" +  keluhan + "</th>");
                     $("#tr_" + key).append("<th>" + convertDate(element["Tanggal"]) + "</th>");
                     $("#tr_" + key).append("<th>" + element["Jam"] + "</th>");
                     // $("#tr_" + key).append("<th>" + element["Status"] + "</th>");
