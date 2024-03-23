@@ -59,6 +59,7 @@
                                             <label class="d-blok">Usia</label>
                                             <h4 id="usia_label">Usia</h4>
                                             <input type="hidden" id="usia_value">
+
                              
                                         </div>
                                     </div>
@@ -122,6 +123,7 @@
                                                 <th>Nomor Gigi</th>
                                                 <th>Kondisi</th>
                                                 <th>Tindakan</th>
+                                                <th>Keterangan</th>
                                                 <?php if($_SESSION['auth']['role'] != 'perawat') :?>
                                                 <th>Action</th>
                                                 <?php endif;?>
@@ -189,6 +191,8 @@
                             $("#tr_" + key).append("<th>" + element.data["nomor_gigi"] + "</th>");
                             $("#tr_" + key).append("<th>" + element.data["Kondisi"] + "</th>");
                             $("#tr_" + key).append("<th>" + element.data["Tindakan"] + "</th>");
+                            $("#tr_" + key).append("<th>" + element.data["Keterangan"] + "</th>");
+
                             if('<?= $_SESSION['auth']['role'] ?>' != 'perawat'){
                                 var action =`<th> <a href="#" class="btn btn-danger" onClick="deleteData(` + element.data["id"] +`,` + element.data["rekam_medis_id"] + `)"><i class="fa fa-trash"></i></a></th>`;
                                 $("#tr_" + key).append(action);
@@ -214,27 +218,34 @@
     </script>
     <!-- getProfile -->
     <script>
+       
         function getProfil(data) {
             var url = "../../backend/odontogram/profil.php?id=" + data;
             $.ajax(url, {
                 dataType: "json",
                 timeout: 500,
                 success: function (data, status, xhr) {
-                    console.log(data[0].status)
+               
+                    var usia = 0;
                     if (data[0].status === "oke") {
                         data.forEach((element, key) => {
                             $('#nama_label').html(element.data["NamaPasien"])
                             $('#usia_label').html(element.data["UsiaPasien"])
                             $('#usia_value').val(element.data["UsiaPasien"])
+                            usia = element.data["UsiaPasien"]
                             $('#alamat_label').html(element.data["alamatPasien"])
                             $('#tanggal_lahir_label').html(element.data["ttlPasien"])
                             $('#jenis_kelamin_label').html(element.data["jenisKelaminPasien"])
                             $('#telepon_label').html(element.data["telpPasien"])
+                            // console.log(usia)
                         });
+                        console.log(usia)
+                        return usia
 
                     }
                     else{
                         console.log("gagal riwayat")
+                        return 0
                     }
                 },
             });
@@ -262,7 +273,7 @@
                         showConfirmButton: true,
                     }).then((result) => {
                         getData(rekam_medis)
-                        getOdontogram(rekam_medis)
+                        getOdontogram(rekam_medis,0)
                     });
                     } else {
                     Swal.fire({
@@ -306,7 +317,7 @@
             if (value !== ''){
                 getProfil(value)
                 getData(value)
-                getOdontogram(value)
+                getOdontogram(value,0)
                 $('#odontograma-content').removeClass('d-none')
             }
             else{
@@ -317,8 +328,40 @@
     <?php else:?>
         <script>
             if($('#data_rekam_medis').val() !== ""){
+                console.log('masuk')
                 getData($('#data_rekam_medis').val())
-                getOdontogram($('#data_rekam_medis').val())
+                var url = "../../backend/odontogram/profil.php?id=" + $('#data_rekam_medis').val();
+                $.ajax(url, {
+                    dataType: "json",
+                    timeout: 500,
+                    success: function (data, status, xhr) {
+                
+                        var usia = 0;
+                        if (data[0].status === "oke") {
+                            data.forEach((element, key) => {
+                                $('#nama_label').html(element.data["NamaPasien"])
+                                $('#usia_label').html(element.data["UsiaPasien"])
+                                $('#usia_value').val(element.data["UsiaPasien"])
+                                usia = element.data["UsiaPasien"]
+                                $('#alamat_label').html(element.data["alamatPasien"])
+                                $('#tanggal_lahir_label').html(element.data["ttlPasien"])
+                                $('#jenis_kelamin_label').html(element.data["jenisKelaminPasien"])
+                                $('#telepon_label').html(element.data["telpPasien"])
+                                getOdontogram($('#data_rekam_medis').val(),usia)
+                                // console.log(usia)
+                            });
+                            console.log(usia)
+             
+
+                        }
+                        else{
+                            console.log("gagal riwayat")
+
+                        }
+                    },
+                });
+                
+                console.log('===aa')
                 $('#odontograma-content').removeClass('d-none')
             }
         </script>

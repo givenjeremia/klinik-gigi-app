@@ -2,8 +2,8 @@
 require_once('../config.php');
 try {
     $tanggal = date('Y-m-d');
-    $stmt = $mysqli->prepare("INSERT INTO `new_odontogram`(`nomor_gigi`, `posisi`, `tanggal`, `rekam_medis_id`, `kondisi_odontogram_id`, `tindakan_odontogram_id`) VALUES (?,?,?,?,?,?)");
-    $stmt->bind_param('sssiii', $_POST['nomor_gigi'], $_POST['posisi'], $tanggal, $_POST['rekam_medis_id'],$_POST['kondisi_odontogram_id'],$_POST['tindakan_odontogram_id']);
+    $stmt = $mysqli->prepare("INSERT INTO `new_odontogram`(`nomor_gigi`, `posisi`, `tanggal`, `rekam_medis_id`, `kondisi_odontogram_id`, `tindakan_odontogram_id`,`keterangan`) VALUES (?,?,?,?,?,?,?)");
+    $stmt->bind_param('sssiiis', $_POST['nomor_gigi'], $_POST['posisi'], $tanggal, $_POST['rekam_medis_id'],$_POST['kondisi_odontogram_id'],$_POST['tindakan_odontogram_id'],$_POST['keterangan']);
     $stmt->execute();
     $check = $stmt->affected_rows;
     if ($check > 0) {

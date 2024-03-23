@@ -1,7 +1,8 @@
 <?php 
 require_once('../config.php');
 $id = $_GET['id'];
-$result = $mysqli->query('SELECT dp.nama as NamaPasien,o.*, ko.nama as Kondisi, coalesce(ot.nama, "Tidak Ada") as Tindakan FROM `new_odontogram` o 
+$result = $mysqli->query('SELECT dp.nama as NamaPasien,o.*, ko.nama as Kondisi, coalesce(ot.nama, "Tidak Ada") as Tindakan, o.keterangan as Keterangan 
+FROM `new_odontogram` o 
 INNER JOIN `kondisi_odontogram` ko ON ko.id = o.kondisi_odontogram_id
 LEFT JOIN `odontogram_tindakan` ot ON ot.id = o.tindakan_odontogram_id
 INNER JOIN `rekam_medis` rm ON rm.id = o.rekam_medis_id

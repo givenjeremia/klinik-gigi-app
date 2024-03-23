@@ -1,4 +1,4 @@
-function getOdontogram(rekam_medis_data) {
+function getOdontogram(rekam_medis_data,usia_send) {
 
     var odontogram = function (opt) {
         "use strict";
@@ -999,7 +999,10 @@ function getOdontogram(rekam_medis_data) {
                 '" class="tdg-svg" version="1.1">';
             svg += tmpdefs.replace(/{zoom}/g, zoom).replace(/{scale}/g, scale);
             svg += "<g>";
-            var usia  =  $('#cboRekamMedis option:selected').attr("usiaPasien");
+            var usia  =  usia_send == 0 ?  $('#cboRekamMedis option:selected').attr("usiaPasien") : usia_send;
+            console.log("=== od")
+            console.log(usia_send)
+            console.log( usia)
             // Cek odt
             var balita  = [
                 18, 17, 16, 15, 55, 54, 53, 52, 51, 61, 62, 63, 64, 65,
@@ -1080,37 +1083,56 @@ function getOdontogram(rekam_medis_data) {
                             if (result.isConfirmed) {
                                 const tindakan_value = result.value;
                                 form_data.append('tindakan_odontogram_id', tindakan_value)
-                                $.ajax({
-                                    type: "POST",
-                                    url: url,
-                                    data: form_data,
-                                    dataType: "json",
-                                    contentType: false,
-                                    processData: false,
-                                    success: function (data) {
-                                        if (data.status == "success") {
-                                            Swal.fire({
-                                                title: "Success",
-                                                text: "Odontogram Berhasil Ditambahkan",
-                                                icon: "success",
-                                                showConfirmButton: true,
-                                            }).then((result) => {
-                                                // getData();
-                                                // me.attr("class", "disabled")
-                                                // getData(rekam_medis)
-                                                _pv.refresh();
-                                                getData(rekam_medis_data)
-                                            });
-                                        } else {
-                                            Swal.fire({
-                                                title: "Error",
-                                                text: "Odontogram Gagal Di Tambahkan",
-                                                icon: "error",
-                                                showConfirmButton: true,
-                                            });
-                                        }
+                                // Add Swall Ketetrangan
+                                Swal.fire({
+                                    title: "Tuliskan Keterangan",
+                                    input: "text",
+                                    inputAttributes: {
+                                      autocapitalize: "off"
                                     },
-                                });
+                                    showCancelButton: true,
+                                    confirmButtonText: "Kirim",
+                                    showLoaderOnConfirm: true,
+
+                                  }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        var Keterangan = result.value
+                                        form_data.append('keterangan',Keterangan)
+                                      console.log(result)
+                                      $.ajax({
+                                        type: "POST",
+                                        url: url,
+                                        data: form_data,
+                                        dataType: "json",
+                                        contentType: false,
+                                        processData: false,
+                                        success: function (data) {
+                                            if (data.status == "success") {
+                                                Swal.fire({
+                                                    title: "Success",
+                                                    text: "Odontogram Berhasil Ditambahkan",
+                                                    icon: "success",
+                                                    showConfirmButton: true,
+                                                }).then((result) => {
+                                                    // getData();
+                                                    // me.attr("class", "disabled")
+                                                    // getData(rekam_medis)
+                                                    _pv.refresh();
+                                                    getData(rekam_medis_data)
+                                                });
+                                            } else {
+                                                Swal.fire({
+                                                    title: "Error",
+                                                    text: "Odontogram Gagal Di Tambahkan",
+                                                    icon: "error",
+                                                    showConfirmButton: true,
+                                                });
+                                            }
+                                        },
+                                        });
+                                    }
+                                  });
+                             
                             } 
                         });
         
