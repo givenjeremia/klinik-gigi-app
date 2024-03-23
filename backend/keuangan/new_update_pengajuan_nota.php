@@ -15,6 +15,7 @@ try {
     $result_karyawan = $stmt_karyawan->get_result();
     $data_karyawan = $result_karyawan->fetch_assoc();
     $id_karyawan = $data_karyawan['id'];
+  
    
     if($status == 'approved'){
         $rekam_medis_id = $_POST['rekam_medis_id'];
@@ -27,6 +28,8 @@ try {
         $stmt->bind_param('ddssisi',$total_pembayaran,$sub_pembayaran,$jenis_pembayaran,$tanggal,$id_karyawan,$status,$id);
         $stmt->execute();
         $eksekusi = $stmt->affected_rows;
+
+       
         
         if ($eksekusi > 0) {
             if(isset($_POST['bayarObat'])){
@@ -63,6 +66,10 @@ try {
                     }
                     //
                 }
+                $mysqli->commit();
+                echo json_encode(['status' => 'success']);
+            }
+            else{
                 $mysqli->commit();
                 echo json_encode(['status' => 'success']);
             }
