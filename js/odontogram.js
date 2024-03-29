@@ -7,7 +7,7 @@ function getData(data) {
     var url = "../../backend/odontogram/get_data_by_id.php?id=" + data;
     $.ajax(url, {
       dataType: "json",
-      timeout: 500, 
+      timeout: 5000, 
       success: function (data, status, xhr) {
         if (data[0].status === "oke") {
           $(".data").remove();
@@ -89,7 +89,7 @@ function getData(data) {
     $.ajax(url, {
       type: "GET",
       dataType: "json",
-      timeout: 500,
+      timeout: 5000,
       success: function (data, status, xhr) {
         if (data[0].status == "oke") {
             data.forEach((element, key) => {

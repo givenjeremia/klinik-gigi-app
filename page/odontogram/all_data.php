@@ -62,7 +62,7 @@
             var url = "../../backend/odontogram/new_all_data.php";
             $.ajax(url, {
                 dataType: "json",
-                timeout: 500,
+                timeout: 5000,
                 success: function(data, status, xhr) {
                     console.log(data[0].status)
                     if (data[0].status === "oke") {

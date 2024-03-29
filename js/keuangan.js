@@ -3,7 +3,7 @@ function getDataPengajuanNota() {
     var url = "../../backend/keuangan/pengajuan_nota.php";
     $.ajax(url, {
         dataType: "json",
-        timeout: 500,
+        timeout: 5000,
         success: function (data, status, xhr) {
             if (data[0].status === "oke") {
                 $(".data").remove();
@@ -142,7 +142,7 @@ function getDataDaftarNota() {
     var url = "../../backend/keuangan/nota_status_approved.php";
     $.ajax(url, {
         dataType: "json",
-        timeout: 500,
+        timeout: 5000,
         success: function (data, status, xhr) {
             if (data[0].status === "oke") {
                 $(".data").remove();
@@ -192,7 +192,7 @@ function getDataCatatanKeuangan() {
     var url = "../../backend/keuangan/catatan_keuangan.php";
     $.ajax(url, {
         dataType: "json",
-        timeout: 500,
+        timeout: 5000,
         success: function (data, status, xhr) {
             if (data[0].status === "oke") {
                 $(".data").remove();
@@ -232,7 +232,7 @@ $("#dengan_nota").on("click", function () {
     $('#daftar_nota_select').append('<option value="">Pilih Nota</option>')
     $.ajax(url, {
       dataType: "json",
-      timeout: 500,
+      timeout: 5000,
       success: function (data, status, xhr) {
         if (data[0].status === "oke") {
           data[0].data.forEach((element, key) => {

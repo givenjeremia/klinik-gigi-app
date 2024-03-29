@@ -50,7 +50,7 @@
             var url = "../../backend/layanan/data.php";
             $.ajax(url, {
                 dataType: "json",
-                timeout: 500,
+                timeout: 5000,
                 success: function (data, status, xhr) {
                     if (data[0].status === "oke") {
                         data.forEach((element, key) => {

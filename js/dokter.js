@@ -6,7 +6,7 @@ function getData() {
   // Merupakan Jquery Ajax
   $.ajax(url, {
     dataType: "json",
-    timeout: 500,
+    timeout: 5000,
     success: function (data, status, xhr) {
       // Jika Setatus Oke tampilkan data (Didapatkan Dari Response JSON pada backend)
       if (data[0].status === "oke") {
@@ -69,7 +69,7 @@ function listSpesialis() {
   var url = "../../backend/spesialis/data.php";
   $.ajax(url, {
     dataType: "json",
-    timeout: 500,
+    timeout: 5000,
     success: function (data, status, xhr) {
       // Pengecekan Status Respnse
       if (data[0].status === "oke") {
@@ -145,7 +145,7 @@ function updateData(id) {
    var url = "../../backend/spesialis/data.php";
    $.ajax(url, {
      dataType: "json",
-     timeout: 500,
+     timeout: 5000,
      success: function (data, status, xhr) {
        // Pengecekan Status Respnse
        if (data[0].status === "oke") {
@@ -166,7 +166,7 @@ function updateData(id) {
       id: id,
     },
     dataType: "json",
-    timeout: 500,
+    timeout: 5000,
     success: function (data, status, xhr) {
       // Jika Sudak Dan status adalah success update value sesuai ID FORM EDIT
       if (data[0].status == "success") {

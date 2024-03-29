@@ -872,7 +872,7 @@ function getOdontogram(rekam_medis_data,usia_send) {
 
             $.ajax(url, {
                 dataType: "json",
-                timeout: 500,
+                timeout: 5000,
                 success: function (response, status, xhr) {
                     if (response[0].status === "oke") {
                         response.forEach((element, key) => {
@@ -1065,7 +1065,7 @@ function getOdontogram(rekam_medis_data,usia_send) {
             if(kondisi_value){
                 $.ajax(url_tindakan, {
                     dataType: "json", // type of response data
-                    timeout: 500, // timeout milliseconds
+                    timeout: 5000, // timeout milliseconds
                     success: function (data, status, xhr) {
                     if (data[0].status === "oke") {
                         data.forEach((element, key) => {

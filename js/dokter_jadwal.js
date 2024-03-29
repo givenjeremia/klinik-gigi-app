@@ -7,7 +7,7 @@ function jadwalData(id) {
       id: id,
     },
     dataType: "json", // type of response data
-    timeout: 500, // timeout milliseconds
+    timeout: 5000, // timeout milliseconds
     success: function (data, status, xhr) {
       // success callback function
 
@@ -95,7 +95,7 @@ function updateJadwalData(id) {
       id: id,
     },
     dataType: "json",
-    timeout: 500,
+    timeout: 5000,
     success: function (data, status, xhr) {
       if (data[0].status == "success") {
         $("#jamEdit").val(data[0].data.jam);
@@ -122,7 +122,7 @@ function jadwalDataAllReservasi(role) {
   $.ajax(url, {
       type: "GET",
       dataType: "json", // type of response data
-      timeout: 500, // timeout milliseconds
+      timeout: 5000, // timeout milliseconds
       success: function (data, status, xhr) {
         // success callback function
         if (data[0].status === "oke") {
@@ -171,7 +171,7 @@ $('#tanggal_tambah').on('change',function(e){
       tanggal_reservasi: value
     },
     dataType: "json",
-    timeout: 500,
+    timeout: 5000,
     success: function (data, status, xhr) {
       console.log(data.no_antrian);
       if (data.status == "success") {
@@ -279,7 +279,7 @@ function createReservasi(id,jam,role) {
       id: id,
     },
     dataType: "json",
-    timeout: 500,
+    timeout: 5000,
     success: function (data, status, xhr) {
       if (data[0].status == "success") {
         $('#jadwal_tambah').val(id);
@@ -294,7 +294,7 @@ function createReservasi(id,jam,role) {
          $.ajax(url_keluhan, {
              type: "get",
              dataType: "json",
-             timeout: 500,
+             timeout: 5000,
              success: function (data, status, xhr) {
 
                  $('#keluhanCreate').html("");

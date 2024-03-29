@@ -299,7 +299,7 @@
             id_reservasi:id2
           },
           dataType: "json",
-          timeout: 500,
+          timeout: 5000,
           success: function (data, status, xhr) {
             if (data[0].status == "success") {
               $("#informasi_nama_dokter").html(data[0].data.nama);

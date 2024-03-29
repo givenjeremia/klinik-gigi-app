@@ -62,7 +62,7 @@
             $.ajax(
             url, {
             dataType: "json", 
-            timeout: 500,
+            timeout: 5000,
             success: function (data, status) {
                 console.log(status);
                 if (data[0].status === "oke") {

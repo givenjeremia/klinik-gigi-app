@@ -3,7 +3,7 @@ function getDataHistoryByUser() {
   var url = "../../backend/reservasi_klinik/history_by_user.php";
   $.ajax(url, {
     dataType: "json", 
-    timeout: 500,
+    timeout: 5000,
     success: function (data, status, xhr) {
       if (data[0].status === "oke") {
         $(".data").remove();
@@ -46,7 +46,7 @@ function getAllData() {
   var url = "../../backend/reservasi_klinik/data.php";
   $.ajax(url, {
     dataType: "json", // type of response data
-    timeout: 500, // timeout milliseconds
+    timeout: 5000, // timeout milliseconds
     success: function (data, status, xhr) {
       // success callback function
       if (data[0].status === "oke") {

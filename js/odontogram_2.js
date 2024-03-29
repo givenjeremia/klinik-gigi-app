@@ -67,7 +67,7 @@ jQuery(function(){
 		var url = "../../backend/odontogram/get_data_by_id.php?id=" + id_data;
         $.ajax(url, {
             dataType: "json",
-            timeout: 500, 
+            timeout: 5000, 
             success: function (data, status, xhr) {
               if (data[0].status === "oke") {
                 $(".data").remove();

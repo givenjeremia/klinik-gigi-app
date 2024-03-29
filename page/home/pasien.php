@@ -159,7 +159,7 @@
                     hari: value,
                 },
                 dataType: "json",
-                timeout: 500,
+                timeout: 5000,
                 success: function(data, status, xhr) {
                     $(".data_jadwal").remove();
                     if (data[0].status === "oke") {
@@ -199,7 +199,7 @@
                 id: id,
                 },
                 dataType: "json",
-                timeout: 500,
+                timeout: 5000,
                 success: function (data, status, xhr) {
                 if (data[0].status == "success") {
                     $('#jadwal_tambah').val(id);
@@ -214,7 +214,7 @@
                     $.ajax(url_keluhan, {
                         type: "get",
                         dataType: "json",
-                        timeout: 500,
+                        timeout: 5000,
                         success: function (data, status, xhr) {
     
                             $('#keluhanCreate').html("");
@@ -266,7 +266,7 @@
             tanggal_reservasi: value
             },
             dataType: "json",
-            timeout: 500,
+            timeout: 5000,
             success: function (data, status, xhr) {
             console.log(data.no_antrian);
             if (data.status == "success") {

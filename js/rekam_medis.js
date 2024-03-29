@@ -5,7 +5,7 @@ function getAlat() {
   var url = "../../backend/alat/data.php";
   $.ajax(url, {
     dataType: "json",
-    timeout: 500,
+    timeout: 5000,
     success: function (data, status, xhr) {
       if (data[0].status === "oke") {
         data.forEach((element, key) => {
@@ -29,7 +29,7 @@ function getLayanan() {
   }
   $.ajax(url, {
     dataType: "json",
-    timeout: 500,
+    timeout: 5000,
     success: function (data, status, xhr) {
       if (data[0].status === "oke") {
         data.forEach((element, key) => {
@@ -49,7 +49,7 @@ function getReservasi() {
   var url = "../../backend/rekam_medis/data_reservasi_hari_ini.php";
   $.ajax(url, {
     dataType: "json",
-    timeout: 500,
+    timeout: 5000,
     success: function (data, status, xhr) {
       if (data[0].status === "oke") {
         data.forEach((element, key) => {
@@ -70,7 +70,7 @@ function getObat() {
   var url = "../../backend/obat/data.php";
   $.ajax(url, {
     dataType: "json", // type of response data
-    timeout: 500, // timeout milliseconds
+    timeout: 5000, // timeout milliseconds
     success: function (data, status, xhr) {
       if (data[0].status === "oke") {
         data.forEach((element, key) => {

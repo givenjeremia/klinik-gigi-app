@@ -206,7 +206,7 @@
             var url = "../../backend/keuangan/get_tindakan_by_rm_id.php?rekam_medis="+id;
             $.ajax(url, {
                 dataType: "json",
-                timeout: 500,
+                timeout: 5000,
                 success: function (data, status, xhr) {
                     // success callback function
                     if (data[0].status === "oke") {
@@ -243,7 +243,7 @@
             var url = "../../backend/keuangan/get_alat_by_rm_id.php?rekam_medis="+id;
             $.ajax(url, {
                 dataType: "json",
-                timeout: 500,
+                timeout: 5000,
                 success: function (data, status, xhr) {
                     // success callback function
                     if (data[0].status === "oke") {
@@ -280,7 +280,7 @@
             var url = "../../backend/keuangan/get_obat_by_rm_id.php?rekam_medis="+id;
             $.ajax(url, {
                 dataType: "json",
-                timeout: 500,
+                timeout: 5000,
                 success: function (data, status, xhr) {
                     // success callback function
                     if (data[0].status === "oke") {
@@ -366,7 +366,7 @@
                 var url = "../../backend/keuangan/get_count_nota.php?rekam_medis="+rekam_medis_id;
                 $.ajax(url, {
                     dataType: "json",
-                    timeout: 500,
+                    timeout: 5000,
                     success: function (data, status, xhr) {
                         // success callback function
                         if (data[0].status === "success") {
@@ -403,7 +403,7 @@
             var url = "../../backend/keuangan/get_count_nota.php?rekam_medis="+id;
             $.ajax(url, {
                 dataType: "json",
-                timeout: 500,
+                timeout: 5000,
                 success: function (data, status, xhr) {
                     // success callback function
                     if (data[0].status === "success") {

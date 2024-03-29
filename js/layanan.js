@@ -3,7 +3,7 @@ function getData() {
     var url = "../../backend/layanan/data.php";
     $.ajax(url, {
       dataType: "json",
-      timeout: 500,
+      timeout: 5000,
       success: function (data, status, xhr) {
         if (data[0].status === "oke") {
           $(".data").remove();
@@ -38,7 +38,7 @@ function getData() {
     var url = "../../backend/spesialis/data.php";
     $.ajax(url, {
       dataType: "json", // type of response data
-      timeout: 500, // timeout milliseconds
+      timeout: 5000, // timeout milliseconds
       success: function (data, status, xhr) {
         if (data[0].status === "oke") {
           data.forEach((element, key) => {
@@ -110,7 +110,7 @@ function getData() {
         id: id,
       },
       dataType: "json",
-      timeout: 500,
+      timeout: 5000,
       success: function (data, status, xhr) {
         if (data[0].status == "success") {
           $("#namaEdit").val(data[0].data.nama);

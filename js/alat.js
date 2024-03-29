@@ -3,7 +3,7 @@ function getData() {
   var url = "../../backend/alat/data.php";
   $.ajax(url, {
     dataType: "json",
-    timeout: 500,
+    timeout: 5000,
     success: function (data, status, xhr) {
       if (data[0].status === "oke") {
         $(".data").remove();
@@ -86,7 +86,7 @@ function updateData(id) {
       id: id,
     },
     dataType: "json",
-    timeout: 500,
+    timeout: 5000,
     success: function (data, status, xhr) {
       if (data[0].status == "success") {
         $("#namaEdit").val(data[0].data.nama);

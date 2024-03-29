@@ -3,7 +3,7 @@ function getData() {
     var url = "../../backend/resep_obat/data.php";
     $.ajax(url, {
       dataType: "json", 
-      timeout: 500,
+      timeout: 5000,
       success: function (data, status, xhr) {
         if (data[0].status === "oke") {
           $(".data").remove();
@@ -43,7 +43,7 @@ function getData() {
     var url = "../../backend/resep_obat/get_data_rekam_medis.php";
     $.ajax(url, {
       dataType: "json",
-      timeout: 500,
+      timeout: 5000,
       success: function (data, status, xhr) {
         if (data[0].status === "oke") {
           data.forEach((element, key) => {
@@ -62,7 +62,7 @@ function getData() {
     var url = "../../backend/obat/data.php";
     $.ajax(url, {
       dataType: "json", // type of response data
-      timeout: 500, // timeout milliseconds
+      timeout: 5000, // timeout milliseconds
       success: function (data, status, xhr) {
         if (data[0].status === "oke") {
           data.forEach((element, key) => {

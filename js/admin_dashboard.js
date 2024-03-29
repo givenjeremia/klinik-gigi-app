@@ -71,7 +71,7 @@ function getReservasi() {
   var url = "../../backend/rekam_medis/data_reservasi_hari_ini.php";
   $.ajax(url, {
     dataType: "json",
-    timeout: 500,
+    timeout: 5000,
     success: function (data, status, xhr) {
       if (data[0].status === "oke") {
         $(".data-pasien").remove();
@@ -151,7 +151,7 @@ function kehadiran(id,status) {
           status: status,
         },
         dataType: "json",
-        timeout: 500,
+        timeout: 5000,
         success: function (data, status, xhr) {
           if (data.status == "success") {
               Swal.fire({

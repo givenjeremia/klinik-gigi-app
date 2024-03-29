@@ -17,7 +17,7 @@ function getPengingat(pengingat) {
 
     $.ajax(url, {
       dataType: "json", // type of response data
-      timeout: 500, // timeout milliseconds
+      timeout: 5000, // timeout milliseconds
       success: function (data, status, xhr) {
         // success callback function
         $(".data").remove();
