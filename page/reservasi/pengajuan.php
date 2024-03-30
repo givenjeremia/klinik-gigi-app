@@ -26,6 +26,7 @@
                                             <?php if($_SESSION['auth']['role'] != 'pasien' ): ?>
                                             <th>Nama Pasien</th>
                                             <?php endif; ?>
+                                            <th>Treatment</th>
                                             <th>Keluhan</th>
                                             <th>Tanggal</th>
                                             <th>Jam</th>
@@ -45,6 +46,7 @@
                                             <?php if($_SESSION['auth']['role'] != 'pasien' ): ?>
                                             <th>Nama Pasien</th>
                                             <?php endif; ?>
+                                            <th>Treatment</th>
                                             <th>Keluhan</th>
                                             <th>Tanggal</th>
                                             <th>Jam</th>

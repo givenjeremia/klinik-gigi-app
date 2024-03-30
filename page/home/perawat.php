@@ -34,6 +34,8 @@
                                                 <th>No Antrian</th>
                                                 <th>Dokter</th>
                                                 <th>Nama Pasien</th>
+                                                <th>Treatment</th>
+                                                <th>Keluhan</th>
                                                 <th>Jam Reservasi</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -47,6 +49,8 @@
                                                 <th>No Antrian</th>
                                                 <th>Dokter</th>
                                                 <th>Nama Pasien</th>
+                                                <th>Treatment</th>
+                                                <th>Keluhan</th>
                                                 <th>Jam Reservasi</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -79,6 +83,9 @@
                             $("#tr_pasien" + key).append("<th>" + element.data["NoAntrian"] + "</th>");
                             $("#tr_pasien" + key).append("<th>" + element.data["NamaDokter"] + "</th>");
                             $("#tr_pasien" + key).append("<th>" + element.data["NamaPasien"] + "</th>");
+                            $("#tr_pasien" + key).append("<th>" + element.data["Treatment"] + "</th>");
+                            $("#tr_pasien" + key).append("<th>" + element.data["Keluhan"] + "</th>");
+
                             $("#tr_pasien" + key).append("<th>" + element.data["Jam"] + "</th>");
             //                 var action =
             //                     `<th>  

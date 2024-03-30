@@ -34,6 +34,8 @@
                                                 <th>No</th>
                                                 <th>No Antrian</th>
                                                 <th>Nama Pasien</th>
+                                                <th>Treatment</th>
+                                                <th>Keluhan</th>
                                                 <th>Jam Reservasi</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -46,6 +48,8 @@
                                                 <th>No</th>
                                                 <th>No Antrian</th>
                                                 <th>Nama Pasien</th>
+                                                <th>Treatment</th>
+                                                <th>Keluhan</th>
                                                 <th>Jam Reservasi</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -77,6 +81,9 @@
                             $("#tr_pasien" + key).append("<th scope='row'>" + (key + 1) + "</th>");
                             $("#tr_pasien" + key).append("<th>" + element.data["NoAntrian"] + "</th>");
                             $("#tr_pasien" + key).append("<th>" + element.data["NamaPasien"] + "</th>");
+                            $("#tr_pasien" + key).append("<th>" + element.data["Treatment"] + "</th>");
+                            $("#tr_pasien" + key).append("<th>" + element.data["Keluhan"] + "</th>");
+
                             $("#tr_pasien" + key).append("<th>" + element.data["Jam"] + "</th>");
             //                 var action =
             //                     `<th>  

@@ -84,8 +84,8 @@ try {
             $newTime = date('H:i:s', $originalTime);
             // Add Reservasi
             $status = 'pending';
-            $stmt = $mysqli->prepare("INSERT INTO `reservasi_kllinik`(`no_antrian`, `tanggal_input_reservasi`, `tanggal_reservasi`, `jam_reservasi`, `status`, `jadwal_dokter_id`,`data_pasien_id_pasien`) VALUES (?,?,?,?,?,?,?)");
-            $stmt->bind_param('issssii', $no_antrian,$now_date_with_time,$tanggal,$newTime ,$status,$jadwal,$id_pasien);
+            $stmt = $mysqli->prepare("INSERT INTO `reservasi_kllinik`(`no_antrian`, `tanggal_input_reservasi`, `tanggal_reservasi`, `jam_reservasi`, `status`, `jadwal_dokter_id`,`data_pasien_id_pasien`,`keluhan_baru`) VALUES (?,?,?,?,?,?,?,?)");
+            $stmt->bind_param('issssiis', $no_antrian,$now_date_with_time,$tanggal,$newTime ,$status,$jadwal,$id_pasien,$_POST['keluhan_baru']);
             $stmt->execute();
             $jumlah_yang_dieksekusi = $stmt->affected_rows;
             if ($jumlah_yang_dieksekusi > 0) {

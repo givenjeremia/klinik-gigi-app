@@ -45,6 +45,7 @@ else {
                                                 <th>No Antrian</th>
                                                 <th>Dokter</th>
                                                 <th>Nama Pasien</th>
+                                                <th>Treatment</th>
                                                 <th>Keluhan</th>
                                                 <th>Jam Reservasi</th>
                                                 <th>Aksi</th>
@@ -59,6 +60,7 @@ else {
                                                 <th>No Antrian</th>
                                                 <th>Dokter</th>
                                                 <th>Nama Pasien</th>
+                                                <th>Treatment</th>
                                                 <th>Keluhan</th>
                                                 <th>Jam Reservasi</th>
                                                 <th>Aksi</th>
